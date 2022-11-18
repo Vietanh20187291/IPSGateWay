@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!-- StyleSheet -->
+
+    <!-- Bootstrap -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+
+    <!-- IPS Gateway StyleSheet -->
+    <!--<link th:href="@{/css/pages/edit.css}" rel="stylesheet" />-->
+    <link th:href="@{../css/Style.css}" rel="stylesheet" />
+
+    <!--<script type="text/javascript" th:src="@{/js/edit.js}"></script>-->
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+    <title>Protocol Configuration</title>
+</head>
+<body>
+<!-- Header -->
+<!-- End Header -->
+
+<!-- Body -->
+<div class="container pt-3">
+    <h4>Protocol Configuration</h4>
+    <form th:action="@{/communication}" th:object="${connection}" th:method="put">
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="inputVtsIp4">IP Address</label>
+                <input type="text" th:field="*{vtsIp}" class="form-control" id="inputVtsIp4" placeholder="#{connection.vtsIp}">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="inputPort4">Port</label>
+                <input type="text" th:field="*{vtsPort}" class="form-control" id="inputVtsPort4" placeholder="#{connection.vtsPort}">
+            </div>
+        </div>
+
+        <div class="form-row" >
+            <div class="form-group col-md-4">
+                <label for="inputVtsIp4">Host IP Address</label>
+                <input type="text" th:field="*{hostIp}" class="form-control" id="inputHostIp4" placeholder="127.0.0.1">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="inputPort4">Port</label>
+                <input type="text" th:field="*{hostPort}" class="form-control" id="inputHostPort4" placeholder="1234">
+            </div>
+        </div>
+
+        <fieldset class="form-group">
+            <div class="row">
+                <legend class="col-form-label col-sm-2 pt-0">Role</legend>
+                <div class="col-sm-10">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" th:field="*{role}" name="inlineRadioOptions" id="inlineRadio1" th:value="false">
+                        <label class="form-check-label" for="inlineRadio1">Client</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" th:field="*{role}" name="inlineRadioOptions" id="inlineRadio2" th:value="true">
+                        <label class="form-check-label" for="inlineRadio2">Server</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <button type="button" class="btn" th:classappend="${connection.status} ? 'btn-success' : 'btn-danger'" th:text="${connection.status} ? 'Connected' : 'Disconnected'"></button>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+
+        <tr>
+            <button type="submit" class="btn btn-primary" th:text="${connection.status} ? 'Disconnect' : 'Connect'"></button>
+          <!--  <button type="submit"  th:unless="${edit.status}" class="btn btn-primary" th:text="${edit.status} ? 'Disconnect' : 'Connect'"></button>
+            <button type="submit" class="btn btn-primary" th:if="${edit.status}" th:text="${edit.status} ? 'Disconnect' : 'Connect'"></button>-->
+        </tr>
+    </form>
+    <div>
+            <h5>Logging</h5>
+        <tr>
+            <p th:text="'Host IP: ' + ${connection.hostIp}" />
+            <p th:text="'Port: ' + ${connection.hostPort}" />
+        </tr>
+        <tr>
+            <p th:text="'VTS IP: ' + ${connection.vtsIp}" />
+            <p th:text="'Port: ' + ${connection.vtsPort}" />
+        </tr>
+        <tr>
+            <p th:text="'Status: ' + ${connection.status}" />
+            <p th:text="'Role: ' + ${connection.role}" />
+        </tr>
+    </div>
+</div>
+<!-- End Body -->
+
+</body>
+</html>

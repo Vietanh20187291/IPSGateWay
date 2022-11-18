@@ -1,12 +1,28 @@
 package com.openwaygroup.ipsgateway.entities;
 
-public class Protocol {
+import org.springframework.stereotype.Component;
+
+@Component
+public class Connection {
     private String vtsIp;
+
     private String hostIp;
+
     private Integer vtsPort;
+
     private Integer hostPort;
+
     private boolean role;
 
+    private boolean status;
+
+    public boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
 
     public Integer getTimeout() {
         return timeout;
@@ -48,10 +64,10 @@ public class Protocol {
     public boolean getRole() { return role; }
 
     public void setRole(boolean role) { this.role = role; }
-    public Protocol() {
+    public Connection() {
 
     }
-    public Protocol(String vtsIp, Integer vtsPort, String hostIp, Integer hostPort, boolean role) {
+    public Connection(String vtsIp, Integer vtsPort, String hostIp, Integer hostPort, boolean role) {
         this.vtsIp = vtsIp;
         this.hostIp = hostIp;
         this.vtsPort = vtsPort;
@@ -59,10 +75,15 @@ public class Protocol {
         this.role = role;
     }
 
-    public Protocol(String vtsIp, Integer vtsPort, boolean role) {
+    public Connection(String vtsIp, Integer vtsPort, boolean role) {
         this.vtsIp = vtsIp;
         this.vtsPort = vtsPort;
         this.role = role;
+    }
+
+    public Connection(String vtsIp, Integer vtsPort) {
+        this.vtsIp = vtsIp;
+        this.vtsPort = vtsPort;
     }
 
 }
