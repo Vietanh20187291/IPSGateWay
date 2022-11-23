@@ -1,5 +1,7 @@
+@import url('pages/connection.css');
+@import url('fragments/header.css');
+
 h4 {
     color: red;
 }
-@import url('pages/connection.css');
 

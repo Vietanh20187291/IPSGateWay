@@ -2,8 +2,13 @@ package com.openwaygroup.ipsgateway.entities;
 
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
+import java.net.InetAddress;
+
 @Component
-public class Connection {
+public class Connection extends Thread{
+
+    private static Connection instance;
     private String vtsIp;
 
     private String hostIp;
@@ -23,11 +28,6 @@ public class Connection {
     public void setStatus(boolean status) {
         this.status = status;
     }
-
-    public Integer getTimeout() {
-        return timeout;
-    }
-    private Integer timeout = 5000;
 
     public String getVtsIp() {
         return vtsIp;
@@ -64,10 +64,18 @@ public class Connection {
     public boolean getRole() { return role; }
 
     public void setRole(boolean role) { this.role = role; }
-    public Connection() {
 
+    public static Connection getInstance(){
+        if(instance == null){
+            instance = new Connection();
+        }
+        return instance;
     }
-    public Connection(String vtsIp, Integer vtsPort, String hostIp, Integer hostPort, boolean role) {
+
+    private Connection(){
+    }
+
+    private Connection(String vtsIp, Integer vtsPort, String hostIp, Integer hostPort, boolean role) {
         this.vtsIp = vtsIp;
         this.hostIp = hostIp;
         this.vtsPort = vtsPort;
@@ -75,15 +83,25 @@ public class Connection {
         this.role = role;
     }
 
-    public Connection(String vtsIp, Integer vtsPort, boolean role) {
+    private Connection(String vtsIp, Integer vtsPort, boolean role) {
         this.vtsIp = vtsIp;
         this.vtsPort = vtsPort;
         this.role = role;
     }
 
-    public Connection(String vtsIp, Integer vtsPort) {
+    private Connection(String vtsIp, Integer vtsPort) {
         this.vtsIp = vtsIp;
         this.vtsPort = vtsPort;
     }
 
+    public void checkConnection() throws IOException, InterruptedException {
+        InetAddress inet;
+        while(hostIp != null){
+            inet = InetAddress.getByName(hostIp);
+            System.out.println("Sending Ping Request to " + inet);
+            System.out.println(inet.isReachable(5000) ? "Host is reachable" : "Host is NOT reachable");
+            Thread.sleep(4000);
+        }
+
+    }
 }

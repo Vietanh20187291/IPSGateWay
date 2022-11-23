@@ -7,7 +7,6 @@
 
     <!-- Bootstrap -->
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
-
     <!-- IPS Gateway StyleSheet -->
     <!--<link th:href="@{/css/pages/edit.css}" rel="stylesheet" />-->
     <link th:href="@{../css/Style.css}" rel="stylesheet" />
@@ -66,10 +65,11 @@
         </fieldset>
 
         <tr>
-            <button type="submit" class="btn btn-primary" th:text="${connection.status} ? 'Disconnect' : 'Connect'"></button>
-          <!--  <button type="submit"  th:unless="${edit.status}" class="btn btn-primary" th:text="${edit.status} ? 'Disconnect' : 'Connect'"></button>
-            <button type="submit" class="btn btn-primary" th:if="${edit.status}" th:text="${edit.status} ? 'Disconnect' : 'Connect'"></button>-->
+            <button type="submit" th:unless="${connection.status}" class="btn btn-primary" th:text="${!(connection.status)} ? 'Connect'"></button>
         </tr>
+    </form>
+    <form th:action="@{/communication/close}" th:object="${connection}" th:method="put">
+        <button type="submit"  th:if="${connection.status}" class="btn btn-primary" th:text="${connection.status} ? 'Disconnect' "></button>
     </form>
     <div>
             <h5>Logging</h5>

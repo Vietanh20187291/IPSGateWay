@@ -2,20 +2,24 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <link th:href="@{../css/style.css}" rel="stylesheet" />
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+
     <script type="text/javascript" th:src="@{/js/action.js}"></script>
     <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
     <title>Communication</title>
 </head>
 <body>
 <!-- Header -->
+<div th:replace="~{fragments/header}">
+
+</div>
 <!-- End Header -->
 
 <!-- Body -->
-<div class="container pt-3">
+<div class="container pt-4">
     <h4>Communication Handler</h4>
-    <div class="container text-center">
+    <div class="text-center">
         <div class="row align-items-start">
             <div class="col">
                 <a th:href="@{/communication/edit}"><button class="btn btn-primary">Protocol Configuration</button></a>
