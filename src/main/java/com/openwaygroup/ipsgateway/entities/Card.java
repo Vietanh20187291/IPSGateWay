@@ -14,6 +14,7 @@ import org.yaml.snakeyaml.Yaml;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 //@Entity
 public class Card {
@@ -117,5 +118,10 @@ public class Card {
                 ", track1Structure='" + track1Structure + '\'' +
                 ", track2Structure='" + track2Structure + '\'' +
                 '}';
+    }
+
+    public static void main(String[] args) {
+        SimpleDateFormat format = new SimpleDateFormat("ddMM");
+
     }
 }
