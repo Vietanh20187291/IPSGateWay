@@ -1,0 +1,26 @@
+.table, table, th, td{
+    border: 1px solid #000000;
+    border-collapse: collapse;
+}
+
+table{
+    margin: 20px auto 0;
+    background-color:#d3d9df;
+}
+th, td{
+    margin: 15px;
+}
+#wp-content{
+
+    display: flex;
+}
+#list-card-component{
+    flex-basis: 40%;
+}
+#card-table{
+
+    flex-basis: 60%;
+}
+.list-card:hover{
+    cursor: pointer;
+}
