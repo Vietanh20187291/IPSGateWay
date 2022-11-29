@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{/css/card.css}" rel="stylesheet" />
+    <script type="text/javascript" th:src="@{/js/action.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+    <title>Card</title>
+</head>
+
+<body>
+    <!-- Header -->
+    <!-- End Header -->
+
+    <!-- Body -->
+    <!-- wp-content -->
+    <div id="wp-content">
+        <!-- Sidebar -->
+        <div id="sidebar">
+            <h4>List of Card</h4>
+        </div>
+<!--         End Sidebar -->
+<!--         content -->
+        <div id="content">
+            <div class="container pt-1">
+                <h4>List of Card</h4>
+                <!--<div class="table">-->
+                <table>
+                    <thead>
+                        <tr class="table-header">
+                            <th>Card Number</th>
+                            <th>Expiry Date</th>
+                            <th>Track 1</th>
+                            <th>Track 2</th>
+                                        <th>Chip Data</th>
+                                        <th>Pin Block</th>
+                                        <th>Track 1 Structure</th>
+                                        <th>Track 2 Structure</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <th:block th:each="listCard : ${listCard}">
+                            <tr class="table-row d-flex">
+                                                <td th:utext="${listCard.getCardNumber()}" ></td>
+                                                <td th:utext="${listCard.getExpiryDate() }"></td>
+                                                <td th:utext="${listCard.getTrack1()}"></td>
+                                                <td th:utext="${listCard.getTrack2()}"></td>
+                                                <td th:utext="${listCard.getChipData()}"></td>
+                                                <td th:utext="${listCard.getPinBlock()}"></td>
+                                                <td th:utext="${listCard.getTrack1Structure()}"></td>
+                                                <td th:utext="${listCard.getTrack2Structure()}"></td>
+                            </tr>
+                        </th:block>
+                    </tbody>
+                </table>
+
+                <!--</div>-->
+            </div>
+            <!-- End Content -->
+        </div>
+        <!-- End wp-content -->
+    </div>
+    <!-- End Body -->
+
+</body>
+<script type="text/javascript" th:src="@{/js/card.js}"></script>
+
+</html>
