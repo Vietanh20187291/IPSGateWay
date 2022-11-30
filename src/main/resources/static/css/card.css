@@ -5,10 +5,10 @@
 
 table{
     margin: 20px auto 0;
-    background-color:#d3d9df;
+    background-color:rgba(0,0,0,.05);
 }
 th, td{
-    margin: 15px;
+    margin: 25px;
 }
 #wp-content{
 
@@ -17,10 +17,32 @@ th, td{
 #list-card-component{
     flex-basis: 40%;
 }
-#card-table{
 
+#card-table{
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
     flex-basis: 60%;
 }
+/*th{*/
+/*    background-color: #009879;*/
+/*    color: #ffffff;*/
+/*    text-align: left;*/
+/*}*/
+/*td{*/
+/*    border-bottom: 1px solid #dddddd;*/
+/*}*/
+/*td:nth-of-type(even) {*/
+/*    background-color: #f3f3f3;*/
+/*}*/
+/*td:last-of-type {*/
+/*    border-bottom: 2px solid #009879;*/
+/*}*/
+/*td.active-row {*/
+/*    font-weight: bold;*/
+/*    color: #009879;*/
+/*}*/
 .list-card:hover{
     cursor: pointer;
 }

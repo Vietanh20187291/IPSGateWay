@@ -73,39 +73,7 @@ public class CardController {
         }
         return "card";
     }
-//    @RequestMapping(method = RequestMethod.PUT)
-//    public String update(@ModelAttribute("connection") Connection connection, Model model) throws IOException {
-//        //model.addAttribute("connection", connection);
-//        System.out.println("------------------------------");
-//        System.out.println("Socket status before : " + connection.getStatus());
-//
-//      /*  if(edit.getStatus()){
-//            closeConnection(edit);
-//        }else{*/
-//        if(!connection.getRole()){
-//            //Client
-//            initializeClient(connection);
-//            /*System.out.println("Client");*/
-//            System.out.println( connection.getHostIp());
-//            System.out.println( connection.getHostPort());
-//        }else{
-//            //Server
-//            initializeServer(connection);
-//            /*   System.out.println("Server");*/
-//            System.out.println( connection.getVtsIp());
-//            System.out.println( connection.getVtsPort());
-//        }
-//        System.out.println("Socket status after : " + connection.getStatus());
-//        /* }*/
-//            /*while (true){
-//
-//            }*/
-//        if (connection.getStatus()){
-//            return "redirect:communication";
-//        }else{
-//            return "edit";
-//        }
-//
-//    }
+
 
 }
+
