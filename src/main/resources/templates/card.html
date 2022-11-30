@@ -22,8 +22,10 @@
             <div id="wp-content">
                 <div id="list-card-component">
             <h4>List of Card</h4>
-                    <ul th:each="listCard : ${listCard}">
-                        <li class="list-card" th:utext="${listCard.getCardNumber()}" onclick="handleClick('a')"></li>
+                    <ul th:each="card : ${listCard}">
+<!--                        <li class="list-card" th:utext="${card.getCardNumber()}"></li>-->
+                        <li class="list-card" th:utext="${card.getF035_04()}" th:onclick="showCardInfo(${card.getCardNumber()})">
+                        </li>
                         </ul>
                 </div>
             <!--<div class="table">-->
@@ -36,10 +38,10 @@
                 </tr>
                 </thead>
                 <tbody>
-                <th:block th:each="listCard : ${listCard}">
+                <th:block th:each="card : ${listCard}">
                     <tr class="table-row">
                         <th>Expiry Date</th>
-                        <td th:utext="${listCard.getCardNumber()}" ></td>
+                        <td th:utext="${card.getF035_04()}" ></td>
 <!--                        <td th:utext="${listCard.getExpiryDate() }"></td>-->
 
 

@@ -1,3 +1,3 @@
-function handleClick(num) {
-    alert("The button was clicked!"+num);
+function showCardInfo(card) {
+    alert(card);
 }
