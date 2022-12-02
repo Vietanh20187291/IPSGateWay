@@ -25,24 +25,7 @@ th, td{
     font-family: sans-serif;
     flex-basis: 60%;
 }
-/*th{*/
-/*    background-color: #009879;*/
-/*    color: #ffffff;*/
-/*    text-align: left;*/
-/*}*/
-/*td{*/
-/*    border-bottom: 1px solid #dddddd;*/
-/*}*/
-/*td:nth-of-type(even) {*/
-/*    background-color: #f3f3f3;*/
-/*}*/
-/*td:last-of-type {*/
-/*    border-bottom: 2px solid #009879;*/
-/*}*/
-/*td.active-row {*/
-/*    font-weight: bold;*/
-/*    color: #009879;*/
-/*}*/
+
 .list-card:hover{
     cursor: pointer;
 }

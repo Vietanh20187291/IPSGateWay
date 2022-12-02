@@ -18,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.HashMap;
 //@Entity
 public class Card {
+    private String id;
     private String f002;
     private String f014;
     private String f023;
@@ -76,7 +77,8 @@ public class Card {
     public Card() {
     }
 
-    public Card(String f002, String f014, String f023, String f035_04, String f035_05, String f035_06, String f035_07, String f035_08, String f045, String f045_01, String f045_02, String f045_04, String f045_06, String f045_07, String f045_08, String f045_09, String f045_10, String f045_11, String f045_12_2, String f052, String f053_03, String f053_04, String f053_05, String f053_06, String f053_07, String f053_08, String f053_09, String f053_10, String f053_11, String f053_12, String f053_13, String f055_07_03, String f055_07_04, String f055_07_05, String f055_07_06, String f055_07_07, String f055_07_08, String f055_07_09, String f055_07_10, String f055_21, String f055_22, String f055_23_08, String f123_11, String f125_025, String f125_034, String f125_048, String f125_057, String f126_10, String f134, String f135, String f136, String f137, String f138, String f152) {
+    public Card(String id, String f002, String f014, String f023, String f035_04, String f035_05, String f035_06, String f035_07, String f035_08, String f045, String f045_01, String f045_02, String f045_04, String f045_06, String f045_07, String f045_08, String f045_09, String f045_10, String f045_11, String f045_12_2, String f052, String f053_03, String f053_04, String f053_05, String f053_06, String f053_07, String f053_08, String f053_09, String f053_10, String f053_11, String f053_12, String f053_13, String f055_07_03, String f055_07_04, String f055_07_05, String f055_07_06, String f055_07_07, String f055_07_08, String f055_07_09, String f055_07_10, String f055_21, String f055_22, String f055_23_08, String f123_11, String f125_025, String f125_034, String f125_048, String f125_057, String f126_10, String f134, String f135, String f136, String f137, String f138, String f152) {
+        this.id = id;
         this.f002 = f002;
         this.f014 = f014;
         this.f023 = f023;
@@ -131,6 +133,14 @@ public class Card {
         this.f137 = f137;
         this.f138 = f138;
         this.f152 = f152;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getF002() {
@@ -568,7 +578,8 @@ public class Card {
     @Override
     public String toString() {
         return "Card{" +
-                "f002='" + f002 + '\'' +
+                "id='" + id + '\'' +
+                ", f002='" + f002 + '\'' +
                 ", f014='" + f014 + '\'' +
                 ", f023='" + f023 + '\'' +
                 ", f035_04='" + f035_04 + '\'' +

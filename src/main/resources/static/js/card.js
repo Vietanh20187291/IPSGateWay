@@ -1,3 +1,3 @@
 function showCardInfo(card) {
-    alert(card);
+console.log(card)
 }
