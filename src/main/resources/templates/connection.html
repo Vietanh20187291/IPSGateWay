@@ -8,33 +8,34 @@
     <!-- Bootstrap -->
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
     <!-- IPS Gateway StyleSheet -->
-    <!--<link th:href="@{/css/pages/edit.css}" rel="stylesheet" />-->
     <link th:href="@{../css/Style.css}" rel="stylesheet" />
 
-    <!--<script type="text/javascript" th:src="@{/js/edit.js}"></script>-->
+    <script type="text/javascript" th:src="@{/js/connection.js}"></script>
     <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
-    <title>Protocol Configuration</title>
+    <title>Connection Configuration</title>
 </head>
 <body>
 <!-- Header -->
+<div th:replace="~{fragments/header}">
+
+</div>
 <!-- End Header -->
 
 <!-- Body -->
 <div class="container pt-3">
     <h4>Protocol Configuration</h4>
     <form th:action="@{/communication}" th:object="${connection}" th:method="put">
-        <div class="form-row">
-            <div class="form-group col-md-4">
-                <label for="inputVtsIp4">IP Address</label>
-                <input type="text" th:field="*{vtsIp}" class="form-control" id="inputVtsIp4" placeholder="#{connection.vtsIp}">
+        <div class="form-row" id="vtsInput" style ="display: none;">
+            <div class="form-group col-md-4 alert alert-success" role="alert" th:inline="text">
+                IP Address : [[${connection.vtsIp}]]
             </div>
             <div class="form-group col-md-2">
                 <label for="inputPort4">Port</label>
-                <input type="text" th:field="*{vtsPort}" class="form-control" id="inputVtsPort4" placeholder="#{connection.vtsPort}">
+                <input type="text" th:field="*{vtsPort}" class="form-control" id="inputVtsPort4" placeholder="1234">
             </div>
         </div>
 
-        <div class="form-row" >
+        <div class="form-row" id="hostInput">
             <div class="form-group col-md-4">
                 <label for="inputVtsIp4">Host IP Address</label>
                 <input type="text" th:field="*{hostIp}" class="form-control" id="inputHostIp4" placeholder="127.0.0.1">
@@ -50,15 +51,15 @@
                 <legend class="col-form-label col-sm-2 pt-0">Role</legend>
                 <div class="col-sm-10">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" th:field="*{role}" name="inlineRadioOptions" id="inlineRadio1" th:value="false">
+                        <input class="form-check-input" type="radio" th:field="*{role}" name="inlineRadioOptions" id="inlineRadio1" th:value="false" th:onclick="removeVts()">
                         <label class="form-check-label" for="inlineRadio1">Client</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" th:field="*{role}" name="inlineRadioOptions" id="inlineRadio2" th:value="true">
+                        <input class="form-check-input" type="radio" th:field="*{role}" name="inlineRadioOptions" id="inlineRadio2" th:value="true" th:onclick="removeHost()">
                         <label class="form-check-label" for="inlineRadio2">Server</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <button type="button" class="btn" th:classappend="${connection.status} ? 'btn-success' : 'btn-danger'" th:text="${connection.status} ? 'Connected' : 'Disconnected'"></button>
+                        <button type="button" class="btn" th:classappend="${connection.status} ? 'btn-success' : 'btn-danger'" th:inline="text">Number of Client : [[${connection.clientNumber}]]</button>
                     </div>
                 </div>
             </div>
@@ -70,6 +71,21 @@
     </form>
     <form th:action="@{/communication/close}" th:object="${connection}" th:method="put">
         <button type="submit"  th:if="${connection.status}" class="btn btn-primary" th:text="${connection.status} ? 'Disconnect' "></button>
+    </form>
+    <form th:action="@{/communication/editIpFail}" th:object="${connection}" th:method="put">
+        <button type="submit" th:if="${connection.status}" class="btn btn-danger">Edit HostIP Fail</button>
+    </form>
+    <form th:action="@{/communication/editIpSuccess}" th:object="${connection}" th:method="put">
+        <button type="submit" th:if="${connection.status}" class="btn btn-success">Edit HostIP Success</button>
+    </form>
+    <form th:action="@{/communication/clientDemo1}" th:object="${connection}" th:method="post">
+        <button type="submit" th:if="${connection.status}" class="btn btn-success">Client Demo 1</button>
+    </form>
+    <form th:action="@{/communication/clientDemo2}" th:object="${connection}" th:method="post">
+        <button type="submit" th:if="${connection.status}" class="btn btn-success">Client Demo 2</button>
+    </form>
+    <form th:action="@{/communication/closeClientDemo}" th:object="${connection}" th:method="post">
+        <button type="submit" th:if="${connection.status}" class="btn btn-danger">Close Client Demo</button>
     </form>
     <div>
             <h5>Logging</h5>

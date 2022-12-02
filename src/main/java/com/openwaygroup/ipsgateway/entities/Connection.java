@@ -1,12 +1,18 @@
 package com.openwaygroup.ipsgateway.entities;
 
+import com.openwaygroup.ipsgateway.controller.CommunicationController;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+import java.net.SocketAddress;
+
+import static com.openwaygroup.ipsgateway.services.InetAddressIsReachable.addressReachable;
 
 @Component
-public class Connection extends Thread{
+public class Connection{
 
     private static Connection instance;
     private String vtsIp;
@@ -16,10 +22,13 @@ public class Connection extends Thread{
     private Integer vtsPort;
 
     private Integer hostPort;
+    private Integer clientNumber = 0;
 
     private boolean role;
 
     private boolean status;
+
+
 
     public boolean getStatus() {
         return status;
@@ -49,6 +58,8 @@ public class Connection extends Thread{
         return vtsPort;
     }
 
+    public Integer getClientNumber() { return clientNumber; }
+
     public void setVtsPort(Integer vtsPort) {
         this.vtsPort = vtsPort;
     }
@@ -64,6 +75,7 @@ public class Connection extends Thread{
     public boolean getRole() { return role; }
 
     public void setRole(boolean role) { this.role = role; }
+    public void setClientNumber(Integer clientNumber) { this.clientNumber = clientNumber; }
 
     public static Connection getInstance(){
         if(instance == null){
@@ -95,13 +107,25 @@ public class Connection extends Thread{
     }
 
     public void checkConnection() throws IOException, InterruptedException {
-        InetAddress inet;
+        Socket socket;
         while(hostIp != null){
-            inet = InetAddress.getByName(hostIp);
-            System.out.println("Sending Ping Request to " + inet);
-            System.out.println(inet.isReachable(5000) ? "Host is reachable" : "Host is NOT reachable");
-            Thread.sleep(4000);
-        }
+            status = addressReachable(hostIp, hostPort, 3000);
+            if(status) {
+                System.out.println("Host is reachable");
+                Thread.sleep(4000);
+            }else{
+                while(!status){
+                    try {
+                        System.out.println("Reconnecting...");
+                        socket = new Socket(hostIp, hostPort);
+                        status = true;
+                    } catch (Exception e){
+                        System.out.println("Can't connect...");
+                        status = false;
+                    }
+                }
+            }
 
+        }
     }
 }

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg">
+<nav class="navbar navbar-expand-md">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">IPS Gateway</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,10 +30,11 @@
             <ul class="navbar-nav me-3 mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#">Connection Status</a>
+                    <button type="button" class="btn btn-success btn-circle btn-sm" th:style="${connection.status} ? 'background-color: #79DE79;' : ' background-color: #FB6962;'"></button>
                 </li>
-                <li class="nav-item">
+               <!-- <li class="nav-item">
                     <button type="button" class="btn btn-success btn-circle btn-sm"></button>
-                </li>
+                </li>-->
             </ul>
         </div>
     </div>
