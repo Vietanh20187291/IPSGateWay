@@ -18,41 +18,69 @@
 
 <!-- Body -->
 
-        <div class="container pt-1">
-            <div id="wp-content">
-                <div id="list-card-component">
+<div class="container pt-1">
+    <div id="wp-content">
+        <div id="list-card-component">
             <h4>List of Card</h4>
-                    <ul th:each="card : ${listCard}">
-<!--                        <li class="list-card" th:utext="${card.getCardNumber()}"></li>-->
-                        <li class="list-card" th:utext="${card.getF035_04()}" th:onclick="showCardInfo(${card.getCardNumber()})">
-                        </li>
-                        </ul>
-                </div>
-            <!--<div class="table">-->
-                <div id="card-table">
-            <table>
-                <thead>
-                <tr class="table-header">
-                    <th>Card Number</th>
-                    <th>Card Number</th>
-                </tr>
-                </thead>
-                <tbody>
-                <th:block th:each="card : ${listCard}">
-                    <tr class="table-row">
-                        <th>Expiry Date</th>
-                        <td th:utext="${card.getF035_04()}" ></td>
-<!--                        <td th:utext="${listCard.getExpiryDate() }"></td>-->
+            <!--                    <ul th:each="card : ${listCard}">-->
+            <!--&lt;!&ndash;                        th:onclick="|showCardIndo('${card}')|"&ndash;&gt;-->
+            <!--&lt;!&ndash;                        th:onclick="'javascript:showCardInfo(' + ${card} + ')'"&ndash;&gt;-->
+            <!--&lt;!&ndash;                        th:onclick="showCardInfo(this,[[${card}]]"&ndash;&gt;-->
+            <!--&lt;!&ndash;                        th:attr="onclick=${'showCardInfo('+card+')'}"&ndash;&gt;-->
+            <!--&lt;!&ndash;                        th:attr="onclick=${'showCardInfo('+ ''' + card + ''' + ')'}"&ndash;&gt;-->
+            <!--&lt;!&ndash;                        th:attr="onclick=|showCardInfo('${card}')|" &ndash;&gt;-->
+            <!--&lt;!&ndash;                        th:onclick="'showCardInfo('+${card}+')'"&ndash;&gt;-->
+            <!--                        <li class="list-card" th:utext="${card.getId()}+ ${card.getF002()}" th:attr="onclick=|showCardInfo(${card.getF002()})|" >-->
+            <!--                        </li>-->
 
+            <!--                        </ul>-->
 
+            <div id="list-card">
+                <table>
+                    <thead>
+                    <tr class="table-header">
+                        <th>ID</th>
+                        <th>Card Number</th>
                     </tr>
-                </th:block>
-                </tbody>
-            </table>
-                </div>
-            <!--</div>-->
+                    </thead>
+                    <tbody>
+                    <th:block th:each="card : ${listCard}">
+                        <tr class="table-row">
+                            <td th:utext="${card.getId()}"></td>
+                            <td th:utext="${card.getF002()}"></td>
+                            <td><button>Show</button></td>
+
+                        </tr>
+                    </th:block>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <!-- End WP-Content -->
+        <!--<div class="table">-->
+<!--        <div id="card-table">-->
+<!--            <table>-->
+<!--                <thead>-->
+<!--                <tr class="table-header">-->
+<!--                    <th>Card Number</th>-->
+<!--                    <th>Card Number</th>-->
+<!--                </tr>-->
+<!--                </thead>-->
+<!--                <tbody>-->
+<!--                <th:block th:each="card : ${listCard}">-->
+<!--                    <tr class="table-row">-->
+<!--                        <th>Expiry Date</th>-->
+<!--                        <td th:utext="${card.getF035_04()}"></td>-->
+<!--                        &lt;!&ndash;                        <td th:utext="${listCard.getExpiryDate() }"></td>&ndash;&gt;-->
+
+
+<!--                    </tr>-->
+<!--                </th:block>-->
+<!--                </tbody>-->
+<!--            </table>-->
+<!--        </div>-->
+        <!--</div>-->
+    </div>
+    <!-- End WP-Content -->
 
 </div>
 <!-- End Body -->

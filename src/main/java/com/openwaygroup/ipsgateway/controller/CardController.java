@@ -36,42 +36,29 @@ public class CardController {
     }
 
     @PostMapping("card")
-    public ArrayList<Card> loadCard(@RequestParam(name = "data") MultipartFile[] multipartFiles) throws IOException {
+    public ArrayList<Card> loadCard(@RequestParam(name = "data") String path) throws IOException {
         ArrayList<Card> listCard = new ArrayList<Card>();
-        for (MultipartFile multipartFile : multipartFiles) {
-            InputStream inputStream = multipartFile.getInputStream();
-            Card card = cardService.loadCard(inputStream);
-            listCard.add(card);
+        File file = new File(path);
+
+        for(File f : file.listFiles()) {
+            FileInputStream fileInputStream = new FileInputStream(f);
+            Card newCard = cardService.loadCard(fileInputStream);
+            listCard.add(newCard);
         }
         return listCard;
     }
     @RequestMapping(method = RequestMethod.GET)
     public String index(@ModelAttribute("card") Card card, Model model) throws IOException {
-        try {
-            File file = new File("src/main/resources/inputCard");
-            ArrayList<Card> listCard = new ArrayList<Card>();
-            for(File f : file.listFiles()){
-//                System.out.println("File name = " + f.getName());
-                FileInputStream fileInputStream = new FileInputStream(f);
-                Card newCard = cardService.loadCard(fileInputStream);
-                listCard.add(newCard);
-            }
+            ArrayList<Card> listCard = loadCard("src/main/resources/inputCard");
             model.addAttribute("listCard",listCard);
-//            FileInputStream file = new FileInputStream("src/main/resources/card1.yaml");
-//            card = cardService.loadCard(file);
-//            Card card1 = card;
-//            card1.setPinBlock("mcmcm");
-//            card.toString();
-//            ArrayList<Card> listCard = new ArrayList<Card>();
-//            listCard.add(card);
-//            listCard.add(card1);
-//            model.addAttribute("listCard",listCard);
-//            model.addAttribute("card", card);
-        }
-        catch(Exception e){
-            System.out.println(e.getMessage());
-        }
         return "card";
+    }
+    @RequestMapping(value = "/showInfo",method = RequestMethod.GET)
+    public String showCardInfo(@ModelAttribute("id") String id, Model model) throws IOException {
+        System.out.println("------------------------------");
+
+        return "redirect:cardinfo";
+
     }
 
 

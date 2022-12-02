@@ -18,6 +18,7 @@ public class CardService implements ICardService {
         Yaml yaml = new Yaml();
         HashMap yamlMap = yaml.load(inputStream);
         // Access HashMaps and ArrayList by key(s)
+        String id= (String) yamlMap.get("id");
         String f002 = (String) yamlMap.get("F002");
         String f014 = (String) yamlMap.get("F014");
         String f023= (String) yamlMap.get("F023");
@@ -61,33 +62,22 @@ public class CardService implements ICardService {
 
 
         HashMap f055 = (HashMap) yamlMap.get("F055");
-//        System.out.println(f055);
-//        HashMap f055_07 = new HashMap<>();
-//        try {
-//             f055_07 = (HashMap) f055.get("7");
-//        } catch (Exception e){
-//            System.out.println(e.getMessage());
-//        }
-//        String f055_07_03 = (String) f055_07.get("03");
-//        String f055_07_04 = (String) f055_07.get("04");
-//        String f055_07_05 = (String) f055_07.get("05");
-//        String f055_07_06 = (String) f055_07.get("06");
-//        String f055_07_07 = (String) f055_07.get("07");
-//        String f055_07_08 = (String) f055_07.get("08");
-//        String f055_07_09 = (String) f055_07.get("09");
-//        String f055_07_10 = (String) f055_07.get("10");
+        HashMap f055_07 = new HashMap<>();
+        try {
+             f055_07 = (HashMap) f055.get("07");
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        String f055_07_03 = (String) f055_07.get("03");
+        String f055_07_04 = (String) f055_07.get("04");
+        String f055_07_05 = (String) f055_07.get("05");
+        String f055_07_06 = (String) f055_07.get("06");
+        String f055_07_07 = (String) f055_07.get("07");
+        String f055_07_08 = (String) f055_07.get("08");
+        String f055_07_09 = (String) f055_07.get("09");
+        String f055_07_10 = (String) f055_07.get("10");
 
 
-        //Nhap
-        String f055_07_03 = "m";
-        String f055_07_04 = "m";
-        String f055_07_05 = "m";
-        String f055_07_06 = "m";
-        String f055_07_07 = "m";
-        String f055_07_08 = "m";
-        String f055_07_09 = "m";
-        String f055_07_10 = "m";
-        //Nhap
 
         String f055_21 = (String) f055.get("21");
         String f055_22 = (String) f055.get("22");
@@ -118,9 +108,7 @@ public class CardService implements ICardService {
 //            throw new NullPointerException("203");
 //        }
 
-            Card card = new Card(f002, f014, f023, f035_04, f035_05, f035_06, f035_07, f035_08, f045, f045_01, f045_02, f045_04, f045_06, f045_07, f045_08, f045_09, f045_10, f045_11, f045_12_2, f052, f053_03, f053_04, f053_05, f053_06, f053_07, f053_08, f053_09, f053_10, f053_11, f053_12, f053_13, f055_07_03, f055_07_04, f055_07_05, f055_07_06, f055_07_07, f055_07_08, f055_07_09, f055_07_10, f055_21, f055_22, f055_23_08, f123_11, f125_025, f125_034, f125_048, f125_057, f126_10, f134, f135, f136, f137, f138, f152);
-            card.toString();
-        System.out.println("You are at Card Service");
+            Card card = new Card(id,f002, f014, f023, f035_04, f035_05, f035_06, f035_07, f035_08, f045, f045_01, f045_02, f045_04, f045_06, f045_07, f045_08, f045_09, f045_10, f045_11, f045_12_2, f052, f053_03, f053_04, f053_05, f053_06, f053_07, f053_08, f053_09, f053_10, f053_11, f053_12, f053_13, f055_07_03, f055_07_04, f055_07_05, f055_07_06, f055_07_07, f055_07_08, f055_07_09, f055_07_10, f055_21, f055_22, f055_23_08, f123_11, f125_025, f125_034, f125_048, f125_057, f126_10, f134, f135, f136, f137, f138, f152);
             return card;
 
 
