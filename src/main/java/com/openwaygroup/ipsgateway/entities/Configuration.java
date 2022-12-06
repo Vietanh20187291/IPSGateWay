@@ -1,20 +1,16 @@
 package com.openwaygroup.ipsgateway.entities;
 
-import com.openwaygroup.ipsgateway.controller.CommunicationController;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.net.SocketAddress;
 
 import static com.openwaygroup.ipsgateway.services.InetAddressIsReachable.addressReachable;
 
 @Component
-public class Connection{
+public class Configuration {
 
-    private static Connection instance;
+    private static Configuration instance;
     private String vtsIp;
 
     private String hostIp;
@@ -23,6 +19,8 @@ public class Connection{
 
     private Integer hostPort;
     private Integer clientNumber = 0;
+    private String logLevel;
+
 
     private boolean role;
 
@@ -59,6 +57,9 @@ public class Connection{
     }
 
     public Integer getClientNumber() { return clientNumber; }
+    public String getLogLevel() {
+        return logLevel;
+    }
 
     public void setVtsPort(Integer vtsPort) {
         this.vtsPort = vtsPort;
@@ -76,18 +77,21 @@ public class Connection{
 
     public void setRole(boolean role) { this.role = role; }
     public void setClientNumber(Integer clientNumber) { this.clientNumber = clientNumber; }
+    public void setLogLevel(String logLevel) {
+        this.logLevel = logLevel;
+    }
 
-    public static Connection getInstance(){
+    public static Configuration getInstance(){
         if(instance == null){
-            instance = new Connection();
+            instance = new Configuration();
         }
         return instance;
     }
 
-    private Connection(){
+    private Configuration(){
     }
 
-    private Connection(String vtsIp, Integer vtsPort, String hostIp, Integer hostPort, boolean role) {
+    private Configuration(String vtsIp, Integer vtsPort, String hostIp, Integer hostPort, boolean role) {
         this.vtsIp = vtsIp;
         this.hostIp = hostIp;
         this.vtsPort = vtsPort;
@@ -95,15 +99,19 @@ public class Connection{
         this.role = role;
     }
 
-    private Connection(String vtsIp, Integer vtsPort, boolean role) {
+    private Configuration(String vtsIp, Integer vtsPort, boolean role) {
         this.vtsIp = vtsIp;
         this.vtsPort = vtsPort;
         this.role = role;
     }
 
-    private Connection(String vtsIp, Integer vtsPort) {
+    private Configuration(String vtsIp, Integer vtsPort) {
         this.vtsIp = vtsIp;
         this.vtsPort = vtsPort;
+    }
+
+    private Configuration(String logLevel){
+        this.logLevel = logLevel;
     }
 
     public void checkConnection() throws IOException, InterruptedException {

@@ -1,0 +1,328 @@
+2022-12-06 16:37:06.426  INFO 22084 --- [restartedMain] c.o.ipsgateway.IpsGatewayApplication     : Starting IpsGatewayApplication using Java 18.0.2.1 on Hieu with PID 22084 (D:\Project\Java\ips-gateway\target\classes started by Admin in D:\Project\Java\ips-gateway)
+2022-12-06 16:37:06.427  INFO 22084 --- [restartedMain] c.o.ipsgateway.IpsGatewayApplication     : No active profile set, falling back to 1 default profile: "default"
+2022-12-06 16:37:06.468  INFO 22084 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-12-06 16:37:06.468  INFO 22084 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-12-06 16:37:07.170  INFO 22084 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-12-06 16:37:07.175  INFO 22084 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-12-06 16:37:07.175  INFO 22084 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.68]
+2022-12-06 16:37:07.223  INFO 22084 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-12-06 16:37:07.223  INFO 22084 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 754 ms
+2022-12-06 16:37:07.244  INFO 22084 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-12-06 16:37:07.311  INFO 22084 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-12-06 16:37:07.319  INFO 22084 --- [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:dcbapp'
+2022-12-06 16:37:07.600  INFO 22084 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-12-06 16:37:07.626  INFO 22084 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-12-06 16:37:07.634  INFO 22084 --- [restartedMain] c.o.ipsgateway.IpsGatewayApplication     : Started IpsGatewayApplication in 1.477 seconds (JVM running for 1.941)
+2022-12-06 16:37:11.956 ERROR 22084 --- [HikariPool-1 connection adder] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Error thrown while acquiring connection from data source
+
+org.h2.jdbc.JdbcSQLNonTransientConnectionException: The database is open in exclusive mode; can not open additional connections [90135-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:678) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.message.DbException.get(DbException.java:223) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.message.DbException.get(DbException.java:199) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.message.DbException.get(DbException.java:188) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.engine.SessionLocal.checkSuspended(SessionLocal.java:1240) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.engine.SessionLocal.transitionToState(SessionLocal.java:1232) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.engine.SessionLocal.waitIfExclusiveModeEnabled(SessionLocal.java:1480) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.command.Command.executeQuery(Command.java:180) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.jdbc.JdbcConnection.isReadOnly(JdbcConnection.java:538) ~[h2-2.1.214.jar:2.1.214]
+	at com.zaxxer.hikari.pool.PoolBase.setupConnection(PoolBase.java:408) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:369) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:206) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:476) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.access$100(HikariPool.java:71) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:726) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:712) ~[HikariCP-4.0.3.jar:na]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:833) ~[na:na]
+
+2022-12-06 16:37:12.153  WARN 22084 --- [SpringApplicationShutdownHook] o.s.b.f.support.DisposableBeanAdapter    : Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-214]
+2022-12-06 16:37:12.154  INFO 22084 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2022-12-06 16:37:12.216  INFO 22084 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2022-12-06 16:37:14.420  INFO 9380 --- [restartedMain] c.o.ipsgateway.IpsGatewayApplication     : Starting IpsGatewayApplication using Java 18.0.2.1 on Hieu with PID 9380 (D:\Project\Java\ips-gateway\target\classes started by Admin in D:\Project\Java\ips-gateway)
+2022-12-06 16:37:14.421  INFO 9380 --- [restartedMain] c.o.ipsgateway.IpsGatewayApplication     : No active profile set, falling back to 1 default profile: "default"
+2022-12-06 16:37:14.467  INFO 9380 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-12-06 16:37:14.467  INFO 9380 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-12-06 16:37:15.181  INFO 9380 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-12-06 16:37:15.187  INFO 9380 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-12-06 16:37:15.187  INFO 9380 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.68]
+2022-12-06 16:37:15.232  INFO 9380 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-12-06 16:37:15.232  INFO 9380 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 764 ms
+2022-12-06 16:37:15.257  INFO 9380 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-12-06 16:37:15.322  INFO 9380 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-12-06 16:37:15.330  INFO 9380 --- [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:dcbapp'
+2022-12-06 16:37:15.701  INFO 9380 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-12-06 16:37:15.734  INFO 9380 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-12-06 16:37:15.742  INFO 9380 --- [restartedMain] c.o.ipsgateway.IpsGatewayApplication     : Started IpsGatewayApplication in 1.587 seconds (JVM running for 2.076)
+2022-12-06 17:00:08.908 ERROR 9380 --- [HikariPool-1 connection adder] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Error thrown while acquiring connection from data source
+
+org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:678) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.message.DbException.get(DbException.java:223) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.message.DbException.get(DbException.java:199) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.message.DbException.get(DbException.java:188) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.jdbc.JdbcConnection.checkClosed(JdbcConnection.java:1375) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.jdbc.JdbcConnection.getAutoCommit(JdbcConnection.java:423) ~[h2-2.1.214.jar:2.1.214]
+	at com.zaxxer.hikari.pool.PoolBase.setupConnection(PoolBase.java:412) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:369) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:206) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:476) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.access$100(HikariPool.java:71) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:726) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:712) ~[HikariCP-4.0.3.jar:na]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:833) ~[na:na]
+
+2022-12-06 17:00:09.112  WARN 9380 --- [SpringApplicationShutdownHook] o.s.b.f.support.DisposableBeanAdapter    : Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-214]
+2022-12-06 17:00:09.113  INFO 9380 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2022-12-06 17:00:09.160  INFO 9380 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2022-12-06 17:00:11.930  INFO 24440 --- [restartedMain] c.o.ipsgateway.IpsGatewayApplication     : Starting IpsGatewayApplication using Java 18.0.2.1 on Hieu with PID 24440 (D:\Project\Java\ips-gateway\target\classes started by Admin in D:\Project\Java\ips-gateway)
+2022-12-06 17:00:11.931  INFO 24440 --- [restartedMain] c.o.ipsgateway.IpsGatewayApplication     : No active profile set, falling back to 1 default profile: "default"
+2022-12-06 17:00:11.973  INFO 24440 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-12-06 17:00:11.973  INFO 24440 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-12-06 17:00:12.675  INFO 24440 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-12-06 17:00:12.680  INFO 24440 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-12-06 17:00:12.680  INFO 24440 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.68]
+2022-12-06 17:00:12.727  INFO 24440 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-12-06 17:00:12.727  INFO 24440 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 753 ms
+2022-12-06 17:00:12.745  INFO 24440 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-12-06 17:00:12.806  INFO 24440 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-12-06 17:00:12.814  INFO 24440 --- [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:dcbapp'
+2022-12-06 17:00:13.081  INFO 24440 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-12-06 17:00:13.107  INFO 24440 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-12-06 17:00:13.116  INFO 24440 --- [restartedMain] c.o.ipsgateway.IpsGatewayApplication     : Started IpsGatewayApplication in 1.514 seconds (JVM running for 2.057)
+2022-12-06 17:37:50.795 ERROR 24440 --- [HikariPool-1 connection adder] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Error thrown while acquiring connection from data source
+
+org.h2.jdbc.JdbcSQLNonTransientConnectionException: The database is open in exclusive mode; can not open additional connections [90135-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:678) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.message.DbException.get(DbException.java:223) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.message.DbException.get(DbException.java:199) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.message.DbException.get(DbException.java:188) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.engine.SessionLocal.checkSuspended(SessionLocal.java:1240) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.engine.SessionLocal.isOpen(SessionLocal.java:1173) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.engine.SessionLocal.waitIfExclusiveModeEnabled(SessionLocal.java:1486) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.command.Command.executeQuery(Command.java:180) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.jdbc.JdbcConnection.isReadOnly(JdbcConnection.java:538) ~[h2-2.1.214.jar:2.1.214]
+	at com.zaxxer.hikari.pool.PoolBase.setupConnection(PoolBase.java:408) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:369) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:206) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:476) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.access$100(HikariPool.java:71) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:726) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:712) ~[HikariCP-4.0.3.jar:na]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:833) ~[na:na]
+
+2022-12-06 17:37:50.881  WARN 24440 --- [SpringApplicationShutdownHook] o.s.b.f.support.DisposableBeanAdapter    : Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-214]
+2022-12-06 17:37:50.882  INFO 24440 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2022-12-06 17:37:51.055  INFO 24440 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2022-12-06 17:37:55.366  INFO 22828 --- [restartedMain] c.o.ipsgateway.IpsGatewayApplication     : Starting IpsGatewayApplication using Java 18.0.2.1 on Hieu with PID 22828 (D:\Project\Java\ips-gateway\target\classes started by Admin in D:\Project\Java\ips-gateway)
+2022-12-06 17:37:55.367  INFO 22828 --- [restartedMain] c.o.ipsgateway.IpsGatewayApplication     : No active profile set, falling back to 1 default profile: "default"
+2022-12-06 17:37:55.406  INFO 22828 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-12-06 17:37:55.406  INFO 22828 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-12-06 17:37:56.097  INFO 22828 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-12-06 17:37:56.103  INFO 22828 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-12-06 17:37:56.103  INFO 22828 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.68]
+2022-12-06 17:37:56.149  INFO 22828 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-12-06 17:37:56.149  INFO 22828 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 743 ms
+2022-12-06 17:37:56.168  INFO 22828 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-12-06 17:37:56.230  INFO 22828 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-12-06 17:37:56.238  INFO 22828 --- [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:dcbapp'
+2022-12-06 17:37:56.505  INFO 22828 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-12-06 17:37:56.530  INFO 22828 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-12-06 17:37:56.538  INFO 22828 --- [restartedMain] c.o.ipsgateway.IpsGatewayApplication     : Started IpsGatewayApplication in 1.44 seconds (JVM running for 1.926)
+2022-12-06 17:38:10.478  INFO 22828 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-12-06 17:38:10.479  INFO 22828 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-12-06 17:38:10.479  INFO 22828 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2022-12-06 17:38:30.388 ERROR 22828 --- [HikariPool-1 connection adder] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Error thrown while acquiring connection from data source
+
+org.h2.jdbc.JdbcSQLNonTransientConnectionException: The database is open in exclusive mode; can not open additional connections [90135-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:678) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.message.DbException.get(DbException.java:223) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.message.DbException.get(DbException.java:199) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.message.DbException.get(DbException.java:188) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.engine.SessionLocal.checkSuspended(SessionLocal.java:1240) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.engine.SessionLocal.isOpen(SessionLocal.java:1173) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.engine.SessionLocal.waitIfExclusiveModeEnabled(SessionLocal.java:1486) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.command.Command.executeQuery(Command.java:180) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.jdbc.JdbcConnection.isReadOnly(JdbcConnection.java:538) ~[h2-2.1.214.jar:2.1.214]
+	at com.zaxxer.hikari.pool.PoolBase.setupConnection(PoolBase.java:408) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:369) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:206) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:476) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.access$100(HikariPool.java:71) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:726) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:712) ~[HikariCP-4.0.3.jar:na]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:833) ~[na:na]
+
+2022-12-06 17:38:30.493  WARN 22828 --- [SpringApplicationShutdownHook] o.s.b.f.support.DisposableBeanAdapter    : Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-214]
+2022-12-06 17:38:30.494  INFO 22828 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2022-12-06 17:38:30.650  INFO 22828 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2022-12-06 17:38:32.838  INFO 13108 --- [restartedMain] c.o.ipsgateway.IpsGatewayApplication     : Starting IpsGatewayApplication using Java 18.0.2.1 on Hieu with PID 13108 (D:\Project\Java\ips-gateway\target\classes started by Admin in D:\Project\Java\ips-gateway)
+2022-12-06 17:38:32.838  INFO 13108 --- [restartedMain] c.o.ipsgateway.IpsGatewayApplication     : No active profile set, falling back to 1 default profile: "default"
+2022-12-06 17:38:32.880  INFO 13108 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-12-06 17:38:32.881  INFO 13108 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-12-06 17:38:33.579  INFO 13108 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-12-06 17:38:33.584  INFO 13108 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-12-06 17:38:33.584  INFO 13108 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.68]
+2022-12-06 17:38:33.630  INFO 13108 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-12-06 17:38:33.630  INFO 13108 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 749 ms
+2022-12-06 17:38:33.648  INFO 13108 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-12-06 17:38:33.710  INFO 13108 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-12-06 17:38:33.718  INFO 13108 --- [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:dcbapp'
+2022-12-06 17:38:33.986  INFO 13108 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-12-06 17:38:34.012  INFO 13108 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-12-06 17:38:34.022  INFO 13108 --- [restartedMain] c.o.ipsgateway.IpsGatewayApplication     : Started IpsGatewayApplication in 1.453 seconds (JVM running for 1.938)
+2022-12-06 17:38:34.206  INFO 13108 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-12-06 17:38:34.206  INFO 13108 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-12-06 17:38:34.207  INFO 13108 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2022-12-06 17:39:00.507 ERROR 13108 --- [HikariPool-1 connection adder] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Error thrown while acquiring connection from data source
+
+org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:678) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.message.DbException.get(DbException.java:223) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.message.DbException.get(DbException.java:199) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.message.DbException.get(DbException.java:188) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.jdbc.JdbcConnection.checkClosed(JdbcConnection.java:1375) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.jdbc.JdbcConnection.getAutoCommit(JdbcConnection.java:423) ~[h2-2.1.214.jar:2.1.214]
+	at com.zaxxer.hikari.pool.PoolBase.setupConnection(PoolBase.java:412) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:369) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:206) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:476) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.access$100(HikariPool.java:71) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:726) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:712) ~[HikariCP-4.0.3.jar:na]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:833) ~[na:na]
+
+2022-12-06 17:39:00.716  WARN 13108 --- [SpringApplicationShutdownHook] o.s.b.f.support.DisposableBeanAdapter    : Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-214]
+2022-12-06 17:39:00.717  INFO 13108 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2022-12-06 17:39:00.762  INFO 13108 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2022-12-06 17:39:02.857  INFO 12380 --- [restartedMain] c.o.ipsgateway.IpsGatewayApplication     : Starting IpsGatewayApplication using Java 18.0.2.1 on Hieu with PID 12380 (D:\Project\Java\ips-gateway\target\classes started by Admin in D:\Project\Java\ips-gateway)
+2022-12-06 17:39:02.858  INFO 12380 --- [restartedMain] c.o.ipsgateway.IpsGatewayApplication     : No active profile set, falling back to 1 default profile: "default"
+2022-12-06 17:39:02.898  INFO 12380 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-12-06 17:39:02.899  INFO 12380 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-12-06 17:39:03.593  INFO 12380 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-12-06 17:39:03.599  INFO 12380 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-12-06 17:39:03.599  INFO 12380 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.68]
+2022-12-06 17:39:03.644  INFO 12380 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-12-06 17:39:03.644  INFO 12380 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 745 ms
+2022-12-06 17:39:03.664  INFO 12380 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-12-06 17:39:03.724  INFO 12380 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-12-06 17:39:03.732  INFO 12380 --- [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:dcbapp'
+2022-12-06 17:39:04.002  INFO 12380 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-12-06 17:39:04.027  INFO 12380 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-12-06 17:39:04.035  INFO 12380 --- [restartedMain] c.o.ipsgateway.IpsGatewayApplication     : Started IpsGatewayApplication in 1.453 seconds (JVM running for 1.987)
+2022-12-06 17:39:05.323  INFO 12380 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-12-06 17:39:05.323  INFO 12380 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-12-06 17:39:05.324  INFO 12380 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2022-12-06 17:39:44.117 ERROR 12380 --- [HikariPool-1 connection adder] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Error thrown while acquiring connection from data source
+
+org.h2.jdbc.JdbcSQLNonTransientConnectionException: The database is open in exclusive mode; can not open additional connections [90135-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:678) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.message.DbException.get(DbException.java:223) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.message.DbException.get(DbException.java:199) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.message.DbException.get(DbException.java:188) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.engine.SessionLocal.checkSuspended(SessionLocal.java:1240) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.engine.SessionLocal.transitionToState(SessionLocal.java:1232) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.engine.SessionLocal.waitIfExclusiveModeEnabled(SessionLocal.java:1480) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.command.Command.executeQuery(Command.java:180) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.jdbc.JdbcConnection.isReadOnly(JdbcConnection.java:538) ~[h2-2.1.214.jar:2.1.214]
+	at com.zaxxer.hikari.pool.PoolBase.setupConnection(PoolBase.java:408) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:369) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:206) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:476) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.access$100(HikariPool.java:71) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:726) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:712) ~[HikariCP-4.0.3.jar:na]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:833) ~[na:na]
+
+2022-12-06 17:39:44.316  WARN 12380 --- [SpringApplicationShutdownHook] o.s.b.f.support.DisposableBeanAdapter    : Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-214]
+2022-12-06 17:39:44.317  INFO 12380 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2022-12-06 17:39:44.380  INFO 12380 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2022-12-06 17:39:46.524  INFO 9984 --- [restartedMain] c.o.ipsgateway.IpsGatewayApplication     : Starting IpsGatewayApplication using Java 18.0.2.1 on Hieu with PID 9984 (D:\Project\Java\ips-gateway\target\classes started by Admin in D:\Project\Java\ips-gateway)
+2022-12-06 17:39:46.525  INFO 9984 --- [restartedMain] c.o.ipsgateway.IpsGatewayApplication     : No active profile set, falling back to 1 default profile: "default"
+2022-12-06 17:39:46.562  INFO 9984 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-12-06 17:39:46.563  INFO 9984 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-12-06 17:39:47.261  INFO 9984 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-12-06 17:39:47.266  INFO 9984 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-12-06 17:39:47.266  INFO 9984 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.68]
+2022-12-06 17:39:47.311  INFO 9984 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-12-06 17:39:47.312  INFO 9984 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 749 ms
+2022-12-06 17:39:47.331  INFO 9984 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-12-06 17:39:47.390  INFO 9984 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-12-06 17:39:47.398  INFO 9984 --- [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:dcbapp'
+2022-12-06 17:39:47.682  INFO 9984 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-12-06 17:39:47.707  INFO 9984 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-12-06 17:39:47.717  INFO 9984 --- [restartedMain] c.o.ipsgateway.IpsGatewayApplication     : Started IpsGatewayApplication in 1.55 seconds (JVM running for 2.045)
+2022-12-06 17:39:57.711  INFO 9984 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-12-06 17:39:57.711  INFO 9984 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-12-06 17:39:57.712  INFO 9984 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2022-12-06 17:41:06.379 ERROR 9984 --- [HikariPool-1 connection adder] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Error thrown while acquiring connection from data source
+
+org.h2.jdbc.JdbcSQLNonTransientConnectionException: The database is open in exclusive mode; can not open additional connections [90135-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:678) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.message.DbException.get(DbException.java:223) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.message.DbException.get(DbException.java:199) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.message.DbException.get(DbException.java:188) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.engine.SessionLocal.checkSuspended(SessionLocal.java:1240) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.engine.SessionLocal.isOpen(SessionLocal.java:1173) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.engine.SessionLocal.waitIfExclusiveModeEnabled(SessionLocal.java:1486) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.command.Command.executeQuery(Command.java:180) ~[h2-2.1.214.jar:2.1.214]
+	at org.h2.jdbc.JdbcConnection.isReadOnly(JdbcConnection.java:538) ~[h2-2.1.214.jar:2.1.214]
+	at com.zaxxer.hikari.pool.PoolBase.setupConnection(PoolBase.java:408) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:369) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:206) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:476) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.access$100(HikariPool.java:71) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:726) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:712) ~[HikariCP-4.0.3.jar:na]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:833) ~[na:na]
+
+2022-12-06 17:41:06.481  WARN 9984 --- [SpringApplicationShutdownHook] o.s.b.f.support.DisposableBeanAdapter    : Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-214]
+2022-12-06 17:41:06.482  INFO 9984 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2022-12-06 17:41:06.637  INFO 9984 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2022-12-06 17:41:08.944  INFO 12252 --- [restartedMain] c.o.ipsgateway.IpsGatewayApplication     : Starting IpsGatewayApplication using Java 18.0.2.1 on Hieu with PID 12252 (D:\Project\Java\ips-gateway\target\classes started by Admin in D:\Project\Java\ips-gateway)
+2022-12-06 17:41:08.945  INFO 12252 --- [restartedMain] c.o.ipsgateway.IpsGatewayApplication     : No active profile set, falling back to 1 default profile: "default"
+2022-12-06 17:41:08.985  INFO 12252 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-12-06 17:41:08.986  INFO 12252 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-12-06 17:41:09.847  INFO 12252 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-12-06 17:41:09.853  INFO 12252 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-12-06 17:41:09.853  INFO 12252 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.68]
+2022-12-06 17:41:09.907  INFO 12252 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-12-06 17:41:09.908  INFO 12252 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 922 ms
+2022-12-06 17:41:09.934  INFO 12252 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-12-06 17:41:10.018  INFO 12252 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-12-06 17:41:10.029  INFO 12252 --- [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:dcbapp'
+2022-12-06 17:41:10.320  INFO 12252 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-12-06 17:41:10.349  INFO 12252 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-12-06 17:41:10.358  INFO 12252 --- [restartedMain] c.o.ipsgateway.IpsGatewayApplication     : Started IpsGatewayApplication in 1.729 seconds (JVM running for 2.265)
+2022-12-06 17:41:38.207  INFO 12252 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-12-06 17:41:38.207  INFO 12252 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-12-06 17:41:38.208  INFO 12252 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2022-12-06 17:41:44.869  INFO 12252 --- [http-nio-8080-exec-3] c.o.ipsgateway.IpsGatewayApplication     : Connect To Server Successfully
+2022-12-06 17:41:44.869  INFO 12252 --- [http-nio-8080-exec-3] c.o.ipsgateway.IpsGatewayApplication     : Socket[addr=/10.145.48.96,port=7777,localport=49508]
+2022-12-06 17:41:49.347  INFO 12252 --- [http-nio-8080-exec-9] c.o.ipsgateway.IpsGatewayApplication     : Configuration To The Server Has Been Closed

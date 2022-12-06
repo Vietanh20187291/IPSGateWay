@@ -1,6 +1,6 @@
 package com.openwaygroup.ipsgateway.controller;
 
-import com.openwaygroup.ipsgateway.entities.Connection;
+import com.openwaygroup.ipsgateway.entities.Configuration;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -18,31 +18,31 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @AutoConfigureMockMvc
 @SpringBootTest
-class CommunicationControllerTest {
+class ConfigurationControllerTest {
     @Autowired
     private MockMvc mockMvc;
-    public Connection connection = Connection.getInstance();
+    public Configuration configuration = Configuration.getInstance();
     @Test
     void testConnectionInitializeClient() throws IOException {
         boolean expectedResult = true;
-        CommunicationController communicationController = new CommunicationController();
-      /*  Connection connection = new Connection(communicationController.getLocalHostAddress(), 9999,"4.2.2.2", 53,false);*/
-        this.connection.setHostIp("4.2.2.2");
-        this.connection.setHostPort(53);
-        this.connection.setRole(false);
-        boolean actualResult = communicationController.initializeClient(connection);
+        ConfigurationController configurationController = new ConfigurationController();
+      /*  Configuration connection = new Configuration(communicationController.getLocalHostAddress(), 9999,"4.2.2.2", 53,false);*/
+        this.configuration.setHostIp("4.2.2.2");
+        this.configuration.setHostPort(53);
+        this.configuration.setRole(false);
+        boolean actualResult = configurationController.initializeClient(configuration);
         assertEquals(expectedResult,actualResult);
         assertEquals(expectedResult,actualResult);
     }
     @Test
     void testConnectionInitializeServer() throws IOException{
         boolean expectedResult = true;
-        CommunicationController communicationController = new CommunicationController();
-       /* Connection connection = new Connection(communicationController.getLocalHostAddress(),9999,true);*/
-        this.connection.setVtsIp(communicationController.getLocalHostAddress());
-        this.connection.setVtsPort(9999);
-        this.connection.setRole(true);
-        boolean actualResult = communicationController.initializeServer(connection);
+        ConfigurationController configurationController = new ConfigurationController();
+       /* Configuration connection = new Configuration(communicationController.getLocalHostAddress(),9999,true);*/
+        this.configuration.setVtsIp(configurationController.getLocalHostAddress());
+        this.configuration.setVtsPort(9999);
+        this.configuration.setRole(true);
+        boolean actualResult = configurationController.initializeServer(configuration);
         assertEquals(expectedResult,actualResult);
         assertEquals(expectedResult,actualResult);
     }
@@ -69,7 +69,7 @@ class CommunicationControllerTest {
     @Test
     void testCommunicationIndex() throws Exception{
         this.mockMvc
-                .perform(get("/communication"))
+                .perform(get("/configuration"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("communication"))
                 .andExpect(model().attributeExists("edit"));
@@ -85,10 +85,10 @@ class CommunicationControllerTest {
    /* @SpringBootTest(classes={com.openwaygroup.ipsgateway.controller.class})*/
     void testConnectionLostClient() throws IOException, InterruptedException {
         Socket socket;
-        Connection connection = Connection.getInstance();
-        connection.setHostIp("4.2.2.2");
-        connection.setHostPort(53);
-        connection.setRole(false);
+        Configuration configuration = Configuration.getInstance();
+        configuration.setHostIp("4.2.2.2");
+        configuration.setHostPort(53);
+        configuration.setRole(false);
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
@@ -98,12 +98,12 @@ class CommunicationControllerTest {
                 + "Host is NOT reachable\n"
                 + "Trying to reconnect\n";
 
-        CommunicationController communicationController = new CommunicationController();
-        communicationController.initializeClient(connection);
+        ConfigurationController configurationController = new ConfigurationController();
+        configurationController.initializeClient(configuration);
         Thread.sleep(30000);
-        connection.setHostIp("55.12.34.53");
+        configuration.setHostIp("55.12.34.53");
         Thread.sleep(30000);
-        connection.setHostIp("4.2.2.2");
+        configuration.setHostIp("4.2.2.2");
         Thread.sleep(30000);
         assertEquals(expectedResult, outContent.toString());
    /*     assertNotEquals(expectedResult, outContent.toString());*/
