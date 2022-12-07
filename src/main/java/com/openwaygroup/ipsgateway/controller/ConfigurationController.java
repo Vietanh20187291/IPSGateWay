@@ -25,7 +25,7 @@ public class ConfigurationController {
     @RequestMapping(method = RequestMethod.GET)
     public String index(@ModelAttribute("configuration") Configuration configuration, Model model) {
         model.addAttribute("configuration", this.configuration);
-        return "communication";
+        return "configuration";
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
@@ -33,10 +33,10 @@ public class ConfigurationController {
         model.addAttribute("configuration", this.configuration);
         this.configuration.setVtsIp(getLocalHostAddress());
         System.out.println("------------------------------");
-        return "configuration";
+        return "configurationEdit";
     }
 
-    @RequestMapping(method = RequestMethod.PUT)
+    @RequestMapping(value = "/edit", method = RequestMethod.PUT)
     public String update(@ModelAttribute("configuration") Configuration configuration, Model model) throws IOException {
         System.out.println("------------------------------");
             if(!configuration.getRole()){
@@ -55,9 +55,9 @@ public class ConfigurationController {
         setLogLevel(loggerLevel);
 
         if (this.configuration.getStatus()){
-            return "redirect:configuration";
+            return "redirect:/configuration";
         }else{
-            return "redirect:configuration/edit";
+            return "redirect:/configuration/edit";
         }
 
     }
