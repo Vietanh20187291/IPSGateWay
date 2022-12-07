@@ -21,7 +21,7 @@
 <div class="container pt-1">
     <div id="wp-content">
         <div id="list-card-component">
-            <h4>List of Card</h4>
+            <h4>GetById</h4>
             <!--                    <ul th:each="card : ${listCard}">-->
             <!--&lt;!&ndash;                        th:onclick="|showCardIndo('${card}')|"&ndash;&gt;-->
             <!--&lt;!&ndash;                        th:onclick="'javascript:showCardInfo(' + ${card} + ')'"&ndash;&gt;-->
@@ -46,9 +46,9 @@
                     <tbody>
                     <th:block th:each="card : ${listCard}">
                         <tr class="table-row">
-                            <td th:utext="${card.getId()}"></td>
                             <td th:utext="${card.getF002()}"></td>
-                            <td><button>Show</button></td>
+                            <td th:utext="${card.getF014()}"></td>
+                            <td><button th:attr="onclick=|getCardById(${card.getF002()})|">Show</button></td>
 
                         </tr>
                     </th:block>

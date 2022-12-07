@@ -1,3 +1,3 @@
-function showCardInfo(card) {
-console.log(card)
-}
+// function showCardInfo(card) {
+// console.log(card)
+// }

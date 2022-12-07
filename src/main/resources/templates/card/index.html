@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/card.css}"/>
+    <script th:src="@{/js/action.js}" type="text/javascript"></script>
+    <script th:src="@{/js/bootstrap.min.js}" type="text/javascript"></script>
+    <title>Card</title>
+</head>
+
+<body>
+<!-- Header -->
+<!-- End Header -->
+
+<!-- Body -->
+
+<div class="container pt-1">
+    <div id="wp-content">
+        <div id="list-card-component">
+            <h4>List of Card</h4>
+            <!--                    <ul th:each="card : ${listCard}">-->
+            <!--&lt;!&ndash;                        th:onclick="|showCardIndo('${card}')|"&ndash;&gt;-->
+            <!--&lt;!&ndash;                        th:onclick="'javascript:showCardInfo(' + ${card} + ')'"&ndash;&gt;-->
+            <!--&lt;!&ndash;                        th:onclick="showCardInfo(this,[[${card}]]"&ndash;&gt;-->
+            <!--&lt;!&ndash;                        th:attr="onclick=${'showCardInfo('+card+')'}"&ndash;&gt;-->
+            <!--&lt;!&ndash;                        th:attr="onclick=${'showCardInfo('+ ''' + card + ''' + ')'}"&ndash;&gt;-->
+            <!--&lt;!&ndash;                        th:attr="onclick=|showCardInfo('${card}')|" &ndash;&gt;-->
+            <!--&lt;!&ndash;                        th:onclick="'showCardInfo('+${card}+')'"&ndash;&gt;-->
+            <!--                        <li class="list-card" th:utext="${card.getId()}+ ${card.getF002()}" th:attr="onclick=|showCardInfo(${card.getF002()})|" >-->
+            <!--                        </li>-->
+
+            <!--                        </ul>-->
+
+            <div id="list-card">
+                <table>
+                    <thead>
+                    <tr class="table-header">
+                        <th>Card Number</th>
+                        <th>Expiry Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <th:block th:each="card : ${listCard}">
+                        <tr class="table-row">
+                            <td th:utext="${card.getF002()}"></td>
+                            <td th:utext="${card.getF014}"></td>
+                            <td><button th:attr="onclick=|getCardById(${card.getF002()})|">Show</button></td>
+
+                        </tr>
+                    </th:block>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--<div class="table">-->
+<!--        <div id="card-table">-->
+<!--            <table>-->
+<!--                <thead>-->
+<!--                <tr class="table-header">-->
+<!--                    <th>Card Number</th>-->
+<!--                    <th>Card Number</th>-->
+<!--                </tr>-->
+<!--                </thead>-->
+<!--                <tbody>-->
+<!--                <th:block th:each="card : ${listCard}">-->
+<!--                    <tr class="table-row">-->
+<!--                        <th>Expiry Date</th>-->
+<!--                        <td th:utext="${card.getF035_04()}"></td>-->
+<!--                        &lt;!&ndash;                        <td th:utext="${listCard.getExpiryDate() }"></td>&ndash;&gt;-->
+
+
+<!--                    </tr>-->
+<!--                </th:block>-->
+<!--                </tbody>-->
+<!--            </table>-->
+<!--        </div>-->
+        <!--</div>-->
+    </div>
+    <!-- End WP-Content -->
+
+</div>
+<!-- End Body -->
+
+</body>
+<script th:src="@{/js/card.js}" type="text/javascript"></script>
+
+</html>
