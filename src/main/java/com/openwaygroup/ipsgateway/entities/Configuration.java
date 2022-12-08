@@ -1,5 +1,9 @@
 package com.openwaygroup.ipsgateway.entities;
 
+import com.openwaygroup.ipsgateway.services.YamlPropertySourceFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -8,25 +12,24 @@ import java.net.Socket;
 import static com.openwaygroup.ipsgateway.services.InetAddressIsReachable.addressReachable;
 
 @Component
+@ConfigurationProperties("configuration") // prefix configuration, find configuration.* values
+@PropertySource(value = "classpath:configuration.yaml", factory = YamlPropertySourceFactory.class)
 public class Configuration {
 
     private static Configuration instance;
     private String vtsIp;
-
+    @Value("${configuration.hostIp}")
     private String hostIp;
-
+    @Value("${configuration.vtsPort}")
     private Integer vtsPort;
-
+    @Value("${configuration.hostPort}")
     private Integer hostPort;
     private Integer clientNumber = 0;
+    @Value("${configuration.logLevel}")
     private String logLevel;
-
-
+    @Value("${configuration.role}")
     private boolean role;
-
     private boolean status;
-
-
 
     public boolean getStatus() {
         return status;

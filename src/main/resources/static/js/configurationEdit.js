@@ -1,4 +1,14 @@
 
+function roleCheck(){
+    var role = document.getElementById("role").value;
+    if(role=="true"){
+        removeHost();
+    }else{
+        removeVts();
+    }
+    console.log(role);
+}
+
 function removeVts() {
     document.getElementById("vtsInput").style.display='none';
     document.getElementById("hostInput").style.display='';
