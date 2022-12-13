@@ -33,6 +33,7 @@
                     <tbody>
                     <th:block th:each="card : ${listCard}">
                         <tr class="table-row">
+                            
                             <td th:utext="${card.getF002()}"></td>
                             <td th:utext="${card.getF014}">
                                 <a th:href="@{/card/getbyid/{id}}"></a>

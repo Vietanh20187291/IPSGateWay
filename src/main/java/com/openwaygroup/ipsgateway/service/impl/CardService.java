@@ -19,9 +19,8 @@ import java.util.List;
 @Service
 public class CardService implements ICardService {
 
-    
 
-        public static ArrayList<Card> loadCard (String path) throws IOException {
+    public ArrayList<Card> loadCard (String path) throws IOException {
             ArrayList<Card> listCard = new ArrayList<Card>();
             File file = new File(path);
             System.out.println("-------CardService.loadCard()--------");
@@ -46,7 +45,7 @@ public class CardService implements ICardService {
                     field.setName(c.getName());
                     field.setValue(fieldValue);
                     fields.add(field);
-                    System.out.println(field.toString());
+
 
                 }
 
@@ -75,48 +74,13 @@ public class CardService implements ICardService {
         }
 
 
-    public static void main(String[] args) throws IOException {
-            List<Card> listCard = loadCard("src/main/resources/inputCard");
-        listCard.forEach((card) -> {
-            List<Field> fields =  card.getListField();
-            fields.forEach(field -> {
-                field.toString();
-            });
-
-
-        });
-
-    }
-//        FileInputStream fileInputStream = new FileInputStream("src/main/resources/inputCard/4761340000000145.yaml");
-//        System.out.println("Set parameter for each card");
-//        Yaml yaml = new Yaml();
-//        HashMap yamlMap = yaml.load(fileInputStream);
-////        EnumSet.allOf(CardEnum.class)
-////                .forEach(field -> System.out.println(field.toString()));
+//    public static void main(String[] args) throws IOException {
+//        List<Card> listCard = loadCard("src/main/resources/inputCard");
 //
-//        EnumSet<CardEnum> cardEnums = EnumSet.allOf(CardEnum.class);
-//        Card card = new Card();
-//        List<Field> fields = new ArrayList<>();
-//        for (CardEnum c : cardEnums) {
-////            // Access HashMaps and ArrayList by key(s)
-//            String fieldValue = (String) yamlMap.get(c.getFieldId());
-////            System.out.println("Card = " + field);
-//            Field field = new Field();
-//            field.setFieldId(c.getFieldId());
-//            field.setDescription(c.getDescription());
-//            field.setName(c.getName());
-//            field.setValue(fieldValue);
-//            fields.add(field);
-//
+//        for(int i= 0; i< listCard.size();i++){
+//            System.out.println(listCard.get(i).toString());
 //        }
-//        fields.forEach((element) -> {
-//            System.out.println(element.toString());
-//
-//        });
-//        card.setListField(fields);
-//
-//
-//
 //
 //    }
+
 }

@@ -28,8 +28,14 @@ public class Card {
     @Override
     public String toString() {
 
-        return "Card{" +
-                "listField=" + listField +
-                '}';
+            List<Field> fields =  this.getListField();
+                String value = "Card {";
+        for (Field field : fields) {
+            value += field.toString();
+        }
+        value+="}";
+
+
+        return value;
     }
 }
