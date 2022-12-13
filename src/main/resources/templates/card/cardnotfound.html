@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container pt-1">
+  <h1>Card Not Found</h1>
+    <form  id="sudokuBoard" method="post">
+        <table class="table table-dark">
+            <tr th:each="row: ${board}">
+                <td th:each="value: ${row}">
+                    <div th:switch="${value}">
+                        <input th:case="0" style="width:30px;height:30px;text-align:center" type = "text" maxlength="1" value="0">
+                        <input th:case="*" style="width:30px;height:30px;text-align:center;background-color:lightgreen" type = "text" th:value="${value}" readonly>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <input type="submit"> Check Solution </input>
+    </form>
+</div>
+</body>
+</html>
