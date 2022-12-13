@@ -59,28 +59,16 @@ public class CardService implements ICardService {
         }
 
         @Override
-        public Card getById (ArrayList < Card > listCard, String id) throws IOException {
-            System.out.println("1");
-            System.out.println("id: " + id);
-
-            for (Card c : listCard) {
-//            System.out.println("c.002"+c.getF002());
-//            if(c.getF002().equals(id)){
-//                System.out.println("hay");
-//                return c;
-//            }
+        public Card getById (ArrayList < Card > listCard, String cardId) throws IOException {
+            for (Card card : listCard) {
+                if(card.getByFieldId("F002").getValue().equals(cardId)){
+                    return card;
+                }
             }
             return null;
         }
 
 
-//    public static void main(String[] args) throws IOException {
-//        List<Card> listCard = loadCard("src/main/resources/inputCard");
-//
-//        for(int i= 0; i< listCard.size();i++){
-//            System.out.println(listCard.get(i).toString());
-//        }
-//
-//    }
+
 
 }

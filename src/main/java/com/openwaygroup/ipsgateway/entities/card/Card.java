@@ -17,9 +17,21 @@ public class Card {
     public Card() {
     }
 
+
     public List<Field> getListField() {
         return listField;
     }
+
+    public Field getByFieldId(String fieldId){
+        List<Field> fields =  this.getListField();
+        for (Field field : fields){
+            if(field.getFieldId().equals(fieldId)){
+                return field;
+            }
+        }
+            return null;
+    }
+
 
     public void setListField(List<Field> listField) {
         this.listField = listField;

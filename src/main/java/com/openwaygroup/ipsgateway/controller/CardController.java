@@ -42,20 +42,20 @@ public class CardController {
         return "card/index";
     }
 
-//    @GetMapping("/{id}")
-//            public String getById(@PathVariable String id, Model model) throws IOException {
-//        if(listCard == null){
-//            listCard = cardService.loadCard("src/main/resources/inputCard");
-//        }
-//
-//        Card card = cardService.getById(listCard,id);
-//        if(cardService.getById(listCard,id)== null){
-//            return "card/cardnotfound";
-//        }
-//        System.out.println("hay"+card.toString());
-//        model.addAttribute("card",card);
-//        return "card/getbyid";
-//    }
+    @GetMapping("/{id}")
+            public String getById(@PathVariable String id, Model model) throws IOException {
+        if(listCard == null){
+            listCard = cardService.loadCard("src/main/resources/inputCard");
+        }
+
+        Card card = cardService.getById(listCard,id);
+        if(cardService.getById(listCard,id)== null){
+            return "card/cardnotfound";
+        }
+        System.out.println("hay"+card.toString());
+        model.addAttribute("card",card);
+        return "card/getbyid";
+    }
 
 
 }
