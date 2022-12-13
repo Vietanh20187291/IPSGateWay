@@ -1,9 +1,6 @@
 package com.openwaygroup.ipsgateway;
 
-import com.openwaygroup.ipsgateway.entities.Card;
-import org.junit.Assert;
 import org.junit.Test;
-import org.springframework.web.multipart.MultipartFile;
 
 public class CardLoadingTest {
 

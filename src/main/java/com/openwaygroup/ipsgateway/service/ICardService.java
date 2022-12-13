@@ -1,10 +1,10 @@
 package com.openwaygroup.ipsgateway.service;
 
-import com.openwaygroup.ipsgateway.entities.Card;
+import com.openwaygroup.ipsgateway.entities.card.Card;
 import java.io.IOException;
-import java.io.InputStream;
+import java.util.ArrayList;
 
 public interface ICardService {
-    Card loadCard(InputStream inputStream) throws IOException;
-
+   //ArrayList<Card> loadCard(String path) throws IOException;
+    Card getById( ArrayList<Card> listCard, String id) throws IOException;
 }
