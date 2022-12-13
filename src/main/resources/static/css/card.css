@@ -7,7 +7,7 @@ table{
     margin: 20px auto 0;
     background-color:rgba(0,0,0,.05);
 }
-th, td{
+th, tr , td{
     padding: 4px 10px;
 }
 #wp-content{
