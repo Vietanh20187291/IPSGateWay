@@ -6,7 +6,7 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" th:href="@{/css/card.css}"/>
+    <!--    <link rel="stylesheet" th:href="@{/css/card.css}"/>-->
     <script th:src="@{/js/action.js}" type="text/javascript"></script>
     <script th:src="@{/js/bootstrap.min.js}" type="text/javascript"></script>
     <title>Card</title>
@@ -23,11 +23,11 @@
         <div id="list-card-component">
             <h4>List of Card</h4>
             <div id="list-card">
-                <table>
-                    <thead>
+                <table class="table table-bordered table-hover">
+                    <thead class="table-header thead-light">
                     <tr class="table-header">
-                        <th>Card Number</th>
-                        <th>Expiry Date</th>
+                        <th scope="col">Card Number</th>
+                        <th scope="col">Expiry Date</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -35,15 +35,22 @@
                         <tr class="table-row">
                             <td th:utext="${card.getByFieldId('F002').getValue()}"></td>
                             <td th:utext="${card.getByFieldId('F014').getValue()}"></td>
-                            <td>
-                                <a th:href="@{/cards/{id}(id=${card.getByFieldId('F002').getValue()})}">Show</a>
+                            <td class="text-center">
+
+                                <a class="text-secondary font-weight-bold" th:href="@{/cards/{id}(id=${card.getByFieldId('F002').getValue()})}">Show</a>
+
                             </td>
-                            <td>
-                                <a th:href="@{/cards/{id}(id=${card.getByFieldId('F002').getValue()})}">Add</a>
+                                <td class="text-center">
+
+                                    <a class="text-secondary font-weight-bold" th:href="@{/cards/{id}(id=${card.getByFieldId('F002').getValue()})}">Edit</a>
+
+                                </td>
+                            <td class="text-center">
+
+                                <a class="text-secondary font-weight-bold" th:href="@{/cards/{id}(id=${card.getByFieldId('F002').getValue()})}">Delete</a>
+
                             </td>
-                            <td>
-                                <a th:href="@{/cards/{id}(id=${card.getByFieldId('F002').getValue()})}">Delete</a>
-                            </td>
+
 
                         </tr>
                     </th:block>
