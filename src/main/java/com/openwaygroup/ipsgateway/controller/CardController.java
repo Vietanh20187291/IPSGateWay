@@ -35,7 +35,7 @@ public class CardController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String index(@ModelAttribute("card") Card card, Model model) throws IOException {
-        listCard = cardService.loadCard("src/main/resources/inputCard");
+        listCard = cardService.loadCard("src/main/resources/inputCards");
         System.out.println("Add card to attribute");
             model.addAttribute("listCard",listCard);
         System.out.println("Render card/index.html");
@@ -49,11 +49,14 @@ public class CardController {
         }
 
         Card card = cardService.getById(listCard,id);
+        System.out.println("Getting card by id");
         if(cardService.getById(listCard,id)== null){
+            System.out.println("Cannot find cards");
             return "card/cardnotfound";
         }
-        System.out.println("hay"+card.toString());
         model.addAttribute("card",card);
+        System.out.println("-----------------");
+        System.out.println("render card by id");
         return "card/getbyid";
     }
 
