@@ -1,0 +1,7 @@
+configuration:
+  hostIp: ''
+  hostPort: null
+  ipsPort: 9998
+  timeout: 5000
+  logLevel: info
+  role: true

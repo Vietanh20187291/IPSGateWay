@@ -25,25 +25,32 @@
 <div class="container pt-3">
     <h4>System Configuration Edit</h4>
     <input type="hidden" id="role" th:value="${configuration.role}"/>
-    <form th:action="@{/configuration/edit}" th:object="${configuration}" th:method="put">
-        <div class="form-row" id="vtsInput" style ="display: none;">
+    <form th:action="@{/configuration}" th:object="${configuration}" th:method="put">
+        <div class="form-row" id="ipsInput" style ="display: none;">
             <div class="form-group col-md-4 alert alert-success" role="alert" th:inline="text">
-                IP Address : [[${configuration.vtsIp}]]
+                IP Address : [[${configuration.ipsIp}]]
             </div>
             <div class="form-group col-md-2">
-                <label for="inputPort4">Port</label>
-                <input type="text" th:field="*{vtsPort}" class="form-control" id="inputVtsPort4" placeholder="1234">
+                <label for="inputPort">Port </label>
+                <p id="notNull"> *</p>
+                <input type="text" th:field="*{ipsPort}" class="form-control" id="inputIpsPort" placeholder="1234">
             </div>
         </div>
 
         <div class="form-row" id="hostInput">
             <div class="form-group col-md-4">
-                <label for="inputVtsIp4">Host IP Address</label>
-                <input type="text" th:field="*{hostIp}" class="form-control" id="inputHostIp4" placeholder="127.0.0.1">
+                <label for="inputIpsIp">Host IP Address</label>
+                <p id="notNull"> *</p>
+                <input type="text" th:field="*{hostIp}" class="form-control" id="inputHostIp" placeholder="127.0.0.1">
             </div>
             <div class="form-group col-md-2">
-                <label for="inputPort4">Port</label>
-                <input type="text" th:field="*{hostPort}" class="form-control" id="inputHostPort4" placeholder="1234">
+                <label for="inputPort">Port</label>
+                <p id="notNull"> *</p>
+                <input type="text" th:field="*{hostPort}" class="form-control" id="inputHostPort" placeholder="1234">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="inputTimeout">Timeout</label>
+                <input type="text" th:field="*{timeout}" class="form-control" id="inputTimeout" placeholder="4000">
             </div>
         </div>
 
@@ -52,7 +59,7 @@
                 <legend class="col-form-label col-sm-2 pt-0">Role</legend>
                 <div class="col-sm-10">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" th:field="*{role}" name="inlineRadioOptions" id="inlineRadio1" th:value="false" th:onclick="removeVts()">
+                        <input class="form-check-input" type="radio" th:field="*{role}" name="inlineRadioOptions" id="inlineRadio1" th:value="false" th:onclick="removeIps()">
                         <label class="form-check-label" for="inlineRadio1">Client</label>
                     </div>
                     <div class="form-check form-check-inline">
@@ -65,6 +72,7 @@
                 </div>
             </div>
         </fieldset>
+
         <div class="form-row">
             <label for="loggerLevel">Logger Level</label>
             <select class="form-select col-md-2" th:field="*{logLevel}" aria-label="Default select example">
@@ -78,7 +86,7 @@
             </select>
         </div>
         <tr>
-            <button type="submit" th:unless="${configuration.status}" class="btn btn-primary" th:text="${!(configuration.status)} ? 'Connect'"></button>
+            <button type="submit" th:unless="${configuration.status}" class="btn btn-primary" th:onclick="validateForm()" th:text="${!(configuration.status)} ? 'Connect'"></button>
         </tr>
     </form>
     <form th:action="@{/configuration/close}" th:object="${configuration}" th:method="put">

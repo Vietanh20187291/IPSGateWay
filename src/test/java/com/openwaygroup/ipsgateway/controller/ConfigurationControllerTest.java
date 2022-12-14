@@ -3,9 +3,13 @@ package com.openwaygroup.ipsgateway.controller;
 import com.openwaygroup.ipsgateway.IpsGatewayApplication;
 import com.openwaygroup.ipsgateway.entities.Configuration;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.io.*;
@@ -17,13 +21,17 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @AutoConfigureMockMvc
+@ContextConfiguration
+@ExtendWith(SpringExtension.class)
 @SpringBootTest
 class ConfigurationControllerTest {
     private MockMvc mockMvc;
     public Socket socket;
-    public Configuration configuration = Configuration.getInstance();
+    @Autowired
+    private Configuration configuration;
     org.slf4j.Logger log = LoggerFactory.getLogger(IpsGatewayApplication.class);
     ConfigurationController configurationController = new ConfigurationController();
+   /* ConfigurationProperties configurationProperties = new ConfigurationProperties();*/
 
     void setConfigurationMockHost(){
         this.configuration.setHostIp("4.2.2.2");
@@ -31,15 +39,15 @@ class ConfigurationControllerTest {
         this.configuration.setRole(false);
     }
     void setConfigurationMockVts() throws UnknownHostException {
-        this.configuration.setVtsIp(configurationController.getLocalHostAddress());
-        this.configuration.setVtsPort(9999);
+        this.configuration.setIpsIp(configurationController.getLocalHostAddress());
+        this.configuration.setIpsPort(9999);
         this.configuration.setRole(true);
     }
    void clientDemo() throws UnknownHostException,
             IOException {
         String sentence_to_server;
         String sentence_from_server;
-        socket = new Socket(this.configuration.getVtsIp(), this.configuration.getVtsPort());
+        socket = new Socket(this.configuration.getIpsIp(), this.configuration.getIpsPort());
       /*  sentence_to_server = "Hello World!";
         DataOutputStream outToServer = new DataOutputStream(socket.getOutputStream());
         BufferedReader inFromServer = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -49,10 +57,11 @@ class ConfigurationControllerTest {
     }
 
     @Test
-    void testConnectionInitializeClient() {
+    void testConnectionInitializeClient() throws IOException {
         boolean expectedResult = true;
         setConfigurationMockHost();
-        boolean actualResult = configurationController.initializeClient(this.configuration);
+        configurationController.update(this.configuration);
+        boolean actualResult = this.configuration.getStatus();
         assertEquals(expectedResult,actualResult);
     }
     @Test
@@ -75,9 +84,9 @@ class ConfigurationControllerTest {
         boolean expectedResult  = false;
         setConfigurationMockHost();
         configurationController.initializeClient(this.configuration);
-        Thread.sleep(30000);
+        Thread.sleep(10000);
         configuration.setHostIp("55.12.34.53");
-        Thread.sleep(30000);
+        Thread.sleep(10000);
         boolean actualResult = this.configuration.getStatus();
         assertEquals(expectedResult, actualResult);
     }
@@ -86,11 +95,11 @@ class ConfigurationControllerTest {
         boolean expectedResult  = true;
         setConfigurationMockHost();
         configurationController.initializeClient(this.configuration);
-        Thread.sleep(30000);
+        Thread.sleep(10000);
         configuration.setHostIp("55.12.34.53");
-        Thread.sleep(30000);
+        Thread.sleep(10000);
         configuration.setHostIp("4.2.2.2");
-        Thread.sleep(30000);
+        Thread.sleep(10000);
         boolean actualResult = this.configuration.getStatus();
         assertEquals(expectedResult, actualResult);
     }
@@ -129,7 +138,7 @@ class ConfigurationControllerTest {
     }
 
     @Test
-    void testShutDownServer() throws IOException {
+    void testShutDownServer() throws Exception {
         boolean expectedResult = false;
         setConfigurationMockVts();
         configurationController.initializeServer(this.configuration);
@@ -138,7 +147,7 @@ class ConfigurationControllerTest {
         assertEquals(expectedResult,actualResult);
     }
     @Test
-    void testCloseConnectionToServer() throws IOException {
+    void testCloseConnectionToServer() throws Exception {
         boolean expectedResult = false;
         setConfigurationMockHost();
         configurationController.initializeClient(this.configuration);
@@ -147,4 +156,10 @@ class ConfigurationControllerTest {
         assertEquals(expectedResult,actualResult);
     }
 
+    @Test
+    void testImportConfigurationFile(){
+        System.out.println(this.configuration.getHostIp());
+        System.out.println(this.configuration.getHostPort());
+        System.out.println(this.configuration.getRole());
+    }
 }

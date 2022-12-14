@@ -1,137 +1,119 @@
 package com.openwaygroup.ipsgateway.entities;
 
+import com.openwaygroup.ipsgateway.IpsGatewayApplication;
 import com.openwaygroup.ipsgateway.services.YamlPropertySourceFactory;
-import org.springframework.beans.factory.annotation.Value;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
-
 import java.io.IOException;
 import java.net.Socket;
+
 
 import static com.openwaygroup.ipsgateway.services.InetAddressIsReachable.addressReachable;
 
 @Component
-@ConfigurationProperties("configuration") // prefix configuration, find configuration.* values
-@PropertySource(value = "classpath:configuration.yaml", factory = YamlPropertySourceFactory.class)
+@org.springframework.context.annotation.Configuration
+@ConfigurationProperties(prefix = "configuration")
+@PropertySource(value = "classpath:configuration.yml", factory = YamlPropertySourceFactory.class)
 public class Configuration {
+        private String ipsIp;
+        private String hostIp;
+        private Integer ipsPort;
+        private Integer hostPort;
+        private boolean role;
 
-    private static Configuration instance;
-    private String vtsIp;
-    @Value("${configuration.hostIp}")
-    private String hostIp;
-    @Value("${configuration.vtsPort}")
-    private Integer vtsPort;
-    @Value("${configuration.hostPort}")
-    private Integer hostPort;
-    private Integer clientNumber = 0;
-    @Value("${configuration.logLevel}")
-    private String logLevel;
-    @Value("${configuration.role}")
-    private boolean role;
-    private boolean status;
-
-    public boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
-
-    public String getVtsIp() {
-        return vtsIp;
-    }
-
-    public void setVtsIp(String vtsIp) {
-        this.vtsIp = vtsIp;
-    }
-
-    public String getHostIp() {
-        return hostIp;
-    }
-
-    public void setHostIp(String hostIp) {
-        this.hostIp = hostIp;
-    }
-
-    public Integer getVtsPort() {
-        return vtsPort;
-    }
-
-    public Integer getClientNumber() { return clientNumber; }
-    public String getLogLevel() {
-        return logLevel;
-    }
-
-    public void setVtsPort(Integer vtsPort) {
-        this.vtsPort = vtsPort;
-    }
-
-    public Integer getHostPort() {
-        return hostPort;
-    }
-
-    public void setHostPort(Integer hostPort) {
-        this.hostPort = hostPort;
-    }
-
-    public boolean getRole() { return role; }
-
-    public void setRole(boolean role) { this.role = role; }
-    public void setClientNumber(Integer clientNumber) { this.clientNumber = clientNumber; }
-    public void setLogLevel(String logLevel) {
-        this.logLevel = logLevel;
-    }
-
-    public static Configuration getInstance(){
-        if(instance == null){
-            instance = new Configuration();
+        public String getIpsIp() {
+            return ipsIp;
         }
-        return instance;
+
+        public void setIpsIp(String ipsIp) {
+            this.ipsIp = ipsIp;
+        }
+
+        public String getHostIp() {
+            return hostIp;
+        }
+
+        public void setHostIp(String hostIp) {
+            this.hostIp = hostIp;
+        }
+
+        public Integer getIpsPort() {
+            return ipsPort;
+        }
+
+        public void setIpsPort(Integer ipsPort) {
+            this.ipsPort = ipsPort;
+        }
+
+        public Integer getHostPort() {
+            return hostPort;
+        }
+
+        public void setHostPort(Integer hostPort) {
+            this.hostPort = hostPort;
+        }
+
+        public boolean getRole() { return role; }
+
+        public void setRole(boolean role) { this.role = role; }
+
+
+
+        private String logLevel;
+        private Integer timeout = 3000;
+        public Integer getTimeout() {
+            return timeout;
+        }
+        public String getLogLevel() {
+            return logLevel;
+        }
+        public void setLogLevel(String logLevel) {
+            this.logLevel = logLevel;
+        }
+        public void setTimeout(Integer timeout) {
+            this.timeout = timeout;
+        }
+
+
+    private Integer clientNumber = 0;
+    private boolean status;
+    public boolean getStatus() {return status;}
+    public void setStatus(boolean status) {this.status = status;}
+    public Integer getClientNumber() { return clientNumber; }
+    public void setClientNumber(Integer clientNumber) { this.clientNumber = clientNumber; }
+    public Configuration(){
     }
 
-    private Configuration(){
-    }
-
-    private Configuration(String vtsIp, Integer vtsPort, String hostIp, Integer hostPort, boolean role) {
-        this.vtsIp = vtsIp;
+    private Configuration(String ipsIp, Integer ipsPort, String hostIp, Integer hostPort, boolean role, String logLevel, Integer timeout) {
+        this.ipsIp = ipsIp;
         this.hostIp = hostIp;
-        this.vtsPort = vtsPort;
+        this.ipsPort = ipsPort;
         this.hostPort = hostPort;
         this.role = role;
-    }
-
-    private Configuration(String vtsIp, Integer vtsPort, boolean role) {
-        this.vtsIp = vtsIp;
-        this.vtsPort = vtsPort;
-        this.role = role;
-    }
-
-    private Configuration(String vtsIp, Integer vtsPort) {
-        this.vtsIp = vtsIp;
-        this.vtsPort = vtsPort;
-    }
-
-    private Configuration(String logLevel){
         this.logLevel = logLevel;
+        this.timeout = timeout;
     }
 
+    //Check Client connection to Server
     public void checkConnection() throws IOException, InterruptedException {
+        org.slf4j.Logger log = LoggerFactory.getLogger(IpsGatewayApplication.class);
         Socket socket;
         while(hostIp != null){
-            status = addressReachable(hostIp, hostPort, 3000);
+            status = addressReachable(hostIp, hostPort, timeout);
             if(status) {
                 System.out.println("Host is reachable");
                 Thread.sleep(4000);
             }else{
                 while(!status){
                     try {
-                        System.out.println("Reconnecting...");
+                        log.info("Host is unable to reach");
+                        log.info("Reconnecting...");
                         socket = new Socket(hostIp, hostPort);
                         status = true;
                     } catch (Exception e){
-                        System.out.println("Can't connect...");
+                        log.info("Can't connect...");
                         status = false;
                     }
                 }
@@ -139,4 +121,6 @@ public class Configuration {
 
         }
     }
+
+
 }

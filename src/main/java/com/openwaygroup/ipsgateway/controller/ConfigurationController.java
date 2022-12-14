@@ -2,59 +2,90 @@ package com.openwaygroup.ipsgateway.controller;
 
 import com.openwaygroup.ipsgateway.IpsGatewayApplication;
 import com.openwaygroup.ipsgateway.entities.Configuration;
+import com.openwaygroup.ipsgateway.services.YamlPropertySourceFactory;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.integration.channel.DirectChannel;
+import org.springframework.integration.config.EnableIntegration;
+import org.springframework.integration.dsl.IntegrationFlow;
+import org.springframework.integration.dsl.IntegrationFlows;
+import org.springframework.integration.dsl.Transformers;
+import org.springframework.integration.dsl.context.IntegrationFlowContext;
+import org.springframework.integration.ip.dsl.Tcp;
+import org.springframework.integration.ip.tcp.TcpInboundGateway;
+import org.springframework.integration.ip.tcp.connection.*;
+import org.springframework.integration.monitor.IntegrationMBeanExporter;
+import org.springframework.messaging.MessageChannel;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.yaml.snakeyaml.DumperOptions;
+import org.yaml.snakeyaml.Yaml;
 
 import java.io.*;
 import java.net.*;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 @Component
+@org.springframework.context.annotation.Configuration
+@EnableIntegration
 @Controller
 @RequestMapping("/configuration")
 public class ConfigurationController {
     public Socket socket;
     public ServerSocket serverSocket;
     org.slf4j.Logger log = LoggerFactory.getLogger(IpsGatewayApplication.class);
-   @Autowired
-    public Configuration configuration = Configuration.getInstance();
+
+    @Autowired
+    IntegrationFlowContext integrationFlowContext;
+
+    @Autowired
+    public Configuration configuration;
+    @Autowired
+    private ApplicationEventPublisher publisher;
+
+    AbstractConnectionFactory serverCf;
+
+    IntegrationMBeanExporter integrationMBeanExporter;
 
     @RequestMapping(method = RequestMethod.GET)
-    public String index(@ModelAttribute("configuration") Configuration configuration, Model model) {
-        model.addAttribute("configuration", this.configuration);
+
+    public String index(@ModelAttribute("configuration") Configuration config,Model model) throws UnknownHostException {
+        model.addAttribute("configuration", configuration); //Đổ ra view
+        configuration.setIpsIp(getLocalHostAddress());
         return "configuration";
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
-    public String edit(@ModelAttribute("configuration") Configuration configuration, Model model) throws UnknownHostException {
-        model.addAttribute("configuration", this.configuration);
-        this.configuration.setVtsIp(getLocalHostAddress());
+    public String edit(@ModelAttribute("configuration") Configuration config, Model model) throws UnknownHostException {
+        model.addAttribute("configuration", configuration);
+        configuration.setIpsIp(getLocalHostAddress());
         System.out.println("------------------------------");
         return "configurationEdit";
     }
 
-    @RequestMapping(value = "/edit", method = RequestMethod.PUT)
-    public String update(@ModelAttribute("configuration") Configuration configuration) throws IOException {
+    @RequestMapping(method = RequestMethod.PUT)
+    public String update(@ModelAttribute("configuration") Configuration config) throws IOException {
         System.out.println("------------------------------");
-            if(!configuration.getRole()){
+        YamlPropertySourceFactory yamlPropertySourceFactory = new YamlPropertySourceFactory();
+            if(!config.getRole()){
                 //Client
-                initializeClient(configuration);
-                System.out.println(this.configuration.getHostIp());
-                System.out.println(this.configuration.getHostPort());
+                initializeClient(config);
             }else{
                 //Server
-                initializeServer(configuration);
-                System.out.println(this.configuration.getVtsIp());
-                System.out.println(this.configuration.getVtsPort());
+                configuration.setIpsPort(config.getIpsPort());
+                commandServerFlow();
+                saveParamChanges();
+               /* initializeServer(configuration);*/
             }
             //Change Log Level
-        String loggerLevel = configuration.getLogLevel();
+        String loggerLevel = config.getLogLevel();
         setLogLevel(loggerLevel);
 
-        if (this.configuration.getStatus()){
+        if (configuration.getStatus()){
             return "redirect:/configuration";
         }else{
             return "redirect:/configuration/edit";
@@ -62,20 +93,20 @@ public class ConfigurationController {
 
     }
 
-    public boolean initializeClient(Configuration configuration) {
+    public boolean initializeClient(Configuration config) {
         System.out.println("------------------------------");
         try {
-            socket = new Socket(configuration.getHostIp(), configuration.getHostPort());
-            this.configuration.setStatus(true);
-            this.configuration.setRole(false);
-            this.configuration.setHostIp(configuration.getHostIp());
-            this.configuration.setHostPort(configuration.getHostPort());
+            socket = new Socket(config.getHostIp(), config.getHostPort());
+            configuration.setStatus(true);
+            configuration.setRole(false);
+            configuration.setHostIp(config.getHostIp());
+            configuration.setHostPort(config.getHostPort());
             log.info("Connect To Server Successfully");
             log.info(String.valueOf(socket));
             //Thread check connection status
             new Thread(() -> {
                 try {
-                    this.configuration.checkConnection();
+                    configuration.checkConnection();
                 } catch (IOException e) {
                    /* throw new RuntimeException(e);*/
                 } catch (InterruptedException e) {
@@ -126,17 +157,17 @@ public class ConfigurationController {
         }
     }
 
-    public boolean initializeServer(Configuration configuration) throws IOException {
+    public boolean initializeServer(Configuration config) throws IOException {
         try {
-            log.info("Binding To Port " + configuration.getVtsPort() + ", Please Wait  ...");
-            serverSocket = new ServerSocket(configuration.getVtsPort());
+            log.info("Binding To Port " + config.getIpsPort() + ", Please Wait  ...");
+            serverSocket = new ServerSocket(config.getIpsPort());
             log.info("Server Started: " + serverSocket);
             log.info("Waiting For A Client ...");
             //
-            this.configuration.setStatus(true);
-            this.configuration.setRole(true);
-            this.configuration.setVtsIp(getLocalHostAddress());
-            this.configuration.setVtsPort(configuration.getVtsPort());
+            configuration.setStatus(true);
+            configuration.setRole(true);
+            configuration.setIpsIp(getLocalHostAddress());
+            configuration.setIpsPort(config.getIpsPort());
             //
             new Thread(() -> {
                 try {
@@ -172,12 +203,12 @@ public class ConfigurationController {
             root.setLevel(ch.qos.logback.classic.Level.ALL);
             loggerLevel = "all";
         }
-        log.trace("Logger Level Set As " + loggerLevel);
+        log.info("Logger Level Set As " + loggerLevel);
     }
 
     @RequestMapping(value = "/close", method = RequestMethod.PUT)
-    public String closeConnection() throws IOException {
-        if(this.configuration.getRole() == false){
+    public String closeConnection() throws Exception {
+        if(!this.configuration.getRole()){
             socket.close();
             //new function ? base method ?
             this.configuration.setHostIp(null);
@@ -185,9 +216,11 @@ public class ConfigurationController {
             this.configuration.setStatus(false);
             log.info("Configuration To The Server Has Been Closed");
         }else {
-            serverSocket.close();
-            this.configuration.setVtsIp(null);
-            this.configuration.setVtsPort(null);
+           /* serverSocket.close();*/
+            /*log.info(String.valueOf(serverConnectionFactory().getListener()));*/
+            integrationMBeanExporter.stopActiveComponents(0);
+            this.configuration.setIpsIp(null);
+            this.configuration.setIpsPort(null);
             this.configuration.setStatus(false);
             this.configuration.setRole(false);
             this.configuration.setClientNumber(0);
@@ -206,6 +239,86 @@ public class ConfigurationController {
         return str;
     }
 
+    //TCP Server
+    public IntegrationFlow commandServerFlow() throws UnknownHostException {
+        IntegrationFlow integrationFlow =  IntegrationFlows.from((serverConnectionFactory()))
+              /*  .handle((payload, handlers) -> "Thread: " + Thread.currentThread().getName() + " Server response...")*/
+                /*.channel("inboundChannel")*/
+
+                .transform(Transformers.objectToString())
+                .log(m -> "payload=" + m.getPayload())
+                .get();
+        this.integrationFlowContext.registration(integrationFlow)
+                .register();
+        return integrationFlow;
+    }
+
+    public TcpInboundGateway serverConnectionFactory() throws UnknownHostException {
+       serverCf = Tcp.netServer(configuration.getIpsPort()).get();
+
+        log.info("Server Started: " + getLocalHostAddress() +" Port: "+ serverCf.getPort() );
+        log.info("Waiting For A Client ...");
+        configuration.setStatus(true);
+        configuration.setRole(true);
+        configuration.setIpsIp(getLocalHostAddress());
+        configuration.setIpsPort(configuration.getIpsPort());
+
+    serverCf.setApplicationEventPublisher(publisher);
+    System.out.println("publisher" + serverCf.getApplicationEventPublisher());
+
+        return Tcp.inboundGateway(serverCf).get();
+        /*return serverConnectionFactory;*/
+    }
+    public MessageChannel inboundChannel() {return new DirectChannel();}
+    public TcpInboundGateway inboundGateway(AbstractServerConnectionFactory serverConnectionFactory,
+                                            MessageChannel inboundChannel) {
+        TcpInboundGateway tcpInboundGateway = new TcpInboundGateway();
+        tcpInboundGateway.setConnectionFactory(serverConnectionFactory);
+        tcpInboundGateway.setRequestChannel(inboundChannel);
+        return tcpInboundGateway;
+    }
+    //Save configuration
+    public void saveParamChanges() {
+        try {
+            // create and set properties into yaml object
+            DumperOptions options = new DumperOptions();
+           /* options.setPrettyFlow(true);*/
+            options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
+
+            Yaml yaml = new Yaml(options);
+            Map<String, LinkedHashMap> dataMap = new LinkedHashMap<>();
+            LinkedHashMap<String, Object> config = new LinkedHashMap<>();
+            dataMap.put("configuration", config);
+            config.put("hostIp", configuration.getHostIp());
+            config.put("hostPort", configuration.getHostPort());
+            config.put("ipsPort", configuration.getIpsPort());
+            config.put("timeout", configuration.getTimeout());
+            config.put("logLevel", configuration.getLogLevel());
+            config.put("role", configuration.getRole());
+            Writer writer = new FileWriter("src/main/resources/configuration.yml");
+            yaml.dump(dataMap,writer);
+            writer.close();
+        } catch (Exception e ) {
+            e.printStackTrace();
+        }
+    }
+
+   /* @Bean
+    public EventListener eventListener() {
+        return new EventListener();
+    }
+    public TcpReceivingChannelAdapter inbound() throws UnknownHostException {
+        TcpReceivingChannelAdapter adapter = new TcpReceivingChannelAdapter();
+        adapter.setConnectionFactory(serverConnectionFactory());
+        adapter.setOutputChannelName("foo");
+        return adapter;
+    }
+    public class EventListener implements ApplicationListener<TcpConnectionCloseEvent> {
+        @Override
+        public void onApplicationEvent(TcpConnectionCloseEvent event) {
+            log.info(String.valueOf(event));
+        }
+    }*/
         /* HOST TCP/IP
         host = "10.145.48.96";
         port = 7777;

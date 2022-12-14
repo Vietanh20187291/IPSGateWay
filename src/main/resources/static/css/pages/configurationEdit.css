@@ -1,7 +1,12 @@
 h4 {
     color: red;
 }
-
+#notNull{
+    color:red;
+    display: inline-block;
+    font-size:20px;
+    margin-bottom: unset;
+}
 /*#status {
     margin: 100px;
     width: 1px;

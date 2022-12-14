@@ -1,6 +1,0 @@
-configuration:
- - hostIp: 10.145.48.96
- - hostPort: 7777
- - vtsPort:
- - logLevel: info
- - role: false
