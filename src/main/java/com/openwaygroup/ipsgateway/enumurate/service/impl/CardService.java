@@ -1,9 +1,10 @@
-package com.openwaygroup.ipsgateway.service.impl;
+package com.openwaygroup.ipsgateway.enumurate.service.impl;
 
 import com.openwaygroup.ipsgateway.entities.card.Card;
 import com.openwaygroup.ipsgateway.entities.card.Field;
 import com.openwaygroup.ipsgateway.enumurate.CardEnum;
-import com.openwaygroup.ipsgateway.service.ICardService;
+import com.openwaygroup.ipsgateway.enumurate.service.ICardService;
+import com.openwaygroup.ipsgateway.exception.CardException;
 import org.springframework.stereotype.Service;
 import org.yaml.snakeyaml.Yaml;
 
@@ -19,7 +20,7 @@ import java.util.List;
 public class CardService implements ICardService {
 
 
-    public ArrayList<Card> loadCard(String path) throws IOException {
+    public ArrayList<Card> loadCard(String path) throws IOException, CardException {
 
 
         ArrayList<Card> listCard = new ArrayList<Card>();
@@ -34,7 +35,8 @@ public class CardService implements ICardService {
         System.out.println("-------CardService.loadCard()--------");
         System.out.println("Reading Yaml File from path");
         if (file.length() == 0) {
-            System.out.println("Error in CardService: File list card is null");
+//            System.out.println("Error in CardService: Cannot read any file from path");
+            throw new CardException("Cannot read any file from path");
         } else {
             // not empty
 
@@ -76,6 +78,8 @@ public class CardService implements ICardService {
 
             System.out.println("Return list card to controller");
         }
+
+
         return listCard;
 
     }
@@ -87,6 +91,7 @@ public class CardService implements ICardService {
                 return card;
             }
         }
+
         return null;
     }
 

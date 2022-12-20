@@ -42,7 +42,7 @@ public enum CardEnum {
     FIELD39("F055.07.09","IDD FORMAT","IDD format"),
     FIELD40("F055.07.10","IDD","IDD"),
     FIELD41("F055.21","FORM FACTOR","Form Factor Indicator - Field 55.21 - Tag 9F6E (Chip)"),
-    FIELD42("F055.22","CUSTOMR EXCUSIVE DATA","Customer Exclusive Data - Field 55.22 - Tag 9F7C (Chip)"),
+    FIELD42("F055.22","CUSTOMER EXCUSIVE DATA","Customer Exclusive Data - Field 55.22 - Tag 9F7C (Chip)"),
     FIELD43("F055.23.08","DEDI FILE NAME","Dedicated File Name - Tag 84 (Chip)"),
     FIELD44("F123.11","TOKEN","Token - Field 123.11"),
     FIELD45("F125.025","MICRDATA1","MICR Data Segment - Field 125.2 (POS Check)"),
