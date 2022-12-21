@@ -1,6 +1,10 @@
 function roleCheck(){
     var role = document.getElementById("role").value;
-
+    if(role=="true"){
+        removeHost();
+    }else{
+        removeIps();
+    }
     console.log(role);
 }
 function validateForm(){
@@ -9,6 +13,18 @@ function validateForm(){
     }else{
         validateHostForm();
     }
+}
+
+function removeIps() {
+    document.getElementById("ipsInput").style.display='none';
+    document.getElementById("hostInput").style.display='';
+    document.getElementById("clientNum").style.display='none';
+}
+
+function removeHost(){
+    document.getElementById("ipsInput").style.display='';
+    document.getElementById("hostInput").style.display='none';
+    document.getElementById("clientNum").style.display='';
 }
 
 function validateIpsForm() {
@@ -30,7 +46,4 @@ function validateHostForm() {
         return false;
     }
 }
-
-
-
 

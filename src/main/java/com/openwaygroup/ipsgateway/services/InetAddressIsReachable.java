@@ -11,7 +11,6 @@ public class InetAddressIsReachable {
      * Overriding default InetAddress.isReachable() method to add 2 more arguments port and timeout value
      */
     public static boolean addressReachable(String address, int port, int timeout) throws IOException {
-
         Socket socket = new Socket();
         try {
            socket.connect(new InetSocketAddress(address, port), timeout);

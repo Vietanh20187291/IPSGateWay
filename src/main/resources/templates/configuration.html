@@ -24,26 +24,26 @@
     <h4>System Configuration</h4>
     <div class="row">
         <div class="alert alert-success  col-sm-3 col-md-6 col-lg-4 " th:inline="text" role="alert">
-            Host IP: [[${configuration.hostIp}]]
+            Host IP: [[${configuration.connection.hostIp}]]
             <br>
-            Port: [[${configuration.hostPort}]]
+            Port: [[${configuration.connection.hostPort}]]
         </div>
-        <div class="text-center alert col-sm-9 col-md-6 col-lg-8" th:classappend="${configuration.status} ? 'alert-success' : 'alert-danger'">
-            Status: [[${configuration.status} ? 'Connected' : 'Disconnected']]
+        <div class="text-center alert col-sm-9 col-md-6 col-lg-8" th:classappend="${configuration.connection.status} ? 'alert-success' : 'alert-danger'">
+            Status: [[${configuration.connection.status} ? 'Connected' : 'Disconnected']]
         </div>
         <div class="alert alert-success  col-sm-3 col-md-6 col-lg-4 " th:inline="text" role="alert">
-            IPS IP: [[${configuration.ipsIp}]]
+            IPS IP: [[${configuration.connection.ipsIp}]]
             <br>
-            Port: [[${configuration.ipsPort}]]
+            Port: [[${configuration.connection.ipsPort}]]
         </div>
         <div class="col-sm-9 col-md-6 col-lg-8">
         </div>
         <div class="alert alert-success  col-sm-3 col-md-6 col-lg-4 " th:inline="text" role="alert">
-            Role: [[${configuration.role} ? 'Server' : 'Client']]
+            Role: [[${configuration.connection.role} ? 'Server' : 'Client']]
             <br>
-            Timeout: [[${configuration.timeout}]]
+            Timeout: [[${configuration.logger.timeout}]]
             <br>
-            Log Level: [[${configuration.logLevel}]]
+            Log Level: [[${configuration.logger.logLevel}]]
         </div>
     </div>
     <a th:href="@{/configuration/edit}"><button class="btn btn-primary">Configuration Edit</button></a>

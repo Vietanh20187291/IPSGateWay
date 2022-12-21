@@ -1,11 +1,12 @@
-h4 {
-    color: red;
-}
+
 #notNull{
     color:red;
     display: inline-block;
     font-size:20px;
     margin-bottom: unset;
+}
+#submitButton{
+    margin-top: 5px;
 }
 /*#status {
     margin: 100px;

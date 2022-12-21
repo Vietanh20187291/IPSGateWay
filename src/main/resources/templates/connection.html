@@ -10,10 +10,9 @@
     <!-- IPS Gateway StyleSheet -->
     <link th:href="@{../css/Style.css}" rel="stylesheet" />
 
-
-    <script type="text/javascript" th:src="@{/js/configurationEdit.js}"></script>
+    <script type="text/javascript" th:src="@{/js/connection.js}"></script>
     <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
-    <title>System Configuration Edit</title>
+    <title>System Connection</title>
 </head>
 <body onload="javascript:roleCheck()">
 <!-- Header -->
@@ -24,10 +23,10 @@
 
 <!-- Body -->
 <div class="container pt-3">
-    <h4>System Configuration Edit</h4>
+    <h4>System Connection</h4>
     <input type="hidden" id="role" th:value="${configuration.connection.role}"/>
-    <form th:action="@{/configuration}" th:object="${configuration}" th:method="put">
-        <div class="form-row" id="ipsInput">
+    <form th:action="@{/connection}" th:object="${configuration}" th:method="put">
+        <div class="form-row" id="ipsInput" style ="display: none;">
             <div class="form-group col-md-4 alert alert-success" role="alert" th:inline="text">
                 IP Address : [[${configuration.connection.ipsIp}]]
             </div>
@@ -67,6 +66,9 @@
                         <input class="form-check-input" type="radio" th:field="*{connection.role}" th:attr="checked=${configuration.connection.role}? 'checked' : 'none' " name="inlineRadioOptions" id="inlineRadio2" th:value="true" th:onclick="removeHost()">
                         <label class="form-check-label" for="inlineRadio2">Server</label>
                     </div>
+                    <div class="form-check form-check-inline" id="clientNum" style ="display: none;">
+                        <button type="button" class="btn" id="clientNumButton" th:value="*{connection.clientNumber}" th:classappend="${configuration.connection.status} ? 'btn-success' : 'btn-danger'" th:inline="text">Number of Client : [[${configuration.connection.clientNumber}]]</button>
+                    </div>
                 </div>
             </div>
         </fieldset>
@@ -84,8 +86,11 @@
             </select>
         </div>
         <tr>
-            <button type="submit" id="submitButton" class="btn btn-primary" th:onclick="validateForm()">Save</button>
+            <button type="submit" th:unless="${configuration.connection.status}" class="btn btn-primary" th:onclick="validateForm()" th:text="${!(configuration.connection.status)} ? 'Connect'"></button>
         </tr>
+    </form>
+    <form th:action="@{/connection/close}" th:object="${configuration}" th:method="put">
+        <button type="submit" id="submitButton" th:if="${configuration.connection.status}" class="btn btn-primary" th:text="${configuration.connection.status} ? 'Disconnect' "></button>
     </form>
 </div>
 <!-- End Body -->

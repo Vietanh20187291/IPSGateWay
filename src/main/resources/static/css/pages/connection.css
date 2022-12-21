@@ -1,0 +1,9 @@
+#notNull{
+    color:red;
+    display: inline-block;
+    font-size:20px;
+    margin-bottom: unset;
+}
+#submitButton{
+    margin-top: 5px;
+}

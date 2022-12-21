@@ -1,7 +1,8 @@
-configuration:
-  hostIp: ''
-  hostPort: null
-  ipsPort: 9998
-  timeout: 5000
+connection:
+  hostIp: 10.145.48.96
+  hostPort: 7777
+  ipsPort: 7777
+  role: false
+log:
+  timeout: 4000
   logLevel: info
-  role: true
