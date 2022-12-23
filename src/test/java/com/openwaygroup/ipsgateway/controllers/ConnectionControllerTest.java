@@ -1,6 +1,6 @@
 package com.openwaygroup.ipsgateway.controllers;
 
-import com.openwaygroup.ipsgateway.IpsGatewayApplication;
+
 import com.openwaygroup.ipsgateway.entities.Configuration;
 import com.openwaygroup.ipsgateway.entities.Connection;
 import com.openwaygroup.ipsgateway.entities.Log;
@@ -8,8 +8,6 @@ import com.openwaygroup.ipsgateway.services.InetAddressIsReachable;
 import com.openwaygroup.ipsgateway.services.TcpConnectionService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -29,7 +27,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ConnectionControllerTest {
     @Autowired
     private Configuration configuration;
-    Logger log = LoggerFactory.getLogger(IpsGatewayApplication.class);
     @Autowired
     ConnectionController connectionController;
     @Autowired
@@ -134,7 +131,7 @@ class ConnectionControllerTest {
         connectionController.update(configuration);
         connectionController.closeConnection();
         boolean actualResult = configuration.getConnection().isStatus();
-
+        assertEquals(expectedResult,actualResult);
     }
     @Test
     void testCloseConnectionToServer() throws Exception {

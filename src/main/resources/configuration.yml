@@ -1,6 +1,6 @@
 connection:
-  hostIp: 10.145.48.96
-  hostPort: 7777
+  hostIp: 192.168.242.1
+  hostPort: 9999
   ipsPort: 7777
   role: false
 log:
