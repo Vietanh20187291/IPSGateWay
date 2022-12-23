@@ -1,0 +1,29 @@
+
+component1=BCD66B9B01A1CE8313AE984025204FE9; KCV=C8F1D1;
+component2=4AC77043D0C8C7700EADF4A29D408661; KCV=027119;
+component3=13B031AEF729BA3DE004408FF8EAD3A4; KCV=5A7EFC;
+
+combined=E5A12A762640B3CEFD072C6D408A1A2C; KCV=2B1509;
+
+data
+keyManagement:
+ zpk:
+  component1:
+   data:
+   kcv:
+  component2:
+   data:
+   kcv:
+  component3:
+   data:
+   kcv:
+ tcmk:
+  component1:
+   data:
+   kcv:
+  component2:
+   data:
+   kcv:
+  component3:
+   data:
+   kcv:

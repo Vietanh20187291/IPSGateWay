@@ -11,7 +11,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.net.Socket;
-
+import java.lang.System;
 import static com.openwaygroup.ipsgateway.services.InetAddressIsReachable.addressReachable;
 
 @Component

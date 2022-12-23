@@ -1,0 +1,33 @@
+.keyLabel{
+    font-size: 18px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.kcv{
+    margin-top: 10px;
+    display:flex;
+}
+.kcvLabel{
+    margin-right:8px;
+    padding-top:7px;
+}
+.groupIdLabel{
+    padding-top:7px;
+    width: 140px;
+}
+.alert.alert-info{
+    margin-left: -14px;
+    padding-left: 25px;
+}
+.btn.btn-primary{
+    margin-top: 12px;
+}
+h2{
+    color: #273444;
+    padding-bottom: 12px;
+}
+h3{
+    font-weight: bold;
+    font-size: 22px;
+    margin-bottom: 0;
+}

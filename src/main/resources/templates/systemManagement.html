@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!-- StyleSheet -->
+
+    <!-- Bootstrap -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+    <!-- IPS Gateway StyleSheet -->
+    <link th:href="@{../css/style.css}" rel="stylesheet" />
+    <script type="text/javascript" th:src="@{/js/action.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+    <title>System Information Management</title>
+</head>
+<body>
+<!-- Header -->
+<div th:replace="~{fragments/header}">
+
+</div>
+<!-- End Header -->
+
+<!-- Body -->
+<div class="container pt-4">
+    <h4>System Information Management</h4>
+    <div class="row">
+        <div class="alert alert-success  col-sm-3 col-md-6 col-lg-4 " th:inline="text" role="alert">
+            <tr th:each="row : ${systemInformation.keyManagement}">
+                <td class="tg bg" th:text="${row.value}"></td>
+            </tr>
+            <!-- Key Component 1: [[${systemInformation.keyManagement}]]
+             <br>
+             Key Component 2: [[${systemInformation.keyManagement}]]
+             <br>
+             Key Component 3: [[${systemInformation.keyManagement}]]-->
+        </div>
+        <div class="text-center alert col-sm-9 col-md-6 col-lg-8">
+         <!--   Status: [[${systemInformation} ? 'Connected' : 'Disconnected']]-->
+        </div>
+        <div class="alert alert-success  col-sm-3 col-md-6 col-lg-4 " th:inline="text" role="alert">
+            IPS IP: [[${systemInformation}]]
+            <br>
+            Port: [[${systemInformation}]]
+        </div>
+        <div class="col-sm-9 col-md-6 col-lg-8">
+        </div>
+        <div class="alert alert-success  col-sm-3 col-md-6 col-lg-4 " th:inline="text" role="alert">
+          <!--  Role: [[${systemInformation} ? 'Server' : 'Client']]-->
+            <br>
+            Timeout: [[${systemInformation}]]
+            <br>
+            Log Level: [[${systemInformation}]]
+        </div>
+    </div>
+    <a th:href="@{/system/edit}"><button class="btn btn-primary">System Information Edit</button></a>
+    <a th:href="@{/system/create}"><button class="btn btn-primary">System Information Create</button></a>
+</div>
+<!-- End Body -->
+
+</body>
+</html>
