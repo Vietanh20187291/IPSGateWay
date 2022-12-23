@@ -1,0 +1,20 @@
+image: openjdk:19-jdk-alpine3.16
+
+stages:          # List of stages for jobs, and their order of execution
+  - test
+
+test:  
+  stage: test   
+  before_script:
+  - 'command -v ssh-agent >/dev/null || ( apk add --update openssh )' 
+  - eval $(ssh-agent -s)
+  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+  - mkdir -p ~/.ssh
+  - chmod 700 ~/.ssh
+  - ssh-keyscan $DELIVERY_SERVER_IP >> ~/.ssh/known_hosts
+  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' >> ~/.ssh/id_ed25519
+  - echo "$SSH_PUBLIC_KEY" | tr -d '\r' >> ~/.ssh/id_ed25519.pub
+  - chmod -R 644 ~/.ssh/*
+  script:
+    - ./mvnw package
+    
