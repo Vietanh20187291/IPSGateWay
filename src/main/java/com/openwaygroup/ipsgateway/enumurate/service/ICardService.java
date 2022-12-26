@@ -9,4 +9,8 @@ import java.util.ArrayList;
 public interface ICardService {
    ArrayList<Card> loadCard(String path) throws IOException, CardException;
     Card getById( ArrayList<Card> listCard, String id) throws IOException;
+    boolean addCard(Card card) throws Exception;
+    boolean editCard(Card card) throws Exception;
+    boolean deleteCard(String id) throws Exception;
+
 }
