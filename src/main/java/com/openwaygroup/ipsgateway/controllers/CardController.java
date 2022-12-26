@@ -2,16 +2,17 @@ package com.openwaygroup.ipsgateway.controller;
 
 import com.openwaygroup.ipsgateway.entities.card.Card;
 import com.openwaygroup.ipsgateway.enumurate.service.ICardService;
+import org.hibernate.annotations.common.reflection.XMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
 import java.util.ArrayList;
+import java.util.List;
 
 @Component
 @Controller
@@ -19,9 +20,6 @@ import java.util.ArrayList;
 //@RestController(value = "/")
 
 public class CardController {
-    public Socket socket;
-
-    public ServerSocket serverSocket;
 
     @Autowired
     public static Card card;
@@ -44,28 +42,26 @@ public class CardController {
         return "card/index";
     }
    // @RequestMapping(method=RequestMethod.PUT)
-    @PutMapping("/{id}")
-    public String update(){
-        return "cards";
+    @RequestMapping (value = "/{id}", method = RequestMethod.PUT)
+    public Card edit(HttpServletRequest hsr) throws Exception {
+//        List<Card> card = hsr.getP("cardFields");
+        String a = hsr.getParameter("cardFields");
+        System.out.println(a+"hufhufuuf");
+
+//        Card cardEditted = cardFields.;
+//        for (int i = 1; i < cardFields.length; i++) {
+//            System.out.println(cardFields[i].getFieldId());
+//            System.out.println(cardFields[i].getValue());
+//
+//        }
+//        cardFields.get(0);
+//        for(int i = 0; i<cardFields.toArray().length;i++){
+//            cardEditted.getByFieldId((String) cardFields.get(0).toString());
+//        }
+//        return cardService.editCard(card);
+        return null;
     }
 
-//    @GetMapping("/{id}")
-//            public String getById(@PathVariable String id, Model model) throws Exception {
-//        if(listCard == null){
-//            listCard = cardService.loadCard(path);
-//        }
-//
-//        Card card = cardService.getById(listCard,id);
-//        System.out.println("Getting card by id");
-//        if(cardService.getById(listCard,id)== null){
-//            System.out.println("Cannot find cards");
-//            return "card/cardnotfound";
-//        }
-//        model.addAttribute("card",card);
-//        System.out.println("-----------------");
-//        System.out.println("render card by id");
-//        return "card/getbyid";
-//    }
     @GetMapping("/{id}")
     public String edit(@PathVariable String id, Model model) throws Exception {
         if(listCard == null){
@@ -75,7 +71,7 @@ public class CardController {
         Card card = cardService.getById(listCard,id);
         System.out.println("Getting card by id");
         if(cardService.getById(listCard,id)== null){
-            System.out.println("Cannot find cards");
+            System.out.println("Cannot found cards");
             return "card/cardnotfound";
         }
         model.addAttribute("card",card);
@@ -90,12 +86,13 @@ public class CardController {
         }
 
 
-        model.addAttribute("listCard",listCard);
+        model.addAttribute("Card",listCard.get(0));
         System.out.println("model.addAttribute");
         System.out.println("-----------------");
         System.out.println("render card add");
         return "card/add";
     }
+
 
 
 }

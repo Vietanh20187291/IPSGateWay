@@ -1,25 +1,29 @@
 package com.openwaygroup.ipsgateway.enumurate.service.impl;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import com.openwaygroup.ipsgateway.entities.card.Card;
 import com.openwaygroup.ipsgateway.entities.card.Field;
 import com.openwaygroup.ipsgateway.enumurate.CardEnum;
 import com.openwaygroup.ipsgateway.enumurate.service.ICardService;
 import com.openwaygroup.ipsgateway.exception.CardException;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.stereotype.Service;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
+
+import static java.util.Arrays.sort;
+
 
 @Service
 public class CardService implements ICardService {
 
-
+    @Override
     public ArrayList<Card> loadCard(String path) throws IOException, CardException {
 
 
@@ -65,7 +69,7 @@ public class CardService implements ICardService {
                 }
 
                 card.setListField(fields);
-                List<String> requiredFields = List.of(new String[]{"F002", "F014", "F035", "F053.13", "F126.10", "F045.08", "F053.08"});
+                List<String> requiredFields = List.of(new String[]{"F002", "F014", "F035", "F053.13", "F126.10", "F053.08"});
                 for (String field : requiredFields) {
                     try {
                         card.getByFieldId(field).setOptional(false);
@@ -95,5 +99,52 @@ public class CardService implements ICardService {
         return null;
     }
 
+    public boolean editCard(Card card) throws Exception{
+        if(card!=null){
+            String id = card.getByFieldId("F002").getValue();
+            if(deleteCard(id)){
+                if(addCard(card)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    public boolean addCard(Card card) throws Exception{
+        if(card!=null){
+            ObjectMapper objectMapper = new YAMLMapper();
+            String idCard = card.getByFieldId("F002").getValue();
+            Map<String, String> map = new HashMap<String, String>();
+            for(int i = 0; i<card.getListField().size();i++){
+                String fieldId = card.getListField().get(i).getFieldId();
+                String value = card.getByFieldId(fieldId).getValue();
+                map.put(fieldId,value);
+            }
+            objectMapper.writeValue(new File("src/main/resources/inputCards/"+idCard+".yaml"), map);
 
+            return true;
+        }
+        return false;
+    }
+
+
+    public boolean deleteCard(String id) throws Exception {
+        System.out.println("Start delete card");
+
+        try {
+
+            File file = new File("src\\main\\resources\\inputCards\\" + id + ".yaml");
+
+            if (file.delete()) {
+                System.out.println("Card deleted successfully");
+                return true;
+            } else {
+                System.out.println("Failed to delete the card");
+
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
 }
