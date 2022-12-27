@@ -25,6 +25,7 @@ public class CardController {
     public static Card card;
 
     private static String path = "src/main/resources/inputCards";
+
     private final ICardService cardService;
 
     private static ArrayList<Card> listCard;

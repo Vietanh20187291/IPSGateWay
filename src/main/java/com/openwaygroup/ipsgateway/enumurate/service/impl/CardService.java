@@ -38,8 +38,8 @@ public class CardService implements ICardService {
 
         System.out.println("-------CardService.loadCard()--------");
         System.out.println("Reading Yaml File from path");
-        if (file.length() == 0) {
-//            System.out.println("Error in CardService: Cannot read any file from path");
+        if (file.listFiles().length == 0) {
+            System.out.println("Error in CardService: Cannot read any file from path");
             throw new CardException("Cannot read any file from path");
         } else {
             // not empty
