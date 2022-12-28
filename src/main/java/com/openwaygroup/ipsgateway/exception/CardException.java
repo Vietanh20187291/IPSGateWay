@@ -1,10 +1,8 @@
 package com.openwaygroup.ipsgateway.exception;
 
-import com.openwaygroup.ipsgateway.entities.card.Card;
-
-public class CardException extends Exception{
-//    private int errorCode;
-    public CardException(String message){
+public class CardException extends Exception {
+    //    private int errorCode;
+    public CardException(String message) {
         super(message);
 //        this.errorCode = errorCode;
     }

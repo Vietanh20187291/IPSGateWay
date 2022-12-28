@@ -1,6 +1,5 @@
 package com.openwaygroup.ipsgateway.enumurate.service.impl;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import com.openwaygroup.ipsgateway.entities.card.Card;
@@ -8,7 +7,6 @@ import com.openwaygroup.ipsgateway.entities.card.Field;
 import com.openwaygroup.ipsgateway.enumurate.CardEnum;
 import com.openwaygroup.ipsgateway.enumurate.service.ICardService;
 import com.openwaygroup.ipsgateway.exception.CardException;
-import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.stereotype.Service;
 import org.yaml.snakeyaml.Yaml;
 
@@ -16,8 +14,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.*;
-
-import static java.util.Arrays.sort;
 
 
 @Service
@@ -72,7 +68,7 @@ public class CardService implements ICardService {
                 List<String> requiredFields = List.of(new String[]{"F002", "F014", "F035", "F053.13", "F126.10", "F053.08"});
                 for (String field : requiredFields) {
                     try {
-                        card.getByFieldId(field).setOptional(false);
+                        card.getFieldById(field).setOptional(false);
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
                     }
@@ -91,7 +87,7 @@ public class CardService implements ICardService {
     @Override
     public Card getById(ArrayList<Card> listCard, String cardId) throws IOException {
         for (Card card : listCard) {
-            if (card.getByFieldId("F002").getValue().equals(cardId)) {
+            if (card.getFieldById("F002").getValue().equals(cardId)) {
                 return card;
             }
         }
@@ -99,28 +95,29 @@ public class CardService implements ICardService {
         return null;
     }
 
-    public boolean editCard(Card card) throws Exception{
-        if(card!=null){
-            String id = card.getByFieldId("F002").getValue();
-            if(deleteCard(id)){
-                if(addCard(card)){
+    public boolean editCard(Card card) throws Exception {
+        if (card != null) {
+            String id = card.getFieldById("F002").getValue();
+            if (deleteCard(id)) {
+                if (addCard(card)) {
                     return true;
                 }
             }
         }
         return false;
     }
-    public boolean addCard(Card card) throws Exception{
-        if(card!=null){
+
+    public boolean addCard(Card card) throws Exception {
+        if (card != null) {
             ObjectMapper objectMapper = new YAMLMapper();
-            String idCard = card.getByFieldId("F002").getValue();
+            String idCard = card.getFieldById("F002").getValue();
             Map<String, String> map = new HashMap<String, String>();
-            for(int i = 0; i<card.getListField().size();i++){
+            for (int i = 0; i < card.getListField().size(); i++) {
                 String fieldId = card.getListField().get(i).getFieldId();
-                String value = card.getByFieldId(fieldId).getValue();
-                map.put(fieldId,value);
+                String value = card.getFieldById(fieldId).getValue();
+                map.put(fieldId, value);
             }
-            objectMapper.writeValue(new File("src/main/resources/inputCards/"+idCard+".yaml"), map);
+            objectMapper.writeValue(new File("src/main/resources/inputCards/" + idCard + ".yaml"), map);
 
             return true;
         }
@@ -139,7 +136,7 @@ public class CardService implements ICardService {
                 System.out.println("Card deleted successfully");
                 return true;
             } else {
-                System.out.println("Failed to delete the card");
+                System.out.println("Failed to delete "+ file.getName());
 
             }
         } catch (Exception e) {
@@ -147,4 +144,5 @@ public class CardService implements ICardService {
         }
         return false;
     }
+
 }

@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,15 +18,14 @@ public class CardServiceTest {
     private CardService cardService; //class chính muốn test
 
 
-
     @Test
     void loadCardTest_sucessful() throws IOException, CardException {
         String path = "/wrongpath";
         ArrayList<Card> cards = new ArrayList<>();
         try {
             cards = cardService.loadCard("src/main/resources/inputCards");
-            Assertions.assertEquals(23,cards.size());
-        }catch (CardException e){
+            Assertions.assertEquals(23, cards.size());
+        } catch (CardException e) {
 
         }
 
