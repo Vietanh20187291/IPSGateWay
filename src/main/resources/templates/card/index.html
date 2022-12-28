@@ -33,16 +33,18 @@
                     <tbody>
                     <th:block th:each="card : ${listCard}">
                         <tr class="table-row">
-                            <td th:utext="${card.getByFieldId('F002').getValue()}"></td>
-                            <td th:utext="${card.getByFieldId('F014').getValue()}"></td>
+                            <td th:utext="${card.getFieldById('F002').getValue()}"></td>
+                            <td th:utext="${card.getFieldById('F014').getValue()}"></td>
                             <td class="text-center">
 
-                                <a class="text-secondary font-weight-bold" th:href="@{/cards/{id}(id=${card.getByFieldId('F002').getValue()})}">Show</a>
+                                <a class="text-secondary font-weight-bold"
+                                   th:href="@{/cards/{id}(id=${card.getFieldById('F002').getValue()})}">Show</a>
 
                             </td>
                             <td class="text-center">
 
-                                <a class="text-secondary font-weight-bold" th:href="@{/cards/{id}(id=${card.getByFieldId('F002').getValue()})}">Delete</a>
+                                <a class="text-secondary font-weight-bold"
+                                   th:href="@{/cards/{id}(id=${card.getFieldById('F002').getValue()})}">Delete</a>
 
                             </td>
 

@@ -1,12 +1,11 @@
 package com.openwaygroup.ipsgateway.entities.card;
 
 public class Field {
+    public String value;
     private String fieldId;
     private String name;
     private String description;
-    private String value;
-
-    private boolean optional= true;
+    private boolean optional = true;
 
 
     public Field() {
@@ -39,16 +38,16 @@ public class Field {
         return description;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public boolean isOptional() {
         return optional;
     }
 
     public void setOptional(boolean optional) {
         this.optional = optional;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getValue() {

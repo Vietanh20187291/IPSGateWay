@@ -5,7 +5,6 @@ package com.openwaygroup.ipsgateway.entities.card;
 //import javax.persistence.GenerationType;
 //import javax.persistence.Id;
 
-import java.util.ArrayList;
 import java.util.List;
 
 //@Entity
@@ -22,30 +21,29 @@ public class Card {
         return listField;
     }
 
-    public Field getByFieldId(String fieldId){
-        List<Field> fields =  this.getListField();
-        for (Field field : fields){
-            if(field.getFieldId().equals(fieldId)){
+    public void setListField(List<Field> listField) {
+        this.listField = listField;
+    }
+
+    public Field getFieldById(String fieldId) {
+        List<Field> fields = this.getListField();
+        for (Field field : fields) {
+            if (field.getFieldId().equals(fieldId)) {
                 return field;
             }
         }
-            return null;
-    }
-
-
-    public void setListField(List<Field> listField) {
-        this.listField = listField;
+        return null;
     }
 
     @Override
     public String toString() {
 
-            List<Field> fields =  this.getListField();
-                String value = "Card {";
+        List<Field> fields = this.getListField();
+        String value = "Card {";
         for (Field field : fields) {
             value += field.toString();
         }
-        value+="}";
+        value += "}";
 
 
         return value;
