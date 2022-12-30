@@ -10,9 +10,7 @@ import com.openwaygroup.ipsgateway.exception.CardException;
 import org.springframework.stereotype.Service;
 import org.yaml.snakeyaml.Yaml;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 
@@ -51,7 +49,7 @@ public class CardService implements ICardService {
                 Card card = new Card();
                 List<Field> fields = new ArrayList<>();
                 for (CardEnum c : cardEnums) {
-//            // Access HashMaps and ArrayList by key(s)
+//            Access HashMaps and ArrayList by key(s)
                     String fieldValue = (String) yamlMap.get(c.getFieldId());
 //            System.out.println("Card = " + field);
                     Field field = new Field();
@@ -74,6 +72,7 @@ public class CardService implements ICardService {
                     }
                 }
                 listCard.add(card);
+                fileInputStream.close();
             }
 
             System.out.println("Return list card to controller");
@@ -129,19 +128,32 @@ public class CardService implements ICardService {
         System.out.println("Start delete card");
 
         try {
-
-            File file = new File("src\\main\\resources\\inputCards\\" + id + ".yaml");
-
-            if (file.delete()) {
-                System.out.println("Card deleted successfully");
-                return true;
-            } else {
-                System.out.println("Failed to delete "+ file.getName());
-
+//            BufferedReader file = new BufferedReader (new FileReader(new File ("src\\main\\resources\\inputCards\\" + id + ".yaml")));
+          File file = new File("src\\main\\resources\\inputCards\\" + id + ".yaml");
+//           if (file.delete()) {
+//                System.out.println("Card deleted successfully");
+//                return true;
+//            } else {
+//                System.out.println("Failed to delete "+ file.getName());
+//
+//            }
+            try{
+                System.out.println(file.getName());
+                if(file.exists()){
+                    System.out.println("Found File");
+                }
+                file.delete();
+                if(!file.exists()){
+                    return true;
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+                System.out.println(e.getMessage());
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+
         return false;
     }
 
