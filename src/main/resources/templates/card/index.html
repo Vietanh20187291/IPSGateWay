@@ -42,10 +42,11 @@
 
                             </td>
                             <td class="text-center">
-
-                                <a class="text-secondary font-weight-bold"
-                                   th:href="@{/cards/{id}(id=${card.getFieldById('F002').getValue()})}">Delete</a>
-
+                            <form action="#"
+                                th:action="@{/cards/{id}/delete(id=${card.getFieldById('F002').getValue()})}"
+                                th:method="post">
+                                <a type="submit" class="text-secondary font-weight-bold">Delete</a>
+                            </form>
                             </td>
 
 

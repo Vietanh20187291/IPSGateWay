@@ -1,6 +1,7 @@
 package com.openwaygroup.ipsgateway.controller;
 
 import com.openwaygroup.ipsgateway.entities.card.Card;
+import com.openwaygroup.ipsgateway.entities.card.Field;
 import com.openwaygroup.ipsgateway.enumurate.service.ICardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.List;
 
 @Component
 @Controller
@@ -84,7 +86,12 @@ public class CardController {
         if (listCard == null) {
             listCard = cardService.loadCard(path);
         }
-
+        Card card = listCard.get(0);
+        List<Field> listFields= card.getListField();
+        for(Field field : listFields){
+            field.setValue("");
+        }
+            //clear data
 
         model.addAttribute("Card", listCard.get(0));
         System.out.println("model.addAttribute");
@@ -104,6 +111,28 @@ public class CardController {
 //        }
         boolean editCard = cardService.editCard(card);
         System.out.println(editCard);
+        return "redirect:/cards";
+    }
+    @PostMapping("/add")
+    public String add(Card card,
+                       BindingResult result, Model model) throws Exception {
+        System.out.println(card.toString());
+//        System.out.println(card.getFieldById("F002").getValue());
+//        System.out.println(card.getFieldById("F014").getValue());
+//        if (result.hasErrors()) {
+//            card.setId(id);
+//            return "card/getbyid";
+//        }
+//        boolean editCard = cardService.editCard(card);
+//        System.out.println(editCard);
+        return "redirect:/cards";
+    }
+
+    @PostMapping("/{id}/delete")
+    public String delete(@PathVariable("id") String id) throws Exception {
+
+        boolean deleteCard = cardService.deleteCard(id);
+        System.out.println(deleteCard);
         return "redirect:/cards";
     }
 

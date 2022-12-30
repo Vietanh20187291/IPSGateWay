@@ -12,14 +12,7 @@ public class CardException extends Exception {
 //        this.errorCode = errorCode;
 //    }
 
-//    public static void main(String[] args) throws CardException {
-////        CardException cardException = new CardException("wrongpath");
-//        Card card = null;
-//        if(card == null){
-//            throw new CardException("hihi",new Throwable(),100);
-//        }
-//
-//    }
+
 
 
 }
