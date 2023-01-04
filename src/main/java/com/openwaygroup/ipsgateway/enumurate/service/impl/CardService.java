@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.util.*;
 
 
@@ -75,7 +76,7 @@ public class CardService implements ICardService {
                 fileInputStream.close();
             }
 
-            System.out.println("Return list card to controller");
+            System.out.println("Return list card to controllers");
         }
 
 
@@ -123,24 +124,27 @@ public class CardService implements ICardService {
         return false;
     }
 
-
     public boolean deleteCard(String id) throws Exception {
         System.out.println("Start delete card");
 
         try {
-//            BufferedReader file = new BufferedReader (new FileReader(new File ("src\\main\\resources\\inputCards\\" + id + ".yaml")));
+
           File file = new File("src\\main\\resources\\inputCards\\" + id + ".yaml");
-//           if (file.delete()) {
-//                System.out.println("Card deleted successfully");
-//                return true;
-//            } else {
-//                System.out.println("Failed to delete "+ file.getName());
-//
-//            }
+
             try{
                 System.out.println(file.getName());
                 if(file.exists()){
                     System.out.println("Found File");
+                }
+                //Copy file to deletedCard folder
+                System.out.println("here");
+                File deletedFile = new File("src\\main\\resources\\deletedCards\\"+file.getName());
+                System.out.println(deletedFile.getName());
+                try {
+                    Files.copy(file.toPath(),deletedFile.toPath());
+                }catch (Exception e){
+                    System.out.println(e.getMessage());
+
                 }
                 file.delete();
                 if(!file.exists()){

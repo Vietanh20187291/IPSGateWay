@@ -1,4 +1,4 @@
-package com.openwaygroup.ipsgateway.controller;
+package com.openwaygroup.ipsgateway.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
