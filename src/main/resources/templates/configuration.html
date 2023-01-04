@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!-- StyleSheet -->
+
+    <!-- Bootstrap -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+    <!-- IPS Gateway StyleSheet -->
+    <link th:href="@{../css/style.css}" rel="stylesheet" />
+    <script type="text/javascript" th:src="@{/js/action.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+    <title>System Configuration</title>
+</head>
+<body>
+<!-- Header -->
+<div th:replace="~{fragments/header}">
+
+</div>
+<!-- End Header -->
+
+<!-- Body -->
+<div class="container pt-4">
+    <h4>System Configuration</h4>
+    <div class="row">
+        <div class="alert alert-success  col-sm-3 col-md-6 col-lg-4 " th:inline="text" role="alert">
+            Host IP: [[${configuration.connection.hostIp}]]
+            <br>
+            Port: [[${configuration.connection.hostPort}]]
+        </div>
+        <div class="text-center alert col-sm-9 col-md-6 col-lg-8" th:classappend="${configuration.connection.status} ? 'alert-success' : 'alert-danger'">
+            Status: [[${configuration.connection.status} ? 'Connected' : 'Disconnected']]
+        </div>
+        <div class="alert alert-success  col-sm-3 col-md-6 col-lg-4 " th:inline="text" role="alert">
+            IPS IP: [[${configuration.connection.ipsIp}]]
+            <br>
+            Port: [[${configuration.connection.ipsPort}]]
+        </div>
+        <div class="col-sm-9 col-md-6 col-lg-8">
+        </div>
+        <div class="alert alert-success  col-sm-3 col-md-6 col-lg-4 " th:inline="text" role="alert">
+            Role: [[${configuration.connection.role} ? 'Server' : 'Client']]
+            <br>
+            Timeout: [[${configuration.logger.timeout}]]
+            <br>
+            Log Level: [[${configuration.logger.logLevel}]]
+        </div>
+    </div>
+    <a th:href="@{/configuration/edit}"><button class="btn btn-primary">Configuration Edit</button></a>
+</div>
+<!-- End Body -->
+
+</body>
+</html>

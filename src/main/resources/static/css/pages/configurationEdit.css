@@ -1,0 +1,18 @@
+
+#notNull{
+    color:red;
+    display: inline-block;
+    font-size:20px;
+    margin-bottom: unset;
+}
+#submitButton{
+    margin-top: 5px;
+}
+/*#status {
+    margin: 100px;
+    width: 1px;
+    height: 1px;
+    background-color: lime; !* for the 1px in the center *!
+    border-radius: 50%;
+    box-shadow: 0 0 50px 70px lime;
+}*/

@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script src="http://localhost:35729/livereload.js"></script>
+    <!-- StyleSheet -->
+
+    <!-- Bootstrap -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+    <!-- IPS Gateway StyleSheet -->
+    <link th:href="@{../css/Style.css}" rel="stylesheet" />
+
+    <script type="text/javascript" th:src="@{/js/connection.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+    <title>System Connection</title>
+</head>
+<body onload="javascript:roleCheck()">
+<!-- Header -->
+<div th:replace="~{fragments/header}">
+
+</div>
+<!-- End Header -->
+
+<!-- Body -->
+<div class="container pt-3">
+    <h4>System Connection</h4>
+    <input type="hidden" id="role" th:value="${configuration.connection.role}"/>
+    <form th:action="@{/connection}" th:object="${configuration}" th:method="put">
+        <div class="form-row" id="ipsInput" style ="display: none;">
+            <div class="form-group col-md-4 alert alert-success" role="alert" th:inline="text">
+                IP Address : [[${configuration.connection.ipsIp}]]
+            </div>
+            <div class="form-group col-md-2">
+                <label for="inputPort">Port </label>
+                <p id="notNull"> *</p>
+                <input type="text" th:field="*{connection.ipsPort}" class="form-control" id="inputIpsPort" placeholder="1234">
+            </div>
+        </div>
+
+        <div class="form-row" id="hostInput">
+            <div class="form-group col-md-4">
+                <label for="inputIpsIp">Host IP Address</label>
+                <p id="notNull"> *</p>
+                <input type="text" th:field="*{connection.hostIp}" class="form-control" id="inputHostIp" placeholder="127.0.0.1">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="inputPort">Port</label>
+                <p id="notNull"> *</p>
+                <input type="text" th:field="*{connection.hostPort}" class="form-control" id="inputHostPort" placeholder="1234">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="inputTimeout">Timeout</label>
+                <input type="text" th:field="*{logger.timeout}" class="form-control" id="inputTimeout" placeholder="4000">
+            </div>
+        </div>
+
+        <fieldset class="form-group">
+            <div class="row">
+                <legend class="col-form-label col-sm-2 pt-0">Role</legend>
+                <div class="col-sm-10">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" th:field="*{connection.role}" name="inlineRadioOptions" id="inlineRadio1" th:value="false" th:onclick="removeIps()">
+                        <label class="form-check-label" for="inlineRadio1">Client</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" th:field="*{connection.role}" th:attr="checked=${configuration.connection.role}? 'checked' : 'none' " name="inlineRadioOptions" id="inlineRadio2" th:value="true" th:onclick="removeHost()">
+                        <label class="form-check-label" for="inlineRadio2">Server</label>
+                    </div>
+                    <div class="form-check form-check-inline" id="clientNum" style ="display: none;">
+                        <button type="button" class="btn" id="clientNumButton" th:value="*{connection.clientNumber}" th:classappend="${configuration.connection.status} ? 'btn-success' : 'btn-danger'" th:inline="text">Number of Client : [[${configuration.connection.clientNumber}]]</button>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+
+        <div class="form-row">
+            <label for="loggerLevel">Logger Level</label>
+            <select class="form-select col-md-2" th:field="*{logger.logLevel}">
+                <option th:value="info" selected>INFO</option>
+                <option th:value="debug">DEBUG</option>
+                <option th:value="warn">WARN</option>
+                <option th:value="trace">TRACE</option>
+                <option th:value="error">ERROR</option>
+                <option th:value="off">OFF</option>
+                <option th:value="all">ALL</option>
+            </select>
+        </div>
+        <tr>
+            <button type="submit" th:unless="${configuration.connection.status}" class="btn btn-primary" th:onclick="validateForm()" th:text="${!(configuration.connection.status)} ? 'Connect'"></button>
+        </tr>
+    </form>
+    <form th:action="@{/connection/close}" th:object="${configuration}" th:method="put">
+        <button type="submit" id="submitButton" th:if="${configuration.connection.status}" class="btn btn-primary" th:text="${configuration.connection.status} ? 'Disconnect' "></button>
+    </form>
+</div>
+<!-- End Body -->
+
+</body>
+</html>

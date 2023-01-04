@@ -1,0 +1,33 @@
+.navbar  {
+    background-color: #273444;
+}
+
+.navbar .container-fluid {
+    padding: 0 70px;
+}
+
+.navbar-brand {
+    color: white !important;
+}
+
+.nav-link {
+    color: white !important;
+}
+
+.btn-circle.btn-sm {
+    width: 15px;
+    height: 15px;
+    padding: 6px 0px;
+    margin-bottom: 2.5px;
+    border-radius: 15px;
+    background-color: #79DE79;
+    display: inline-block;
+}
+
+.navbar-nav.me-3 .nav-link {
+    display: inline-block;
+}
+
+/*
+Name: Pastel Red
+Hex: #FB6962*/
