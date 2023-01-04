@@ -1,7 +1,6 @@
-package com.openwaygroup.ipsgateway.controller;
+package com.openwaygroup.ipsgateway.controllers;
 
 import com.openwaygroup.ipsgateway.entities.card.Card;
-import com.openwaygroup.ipsgateway.entities.card.Field;
 import com.openwaygroup.ipsgateway.enumurate.service.ICardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
-import java.util.List;
 
 @Component
 @Controller
