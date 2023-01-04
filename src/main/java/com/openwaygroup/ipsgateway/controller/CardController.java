@@ -86,12 +86,12 @@ public class CardController {
         if (listCard == null) {
             listCard = cardService.loadCard(path);
         }
-        Card card = listCard.get(0);
-        List<Field> listFields= card.getListField();
-        for(Field field : listFields){
-            field.setValue("");
-        }
-            //clear data
+//        Card card = listCard.get(0);
+//        List<Field> listFields= card.getListField();
+//        for(Field field : listFields){
+//            field.setValue("");
+//        }
+//            //clear data
 
         model.addAttribute("Card", listCard.get(0));
         System.out.println("model.addAttribute");
@@ -116,21 +116,21 @@ public class CardController {
     @PostMapping("/add")
     public String add(Card card,
                        BindingResult result, Model model) throws Exception {
-        System.out.println(card.toString());
+ //       System.out.println(card.toString());
 //        System.out.println(card.getFieldById("F002").getValue());
 //        System.out.println(card.getFieldById("F014").getValue());
 //        if (result.hasErrors()) {
 //            card.setId(id);
 //            return "card/getbyid";
 //        }
-//        boolean editCard = cardService.editCard(card);
-//        System.out.println(editCard);
+        boolean addCard = cardService.addCard(card);
+        System.out.println(addCard);
         return "redirect:/cards";
     }
 
     @PostMapping("/{id}/delete")
     public String delete(@PathVariable("id") String id) throws Exception {
-
+        System.out.println("here");
         boolean deleteCard = cardService.deleteCard(id);
         System.out.println(deleteCard);
         return "redirect:/cards";
