@@ -9,8 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 @Configuration
 @ToString
-/*@ConfigurationProperties(prefix = "component")
-@PropertySource(value = "classpath:systemInformation.yml", factory = YamlPropertySourceFactory.class)*/
+@PropertySource(value = "classpath:systemInformation.yml", factory = YamlPropertySourceFactory.class)
 public class Component {
     @Getter
     @Setter

@@ -1,0 +1,151 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script src="http://localhost:35729/livereload.js"></script>
+    <!-- StyleSheet -->
+
+    <!-- Bootstrap -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+    <!-- IPS Gateway StyleSheet -->
+    <link th:href="@{../css/Style.css}" rel="stylesheet" />
+
+    <script type="text/javascript" th:src="@{/js/systemCreate.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+    <title>System Configuration Edit</title>
+</head>
+<body <!--onload="javascript:roleCheck()"-->>
+<!-- Header -->
+<div th:replace="~{fragments/header}">
+
+</div>
+<!-- End Header -->
+
+<!-- Body -->
+<div class="container pt-3">
+    <h2>System Information Edit</h2>
+    <div class="alert alert-info">
+        <form class="row" th:action="@{/system/edit/{id}(id=${id})}" th:object="${keyManagement}" th:method="post">
+            <h3 class="h3-system-create">ZPK</h3>
+            <div class="col-sm-6 col-md-6 col-lg-6 col-key">
+                <div class="form-row" id="keyInput1">
+                    <div class="form-group col-sm-11 col-md-11 col-lg-11">
+                        <label class="keyLabel" for="inputZpkComponent1">Key Component 1</label>
+                        <input type="text" th:field="*{zpk.component1.data}" class="form-control" id="inputZpkComponent1" placeholder="123456789ABCDEF" onchange="javascript:generateKcv1()">
+                    </div>
+                    <div class="form-group col-sm-8 col-md-7 col-lg-4 kcv">
+                        <label class="kcvLabel" for="inputKcv1">KCV</label>
+                        <input type="text" th:field="*{zpk.component1.kcv}" class="form-control" id="inputZpkKcv1" placeholder="123456" style="display:inline;">
+                    </div>
+                </div>
+
+                <div class="form-row" id="keyInput2">
+                    <div class="form-group col-sm-11 col-md-11 col-lg-11">
+                        <label class="keyLabel" for="inputZpkComponent2">Key Component 2</label>
+                        <input type="text" th:field="*{zpk.component2.data}" class="form-control" id="inputZpkComponent2" placeholder="123456789ABCDEF" onchange="javascript:generateKcv2()">
+                    </div>
+                    <div class="form-group col-sm-8 col-md-7 col-lg-4 kcv">
+                        <label class="kcvLabel" for="inputKcv2" >KCV</label>
+                        <input type="text" th:field="*{zpk.component2.kcv}" class="form-control" id="inputZpkKcv2" placeholder="123456">
+                    </div>
+                </div>
+
+                <div class="form-row" id="keyInput3">
+                    <div class="form-group col-sm-11 col-md-11 col-lg-11">
+                        <label class="keyLabel" for="inputZpkComponent3">Key Component 3</label>
+                        <input type="text" th:field="*{zpk.component3.data}" class="form-control" id="inputZpkComponent3" placeholder="123456789ABCDEF" onchange="javascript:generateKcv3()">
+                    </div>
+                    <div class="form-group col-sm-8 col-md-7 col-lg-4 kcv">
+                        <label class="kcvLabel" for="inputKcv3" >KCV</label>
+                        <input type="text" th:field="*{zpk.component3.kcv}" class="form-control" id="inputZpkKcv3" placeholder="123456">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-sm-6 col-md-6 col-lg-6 col-key">
+                <div class="form-row" id="keyInputCombined">
+                    <div class="form-group col-sm-11 col-md-11 col-lg-11">
+                        <label class="keyLabel" for="inputKeyCombined">Combined Key</label>
+                        <input type="text" th:field="*{zpk.combined}" class="form-control" id="inputZpkCombined" placeholder="123456789ABCDEF" onchange="javascript:generateKcvCombined()">
+                    </div>
+                    <div class="form-group col-sm-8 col-md-7 col-lg-4 kcv">
+                        <label class="kcvLabel" for="inputKcvCombined" >KCV</label>
+                        <input type="text" th:field="*{zpk.kcv}" class="form-control" id="inputZpkKcvCombined" placeholder="123456">
+                    </div>
+
+                </div>
+                <tr>
+                    <button type="button" id="buttonCombined" class="btn btn-primary" th:onclick="combineKcvKey()">Combine Keys</button>
+                </tr>
+            </div>
+
+            <!--TCMK-->
+            <h3 class="h3-system-create">TCMK</h3>
+            <div class="col-sm-6 col-md-6 col-lg-6 col-key">
+                <div class="form-row" id="keyInput1">
+                    <div class="form-group col-sm-11 col-md-11 col-lg-11">
+                        <label class="keyLabel" for="inputTcmkComponent1">Key Component 1</label>
+                        <input type="text" th:field="*{tcmk.component1.data}" class="form-control" id="inputTcmkComponent1" placeholder="123456789ABCDEF" onchange="javascript:generateTcmk1()">
+                    </div>
+                    <div class="form-group col-sm-8 col-md-7 col-lg-4 kcv">
+                        <label class="kcvLabel" for="inputKcv1">KCV</label>
+                        <input type="text" th:field="*{tcmk.component1.kcv}" class="form-control" id="inputTcmkKcv1" placeholder="123456" style="display:inline;">
+                    </div>
+                </div>
+
+                <div class="form-row" id="keyInput2">
+                    <div class="form-group col-sm-11 col-md-11 col-lg-11">
+                        <label class="keyLabel" for="inputTcmkComponent2">Key Component 2</label>
+                        <input type="text" th:field="*{tcmk.component2.data}" class="form-control" id="inputTcmkComponent2" placeholder="123456789ABCDEF" onchange="javascript:generateTcmk2()">
+                    </div>
+                    <div class="form-group col-sm-8 col-md-7 col-lg-4 kcv">
+                        <label class="kcvLabel" for="inputKcv2" >KCV</label>
+                        <input type="text" th:field="*{tcmk.component2.kcv}" class="form-control" id="inputTcmkKcv2" placeholder="123456">
+                    </div>
+                </div>
+
+                <div class="form-row" id="keyInput3">
+                    <div class="form-group col-sm-11 col-md-11 col-lg-11">
+                        <label class="keyLabel" for="inputTcmkComponent3">Key Component 3</label>
+                        <input type="text" th:field="*{tcmk.component3.data}" class="form-control" id="inputTcmkComponent3" placeholder="123456789ABCDEF" onchange="javascript:generateTcmk3()">
+                    </div>
+                    <div class="form-group col-sm-8 col-md-7 col-lg-4 kcv">
+                        <label class="kcvLabel" for="inputKcv3" >KCV</label>
+                        <input type="text" th:field="*{tcmk.component3.kcv}" class="form-control" id="inputTcmkKcv3" placeholder="123456">
+                    </div>
+                </div>
+                <!--End TCMK-->
+
+                <div class="form-group col-sm-8 col-md-7 col-lg-4 kcv">
+                    <label class="groupIdLabel" for="inputGroupId" >Group ID</label>
+                    <input type="text" th:field="*{id}" class="form-control" id="groupId" placeholder="123456">
+                </div>
+
+                <tr>
+                    <button type="submit" id="buttonSave" class="btn btn-primary" th:onclick="validateForm()">Save Key</button>
+                </tr>
+            </div>
+
+            <div class="col-sm-6 col-md-6 col-lg-6 col-key">
+                <div class="form-row" id="keyInputCombined">
+                    <div class="form-group col-sm-11 col-md-11 col-lg-11">
+                        <label class="keyLabel" for="inputTcmkCombined">Combined Key</label>
+                        <input type="text" th:field="*{tcmk.combined}" class="form-control" id="inputTcmkCombined" placeholder="123456789ABCDEF" onchange="javascript:generateTcmkCombined()">
+                    </div>
+                    <div class="form-group col-sm-8 col-md-7 col-lg-4 kcv">
+                        <label class="kcvLabel" for="inputTcmkKcvCombined" >KCV</label>
+                        <input type="text" th:field="*{tcmk.kcv}" class="form-control" id="inputTcmkKcvCombined" placeholder="123456">
+                    </div>
+
+                </div>
+                <tr>
+                    <button type="button" id="buttonCombined" class="btn btn-primary" th:onclick="combineTcmkKey()">Combine Keys</button>
+                </tr>
+            </div>
+        </form>
+    </div>
+    <!-- End Body -->
+
+    </body>
+</html>

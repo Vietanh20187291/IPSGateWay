@@ -10,6 +10,7 @@
     <link th:href="@{../css/style.css}" rel="stylesheet" />
     <script type="text/javascript" th:src="@{/js/action.js}"></script>
     <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/systemManagement.js}"></script>
     <title>System Information Management</title>
 </head>
 <body>
@@ -21,38 +22,92 @@
 
 <!-- Body -->
 <div class="container pt-4">
-    <h4>System Information Management</h4>
-    <div class="row">
-        <div class="alert alert-success  col-sm-3 col-md-6 col-lg-4 " th:inline="text" role="alert">
-            <tr th:each="row : ${systemInformation.keyManagement}">
-                <td class="tg bg" th:text="${row.value}"></td>
-            </tr>
-            <!-- Key Component 1: [[${systemInformation.keyManagement}]]
-             <br>
-             Key Component 2: [[${systemInformation.keyManagement}]]
-             <br>
-             Key Component 3: [[${systemInformation.keyManagement}]]-->
-        </div>
-        <div class="text-center alert col-sm-9 col-md-6 col-lg-8">
-         <!--   Status: [[${systemInformation} ? 'Connected' : 'Disconnected']]-->
-        </div>
-        <div class="alert alert-success  col-sm-3 col-md-6 col-lg-4 " th:inline="text" role="alert">
-            IPS IP: [[${systemInformation}]]
-            <br>
-            Port: [[${systemInformation}]]
-        </div>
-        <div class="col-sm-9 col-md-6 col-lg-8">
-        </div>
-        <div class="alert alert-success  col-sm-3 col-md-6 col-lg-4 " th:inline="text" role="alert">
-          <!--  Role: [[${systemInformation} ? 'Server' : 'Client']]-->
-            <br>
-            Timeout: [[${systemInformation}]]
-            <br>
-            Log Level: [[${systemInformation}]]
-        </div>
+    <h2>System Information Management</h2>
+    <div class="navigate">
+    <a th:href="@{/system/edit}"><button class="btn navigateBtn">System Information Edit</button></a>
+    <a th:href="@{/system/create}"><button class="btn navigateBtn">System Information Create</button></a>
     </div>
-    <a th:href="@{/system/edit}"><button class="btn btn-primary">System Information Edit</button></a>
-    <a th:href="@{/system/create}"><button class="btn btn-primary">System Information Create</button></a>
+    <div class="row">
+    <tr th:each="row : ${systemInfo.systemInformation}">
+        <div class="accordion " id="accordionPanelsStayOpenExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                    <button th:inline="text" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" th:attr="data-bs-target='#panelsStayOpen-collapse'+${row.id+1}" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                        Group ID: [[${row.id}]]
+                    </button>
+                    <a th:href="@{/system/edit/{id}(id=${row.id})}"><button class="editBtn"></button></a>
+                </h2>
+                <div th:attr="id='panelsStayOpen-collapse'+${row.id+1}" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
+                    <div th:inline="text" class="accordion-body idBody">
+                        <div class="accordion" >
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" >
+                                    <button class="accordion-button white collapsed" type="button" data-bs-toggle="collapse" th:attr="data-bs-target='#panelsStayOpen-collapse'+'zpk'+${row.id+1}" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                        ZPK
+                                    </button>
+                                </h2>
+                                <div th:attr="id='panelsStayOpen-collapse'+'zpk'+${row.id+1}" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
+                                    <div class="accordion-body keyBody">
+                                            <td class="value" th:inline="text"><p class="tableComponentTitle" >Key Component 1: </p>[[${row.zpk.component1.data}]]</td>
+                                            <br>
+                                            <td class="value" th:inline="text"><p class="tableComponentTitle" >KCV: </p>[[${row.zpk.component1.kcv}]]</td>
+                                            <br>
+                                            <td class="value" th:inline="text"><p class="tableComponentTitle" >Key Component 2: </p>[[${row.zpk.component2.data}]]</td>
+                                            <br>
+                                            <td class="value" th:inline="text"><p class="tableComponentTitle" >KCV: </p>[[${row.zpk.component2.kcv}]]</td>
+                                            <br>
+                                            <td class="value" th:inline="text"><p class="tableComponentTitle" >Key Component 3: </p>[[${row.zpk.component3.data}]]</td>
+                                            <br>
+                                            <td class="value" th:inline="text"><p class="tableComponentTitle" >KCV: </p>[[${row.zpk.component3.kcv}]]</td>
+                                            <br>
+                                            <td class="value" th:inline="text"><p class="tableComponentTitle" >Combined Key: </p>[[${row.zpk.combined}]]</td>
+                                            <br>
+                                            <td class="value" th:inline="text"><p class="tableComponentTitle" >KCV: </p>[[${row.zpk.kcv}]]</td>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" >
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" th:attr="data-bs-target='#panelsStayOpen-collapse'+'tcmk'+${row.id+1}" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                        TCMK
+                                    </button>
+                                </h2>
+                                <div th:attr="id='panelsStayOpen-collapse'+'tcmk'+${row.id+1}" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
+                                    <div class="accordion-body endBody">
+                                        <p class="tableComponentTitle" >Key Component 1: </p>
+                                        <td class="value" th:inline="text">[[${row.tcmk.component1.data}]]</td>
+                                        <br>
+                                        <p class="tableComponentTitle" >KCV: </p>
+                                        <td class="value" th:inline="text">[[${row.tcmk.component1.kcv}]]</td>
+                                        <br>
+                                        <p class="tableComponentTitle" >Key Component 2: </p>
+                                        <td class="value" th:inline="text">[[${row.tcmk.component2.data}]]</td>
+                                        <br>
+                                        <p class="tableComponentTitle" >KCV: </p>
+                                        <td class="value" th:inline="text">[[${row.tcmk.component2.kcv}]]</td>
+                                        <br>
+                                        <p class="tableComponentTitle" >Key Component 3: </p>
+                                        <td class="value" th:inline="text">[[${row.tcmk.component3.data}]]</td>
+                                        <br>
+                                        <p class="tableComponentTitle" >KCV: </p>
+                                        <td class="value" th:inline="text">[[${row.tcmk.component3.kcv}]]</td>
+                                        <br>
+                                        <p class="tableComponentTitle" >Combined Key: </p>
+                                        <td class="value" th:inline="text">[[${row.tcmk.combined}]]</td>
+                                        <br>
+                                        <p class="tableComponentTitle" >KCV: </p>
+                                        <td class="value" th:inline="text">[[${row.tcmk.kcv}]]</td>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </tr>
+    </div>
 </div>
 <!-- End Body -->
 

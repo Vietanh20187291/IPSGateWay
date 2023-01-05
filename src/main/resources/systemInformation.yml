@@ -1,29 +1,177 @@
-
-component1=BCD66B9B01A1CE8313AE984025204FE9; KCV=C8F1D1;
-component2=4AC77043D0C8C7700EADF4A29D408661; KCV=027119;
-component3=13B031AEF729BA3DE004408FF8EAD3A4; KCV=5A7EFC;
-
-combined=E5A12A762640B3CEFD072C6D408A1A2C; KCV=2B1509;
-
-data
-keyManagement:
- zpk:
-  component1:
-   data:
-   kcv:
-  component2:
-   data:
-   kcv:
-  component3:
-   data:
-   kcv:
- tcmk:
-  component1:
-   data:
-   kcv:
-  component2:
-   data:
-   kcv:
-  component3:
-   data:
-   kcv:
+system-information:
+  systemInformation:
+  - id: 0
+    zpk:
+      component1:
+        data: BCD66B9B01A1CE8313AE984025204FE9
+        kcv: C8F1D1
+      component2:
+        data: BCD66B9B01A1CE8313AE984025204FE9
+        kcv: C8F1D1
+      component3:
+        data: BCD66B9B01A1CE8313AE984025204FE9
+        kcv: C8F1D1
+      combined: 9FEC590E50944C7491B15B121E050554
+      kcv: CD365F
+    tcmk:
+      component1:
+        data: BCD66B9B01A1CE8313AE984025204FE9
+        kcv: C8F1D1
+      component2:
+        data: BCD66B9B01A1CE8313AE984025204FE9
+        kcv: C8F1D1
+      component3:
+        data: BCD66B9B01A1CE8313AE984025204FE9
+        kcv: C8F1D1
+      combined: 9FEC590E50944C7491B15B121E050554
+      kcv: CD365F
+  - id: 1
+    zpk:
+      component1:
+        data: BCD66B9B01A1CE8313AE984025204FE9
+        kcv: C8F1D1
+      component2:
+        data: BCD66B9B01A1CE8313AE984025204FE9
+        kcv: C8F1D1
+      component3:
+        data: BCD66B9B01A1CE8313AE984025204FE9
+        kcv: C8F1D1
+      combined: 9FEC590E50944C7491B15B121E050554
+      kcv: CD365F
+    tcmk:
+      component1:
+        data: BCD66B9B01A1CE8313AE984025204FE9
+        kcv: C8F1D1
+      component2:
+        data: BCD66B9B01A1CE8313AE984025204FE9
+        kcv: C8F1D1
+      component3:
+        data: BCD66B9B01A1CE8313AE984025204FE9
+        kcv: C8F1D1
+      combined: 9FEC590E50944C7491B15B121E050554
+      kcv: CD365F
+  - id: 2
+    zpk:
+      component1:
+        data: BCD66B9B01A1CE8313AE984025204FE9
+        kcv: C8F1D1
+      component2:
+        data: BCD66B9B01A1CE8313AE984025204FE9
+        kcv: C8F1D1
+      component3:
+        data: BCD66B9B01A1CE8313AE984025204FE9
+        kcv: C8F1D1
+      combined: 9FEC590E50944C7491B15B121E050554
+      kcv: CD365F
+    tcmk:
+      component1:
+        data: BCD66B9B01A1CE8313AE984025204FE9
+        kcv: C8F1D1
+      component2:
+        data: BCD66B9B01A1CE8313AE984025204FE9
+        kcv: C8F1D1
+      component3:
+        data: BCD66B9B01A1CE8313AE984025204FE9
+        kcv: C8F1D1
+      combined: 9FEC590E50944C7491B15B121E050554
+      kcv: CD365F
+  - id: 3
+    zpk:
+      component1:
+        data: 69FD42D681FD45878CB237F0A665CCDC
+        kcv: 18535B
+      component2:
+        data: 5E04E8C7FCFBB86B33FAE484215B9033
+        kcv: BEDA8F
+      component3:
+        data: 5EABF3378ADB3840EFFF40A9DC388D7D
+        kcv: E97176
+      combined: 9FEC590E50944C7491B15B121E050554
+      kcv: CD365F
+    tcmk:
+      component1:
+        data: BCD66B9B01A1CE8313AE984025204FE9
+        kcv: C8F1D1
+      component2:
+        data: BCD66B9B01A1CE8313AE984025204FE9
+        kcv: C8F1D1
+      component3:
+        data: BCD66B9B01A1CE8313AE984025204FE9
+        kcv: C8F1D1
+      combined: 9FEC590E50944C7491B15B121E050554
+      kcv: CD365F
+  - id: 4
+    zpk:
+      component1:
+        data: 69FD42D681FD45878CB237F0A665CCDC
+        kcv: 18535B
+      component2:
+        data: 5E04E8C7FCFBB86B33FAE484215B9033
+        kcv: BEDA8F
+      component3:
+        data: 5EABF3378ADB3840EFFF40A9DC388D7D
+        kcv: E97176
+      combined: 9FEC590E50944C7491B15B121E050554
+      kcv: CD365F
+    tcmk:
+      component1:
+        data: BCD66B9B01A1CE8313AE984025204FE9
+        kcv: C8F1D1
+      component2:
+        data: BCD66B9B01A1CE8313AE984025204FE9
+        kcv: C8F1D1
+      component3:
+        data: BCD66B9B01A1CE8313AE984025204FE9
+        kcv: C8F1D1
+      combined: 9FEC590E50944C7491B15B121E050554
+      kcv: CD365F
+  - id: 5
+    zpk:
+      component1:
+        data: ACD66B9B01A1CE8313AE984025204FE9
+        kcv: FCA881
+      component2:
+        data: 5E04E8C7FCFBB86B33FAE484215B9033
+        kcv: BEDA8F
+      component3:
+        data: 13B031AEF729BA3DE004408FF8EAD3A4
+        kcv: 5A7EFC
+      combined: E162B2F20A73CCD5C0503C4BFC910C7E
+      kcv: 4D37DC
+    tcmk:
+      component1:
+        data: BCD66B9B01A1CE8313AE984025204FE9
+        kcv: C8F1D1
+      component2:
+        data: 4AC77043D0C8C7700EADF4A29D408661
+        kcv: 027119
+      component3:
+        data: 69FD42D681FD45878CB237F0A665CCDC
+        kcv: 18535B
+      combined: 9FEC590E50944C7491B15B121E050554
+      kcv: CD365F
+  - id: 6
+    zpk:
+      component1:
+        data: BCD66B9B01A1CE8313AE984025204FE9
+        kcv: C8F1D1
+      component2:
+        data: 4AC77043D0C8C7700EADF4A29D408661
+        kcv: 027119
+      component3:
+        data: 5EABF3378ADB3840EFFF40A9DC388D7D
+        kcv: E97176
+      combined: A8BAE8EF5BB231B3F2FC2C4B645844F5
+      kcv: 17D023
+    tcmk:
+      component1:
+        data: BCD66B9B01A1CE8313AE984025204FE9
+        kcv: C8F1D1
+      component2:
+        data: 4AC77043D0C8C7700EADF4A29D408661
+        kcv: 027119
+      component3:
+        data: 69FD42D681FD45878CB237F0A665CCDC
+        kcv: 18535B
+      combined: 9FEC590E50944C7491B15B121E050554
+      kcv: CD365F

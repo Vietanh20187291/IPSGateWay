@@ -2,7 +2,7 @@ connection:
   hostIp: 10.145.48.96
   hostPort: 7777
   ipsPort: 7777
-  role: false
+  role: true
 log:
   timeout: 4000
-  logLevel: info
+  logLevel: error
