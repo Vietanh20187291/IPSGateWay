@@ -16,5 +16,5 @@ test:
   - echo "$SSH_PUBLIC_KEY" | tr -d '\r' >> ~/.ssh/id_ed25519.pub
   - chmod -R 644 ~/.ssh/*
   script:
-    - ./mvnw package
+    - ./mvnw test
     
