@@ -93,8 +93,7 @@ public class CardController {
 //        }
 //            //clear data
 
-        model.addAttribute("Card", listCard.get(0));
-        log.info("model.addAttribute");
+        model.addAttribute("card", listCard.get(0));
         log.info("-----------------");
         log.info("render card add");
         return "card/add";
