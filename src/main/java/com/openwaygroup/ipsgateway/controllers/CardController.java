@@ -1,13 +1,16 @@
 package com.openwaygroup.ipsgateway.controllers;
 
+import com.openwaygroup.ipsgateway.IpsGatewayApplication;
 import com.openwaygroup.ipsgateway.entities.card.Card;
-import com.openwaygroup.ipsgateway.enumurate.service.ICardService;
+import com.openwaygroup.ipsgateway.service.ICardService;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -18,7 +21,7 @@ import java.util.ArrayList;
 //@RestController(value = "/")
 
 public class CardController {
-
+    org.slf4j.Logger log = LoggerFactory.getLogger(IpsGatewayApplication.class);
     @Autowired
     public static Card card;
 
@@ -33,9 +36,9 @@ public class CardController {
     @RequestMapping(method = RequestMethod.GET)
     public String index(@ModelAttribute("card") Card card, Model model) throws Exception {
         listCard = cardService.loadCard(path);
-        System.out.println("Add card to attribute");
+        log.info("Add card to attribute");
         model.addAttribute("listCard", listCard);
-        System.out.println("Render card/index.html");
+        log.info("Render card/index.html");
         return "card/index";
     }
 
@@ -44,12 +47,11 @@ public class CardController {
     public Card edit(HttpServletRequest hsr) throws Exception {
 //        List<Card> card = hsr.getP("cardFields");
         String a = hsr.getParameter("cardFields");
-        System.out.println(a + "hufhufuuf");
 
 //        Card cardEditted = cardFields.;
 //        for (int i = 1; i < cardFields.length; i++) {
-//            System.out.println(cardFields[i].getFieldId());
-//            System.out.println(cardFields[i].getValue());
+//            log.info(cardFields[i].getFieldId());
+//            log.info(cardFields[i].getValue());
 //
 //        }
 //        cardFields.get(0);
@@ -67,15 +69,15 @@ public class CardController {
         }
 
         Card card = cardService.getById(listCard, id);
-        System.out.println("Getting card by id");
+        log.info("Getting card by id");
         if (cardService.getById(listCard, id) == null) {
-            System.out.println("Cannot found cards");
+            log.info("Cannot found cards");
             return "card/cardnotfound";
         }
 
         model.addAttribute("card", card);
-        System.out.println("-----------------");
-        System.out.println("render card get by id");
+        log.info("-----------------");
+        log.info("render card get by id");
         return "card/getbyid";
     }
 
@@ -92,46 +94,66 @@ public class CardController {
 //            //clear data
 
         model.addAttribute("Card", listCard.get(0));
-        System.out.println("model.addAttribute");
-        System.out.println("-----------------");
-        System.out.println("render card add");
+        log.info("model.addAttribute");
+        log.info("-----------------");
+        log.info("render card add");
         return "card/add";
     }
 
     @PostMapping("/{id}/edit")
     public String edit(@PathVariable("id") String id, Card card,
-                       BindingResult result, Model model) throws Exception {
-//        System.out.println(card.getFieldById("F002").getValue());
-//        System.out.println(card.getFieldById("F014").getValue());
+                       BindingResult result, Model model, RedirectAttributes redirectAttributes) throws Exception {
+//        log.info(card.getFieldById("F002").getValue());
+//        log.info(card.getFieldById("F014").getValue());
 //        if (result.hasErrors()) {
 //            card.setId(id);
 //            return "card/getbyid";
 //        }
         boolean editCard = cardService.editCard(card);
-        System.out.println(editCard);
+        log.info("edit card: "+editCard);
+        if(editCard) {
+            redirectAttributes.addFlashAttribute("message", " Card Edited Successfully!");
+        }else{
+            redirectAttributes.addFlashAttribute("message", " Failed to add card!");
+
+        }
         return "redirect:/cards";
     }
     @PostMapping("/add")
     public String add(Card card,
-                       BindingResult result, Model model) throws Exception {
- //       System.out.println(card.toString());
-//        System.out.println(card.getFieldById("F002").getValue());
-//        System.out.println(card.getFieldById("F014").getValue());
+                       BindingResult result, Model model, RedirectAttributes redirectAttributes) throws Exception {
+ //       log.info(card.toString());
+//        log.info(card.getFieldById("F002").getValue());
+//        log.info(card.getFieldById("F014").getValue());
 //        if (result.hasErrors()) {
 //            card.setId(id);
 //            return "card/getbyid";
 //        }
+
         boolean addCard = cardService.addCard(card);
-        System.out.println(addCard);
+        log.info("add card: "+addCard);
+        if(addCard) {
+            redirectAttributes.addFlashAttribute("message", " Card Added Successfully!");
+        }else{
+            redirectAttributes.addFlashAttribute("message", " Failed to add card!");
+
+        }
         return "redirect:/cards";
     }
 
     @PostMapping("/{id}/delete")
-    public String delete(@PathVariable("id") String id) throws Exception {
-        System.out.println("here");
+    public String delete(@PathVariable("id") String id, RedirectAttributes redirectAttributes) throws Exception {
+        log.info("here");
         boolean deleteCard = cardService.deleteCard(id);
-        System.out.println(deleteCard);
+        log.info("delete card: "+deleteCard);
+        if(deleteCard) {
+            redirectAttributes.addFlashAttribute("message", " Card Deleted Successfully!");
+        }else{
+            redirectAttributes.addFlashAttribute("message", " Failed to add card!");
+
+        }
         return "redirect:/cards";
+
     }
 
 

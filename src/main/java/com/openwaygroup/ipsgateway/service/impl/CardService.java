@@ -1,14 +1,17 @@
-package com.openwaygroup.ipsgateway.enumurate.service.impl;
+package com.openwaygroup.ipsgateway.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
+import com.openwaygroup.ipsgateway.IpsGatewayApplication;
 import com.openwaygroup.ipsgateway.entities.card.Card;
 import com.openwaygroup.ipsgateway.entities.card.Field;
-import com.openwaygroup.ipsgateway.enumurate.CardEnum;
-import com.openwaygroup.ipsgateway.enumurate.service.ICardService;
+import com.openwaygroup.ipsgateway.enumurate.cardEnums.FieldsEnum;
+import com.openwaygroup.ipsgateway.enumurate.cardEnums.RequiredFields;
+import com.openwaygroup.ipsgateway.service.ICardService;
 import com.openwaygroup.ipsgateway.exception.CardException;
 import org.springframework.stereotype.Service;
 import org.yaml.snakeyaml.Yaml;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -17,6 +20,7 @@ import java.util.*;
 
 @Service
 public class CardService implements ICardService {
+    org.slf4j.Logger log = LoggerFactory.getLogger(IpsGatewayApplication.class);
 
     @Override
     public ArrayList<Card> loadCard(String path) throws IOException, CardException {
@@ -28,35 +32,33 @@ public class CardService implements ICardService {
             file = new File(path);
 
         } catch (Exception e) {
-            System.out.println("Error when load card from path in CardService " + e.getMessage());
+            log.info("Error when load card from path in CardService " + e.getMessage());
         }
 
-        System.out.println("-------CardService.loadCard()--------");
-        System.out.println("Reading Yaml File from path");
+        log.info("-------CardService.loadCard()--------");
+        log.info("Reading Yaml File from path");
         if (file.listFiles().length == 0) {
-            System.out.println("Error in CardService: Cannot read any file from path");
+            log.info("Error in CardService: Cannot read any file from path");
             throw new CardException("Cannot read any file from path");
         } else {
             // not empty
 
             for (File f : file.listFiles()) {
                 FileInputStream fileInputStream = new FileInputStream(f);
-
-                System.out.println("Set parameter for each card");
                 Yaml yaml = new Yaml();
                 HashMap yamlMap = yaml.load(fileInputStream);
                 // Access HashMaps and ArrayList by key(s)
-                EnumSet<CardEnum> cardEnums = EnumSet.allOf(CardEnum.class);
+                EnumSet<FieldsEnum> fieldsEnums = EnumSet.allOf(FieldsEnum.class);
                 Card card = new Card();
                 List<Field> fields = new ArrayList<>();
-                for (CardEnum c : cardEnums) {
+                for (FieldsEnum fe : fieldsEnums) {
 //            Access HashMaps and ArrayList by key(s)
-                    String fieldValue = (String) yamlMap.get(c.getFieldId());
-//            System.out.println("Card = " + field);
+                    String fieldValue = (String) yamlMap.get(fe.getFieldId());
+//            log.info("Card = " + field);
                     Field field = new Field();
-                    field.setFieldId(c.getFieldId());
-                    field.setDescription(c.getDescription());
-                    field.setName(c.getName());
+                    field.setFieldId(fe.getFieldId());
+                    field.setDescription(fe.getDescription());
+                    field.setName(fe.getName());
                     field.setValue(fieldValue);
                     fields.add(field);
 
@@ -64,19 +66,22 @@ public class CardService implements ICardService {
                 }
 
                 card.setListField(fields);
-                List<String> requiredFields = List.of(new String[]{"F002", "F014", "F035", "F053.13", "F126.10", "F053.08"});
-                for (String field : requiredFields) {
+
+                EnumSet<RequiredFields> listRequiredFields = EnumSet.allOf(RequiredFields.class);
+
+                    for (RequiredFields requiredFields : listRequiredFields) {
+                        String field = requiredFields.getField();
                     try {
                         card.getFieldById(field).setOptional(false);
                     } catch (Exception e) {
-                        System.out.println(e.getMessage());
+                        log.info(e.getMessage());
                     }
                 }
                 listCard.add(card);
                 fileInputStream.close();
             }
 
-            System.out.println("Return list card to controllers");
+            log.info("Return list card to controllers");
         }
 
 
@@ -125,25 +130,25 @@ public class CardService implements ICardService {
     }
 
     public boolean deleteCard(String id) throws Exception {
-        System.out.println("Start delete card");
+        log.info("Start delete card");
 
         try {
 
           File file = new File("src\\main\\resources\\inputCards\\" + id + ".yaml");
 
             try{
-                System.out.println(file.getName());
+                log.info(file.getName());
                 if(file.exists()){
-                    System.out.println("Found File");
+                    log.info("Found File");
                 }
                 //Copy file to deletedCard folder
-                System.out.println("here");
+                log.info("here");
                 File deletedFile = new File("src\\main\\resources\\deletedCards\\"+file.getName());
-                System.out.println(deletedFile.getName());
+                log.info(deletedFile.getName());
                 try {
                     Files.copy(file.toPath(),deletedFile.toPath());
                 }catch (Exception e){
-                    System.out.println(e.getMessage());
+                    log.info(e.getMessage());
 
                 }
                 file.delete();
@@ -152,10 +157,10 @@ public class CardService implements ICardService {
                 }
             }catch (Exception e){
                 e.printStackTrace();
-                System.out.println(e.getMessage());
+                log.info(e.getMessage());
             }
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            log.info(e.getMessage());
         }
 
         return false;
