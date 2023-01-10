@@ -1,6 +1,6 @@
-package com.openwaygroup.ipsgateway.enumurate;
+package com.openwaygroup.ipsgateway.enumurate.cardEnums;
 
-public enum CardEnum {
+public enum FieldsEnum {
     FIELD1("F002", "PAN", "Primary Account Number - Fields 2 and 35.1"),
     FIELD2("F014", "EXPDATE", "Expiration Date - Fields 14, 35.3 and 45.6 (yymm)"),
     FIELD3("F023", "CARD SEQ NUM", "Card Sequence Number - Field 23"),
@@ -62,7 +62,7 @@ public enum CardEnum {
 //    private String value;
 
 
-    CardEnum(String fieldId, String name, String description) {
+    FieldsEnum(String fieldId, String name, String description) {
         this.fieldId = fieldId;
         this.name = name;
         this.description = description;
@@ -94,7 +94,7 @@ public enum CardEnum {
 
     @Override
     public String toString() {
-        return "CardEnum{" +
+        return "FieldsEnum{" +
                 "fieldId='" + fieldId + '\'' +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +

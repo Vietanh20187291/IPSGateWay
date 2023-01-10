@@ -45,58 +45,70 @@
                     <table class="table table-bordered">
                         <thead class="table-header thead-light">
                         <tr>
-                            <th class="col-md-1">Field ID</th>
-                            <th class="col-md-1">Name</th>
-                            <th class="col-md-2">Description</th>
-                            <th class="col-md-6">Value</th>
-                            <th class="col-md-1">Required</th>
+                            <th>Field ID</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Value</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr class="table-row">
                         <tr th:each="field, itemStat : *{listField}">
-                            <td>
-                                <input class="border-0 form-control" readonly
-                                       th:field="*{listField[__${itemStat.index}__].fieldId}" value="Toggle Border"/>
-                            </td>
-                            <td th:utext="*{listField[__${itemStat.index}__].name}">
-                            </td>
-                            <td th:utext="*{listField[__${itemStat.index}__].description}">
-
-                            </td>
+                            <!--                            Required Row-->
                             <div th:if="*{not listField[__${itemStat.index}__].optional}">
+                                <td class="col-md-1 text-danger" th:text="${field.fieldId}+'*'"></td>
+                                <td class="col-md-1" th:utext="*{listField[__${itemStat.index}__].name}"></td>
+                                <td class="col-md-2" th:utext="*{listField[__${itemStat.index}__].description}"></td>
                                 <td>
-                                    <div>
-                                        <input class="form-control border-0" id="validationCustom01" required
-                                               th:field="*{listField[__${itemStat.index}__].value}" type="text">
+                                    <input class="border-0 form-control" readonly
+                                           th:field="*{listField[__${itemStat.index}__].fieldId}"
+                                           type="hidden"/>
+                                    <!--                                    This hidden input is to set the fieldId to modelattribute-->
+                                    <div th:if="${field.fieldId == 'F002'}">
+                                        <input class="form-control border-0"
+                                               readonly
+                                               th:field="*{listField[__${itemStat.index}__].value}"
+                                               th:placeholder="'ex: '+*{listField[__${itemStat.index}__].value}"
+                                               type="text">
+                                    </div>
+
+                                    <div th:unless="${field.fieldId == 'F002'}">
+                                        <input class="form-control border-0" id="validationCustom01"
+                                               required
+                                               th:field="*{listField[__${itemStat.index}__].value}"
+                                               th:placeholder="'ex: '+*{listField[__${itemStat.index}__].value}"
+                                               type="text">
                                         <div class="invalid-feedback">
                                             This cannot be empty!
                                         </div>
                                     </div>
 
                                 </td>
-                                <td class="text-center col-md-2">
-                                    <svg class="bi bi-check" fill="currentColor" height="30" viewBox="0 0 16 16"
-                                         width="30" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
-                                    </svg>
-                                </td>
-                            </div>
 
+                            </div>
+                            <!--                           End Required Row-->
+                            <!--                          Optional row-->
                             <div th:if="*{listField[__${itemStat.index}__].optional}">
+                                <td class="col-md-1" th:text="${field.fieldId}"></td>
+                                <td class="col-md-1" th:utext="*{listField[__${itemStat.index}__].name}"></td>
+                                <td class="col-md-2" th:utext="*{listField[__${itemStat.index}__].description}"></td>
                                 <td>
+                                    <input readonly th:field="*{listField[__${itemStat.index}__].fieldId}"
+                                           type="hidden"/>
+                                    <!-- This hidden input is to set the fieldId to modelattribute-->
                                     <div>
-                                        <input class="form-control border-0" th:field="*{listField[__${itemStat.index}__].value}"
+                                        <input class="form-control border-0"
+                                               th:field="*{listField[__${itemStat.index}__].value}"
+                                               th:placeholder="'ex: '+*{listField[__${itemStat.index}__].value}"
                                                type="text">
                                     </div>
                                 </td>
-                                <td>
-                                </td>
                             </div>
                         </tr>
+                        <!--                        End Optional Row-->
                         </tbody>
                     </table>
-                </div>
+
                 <div>
                     <button class="btn btn-outline-secondary float-right m-1">
                         <a class="text-secondary" th:href="@{/cards}">BACK</a>
@@ -107,7 +119,24 @@
                         SAVE
                     </button>
                 </div>
-
+                    <!-- Modal -->
+                    <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="notificationId"
+                         role="dialog" tabindex="-1">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title text-danger" id="exampleModalLabel">Notification</h5>
+                                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Please Fill All Required Fields
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </form>
 
 
@@ -150,7 +179,8 @@
                     if (!form.checkValidity()) {
                         event.preventDefault()
                         event.stopPropagation()
-                        alert('Please fill all required fields')
+                        jQuery.noConflict();
+                        window.$('#notificationId').modal('show');
                     }
                     form.classList.add('was-validated')
 

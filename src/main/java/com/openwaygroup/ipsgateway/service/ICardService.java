@@ -1,4 +1,4 @@
-package com.openwaygroup.ipsgateway.enumurate.service;
+package com.openwaygroup.ipsgateway.service;
 
 import com.openwaygroup.ipsgateway.entities.card.Card;
 import com.openwaygroup.ipsgateway.exception.CardException;
