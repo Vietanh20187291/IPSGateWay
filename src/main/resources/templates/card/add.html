@@ -35,11 +35,12 @@
 <div class="container pt-1">
     <div id="wp-content">
         <div id="list-card-component">
-            <h4>Add Card</h4>
-            <form action="#"
+            <h4>Card Add</h4>
+            <form action="#" class="needs-validation"
+                  novalidate
                   th:action="@{/cards/add}"
                   th:method="post"
-                  th:object="${Card}">
+                  th:object="${card}">
                 <div id="list-card">
                     <table class="table table-bordered">
                         <thead class="table-header thead-light">
@@ -59,7 +60,8 @@
                                 <td class="col-md-1" th:utext="*{listField[__${itemStat.index}__].name}"></td>
                                 <td class="col-md-2" th:utext="*{listField[__${itemStat.index}__].description}"></td>
                                 <td>
-                                    <input class="border-0 form-control" readonly th:field="*{listField[__${itemStat.index}__].fieldId}"
+                                    <input class="border-0 form-control" readonly
+                                           th:field="*{listField[__${itemStat.index}__].fieldId}"
                                            type="hidden"/>
                                     <!--                                    This hidden input is to set the fieldId to modelattribute-->
                                     <div>
@@ -98,35 +100,38 @@
                         <!--                        End Optional Row-->
                         </tbody>
                     </table>
-                </div>
-                <div>
-                    <button class="btn btn-outline-secondary float-right m-1">
-                        <a class="text-secondary" th:href="@{/cards}">BACK</a>
-                    </button>
-                </div>
-                <div>
-                    <button class="btn btn-outline-secondary float-right m-1">
-                        SAVE
-                    </button>
-                </div>
-            </form>
-            <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="notificationId"
-                 role="dialog" tabindex="-1">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title text-danger" id="exampleModalLabel">Notification</h5>
-                            <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            Please Fill All Required Fields
+
+                    <div>
+                        <button class="btn btn-outline-secondary float-right m-1">
+                            <a class="text-secondary" th:href="@{/cards}">BACK</a>
+                        </button>
+                    </div>
+                    <div>
+                        <button class="btn btn-outline-secondary float-right m-1">
+                            SAVE
+                        </button>
+                    </div>
+                    <!-- Modal -->
+                    <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="notificationId"
+                         role="dialog" tabindex="-1">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title text-danger" id="exampleModalLabel">Notification</h5>
+                                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Please Fill All Required Fields
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </form>
+
+
         </div>
     </div>
 
@@ -146,6 +151,16 @@
 <!--    }-->
 
 <!--</script>-->
+
+<style>
+    .form-control:focus {
+        box-shadow: none;
+    }
+
+    .form-control {
+        background-color: white !important;
+    }
+</style>
 <script>
     (function () {
         'use strict'
@@ -169,19 +184,5 @@
             })
     })()
 </script>
-<style>
-    .form-control:focus {
-        box-shadow: none;
-    }
-
-    .form-control {
-        background-color: white !important;
-    }
-
-    .form-control:active {
-        background-color: white !important;
-    }
-
-</style>
 <link rel="stylesheet" th:href="@{/css/card.css}"/>
 </html>
