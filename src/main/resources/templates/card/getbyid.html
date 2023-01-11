@@ -55,25 +55,17 @@
                         <tr class="table-row">
                         <tr th:each="field, itemStat : *{listField}">
                             <!--                            Required Row-->
-                            <div th:if="*{not listField[__${itemStat.index}__].optional}">
-                                <td class="col-md-1 text-danger" th:text="${field.fieldId}+'*'"></td>
-                                <td class="col-md-1" th:utext="*{listField[__${itemStat.index}__].name}"></td>
-                                <td class="col-md-2" th:utext="*{listField[__${itemStat.index}__].description}"></td>
-                                <td>
+                            <div th:id="${field.fieldId}+'-row'" th:if="*{not listField[__${itemStat.index}__].optional}">
+                                <td th:id="${field.fieldId}+'-fieldId'" class="col-md-1 text-danger" th:text="${field.fieldId}+'*'"></td>
+                                <td th:id="${field.fieldId}+'-name'" class="col-md-1" th:utext="*{listField[__${itemStat.index}__].name}"></td>
+                                <td th:id="${field.fieldId}+'-description'" class="col-md-2" th:utext="*{listField[__${itemStat.index}__].description}"></td>
+                                <td th:id="${field.fieldId}+'-value'">
                                     <input class="border-0 form-control" readonly
                                            th:field="*{listField[__${itemStat.index}__].fieldId}"
                                            type="hidden"/>
                                     <!--                                    This hidden input is to set the fieldId to modelattribute-->
-                                    <div th:if="${field.fieldId == 'F002'}">
-                                        <input class="form-control border-0"
-                                               readonly
-                                               th:field="*{listField[__${itemStat.index}__].value}"
-                                               th:placeholder="'ex: '+*{listField[__${itemStat.index}__].value}"
-                                               type="text">
-                                    </div>
-
-                                    <div th:unless="${field.fieldId == 'F002'}">
-                                        <input class="form-control border-0" id="validationCustom01"
+                                    <div>
+                                        <input th:id="${field.fieldId}+'-value-input'" class="form-control border-0" id="validationCustom01"
                                                required
                                                th:field="*{listField[__${itemStat.index}__].value}"
                                                th:placeholder="'ex: '+*{listField[__${itemStat.index}__].value}"
@@ -140,6 +132,33 @@
             </form>
 
 
+            <!-- Modal Delete Confirmation -->
+            <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="confirmationId"
+                 role="dialog" tabindex="-1">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Confirmation</h5>
+                            <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Do you want to delete card <span id="cardId"></span> ?
+                        </div>
+                        <div class="modal-footer">
+                            <form id="form-delete">
+                                <button class="btn btn-danger" type="submit" value="Delete">
+                                    Yes
+                                </button>
+                            </form>
+                            <button class="btn btn-secondary" data-dismiss="modal" type="button">No</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         </div>
     </div>
 
@@ -166,6 +185,7 @@
     }
 </style>
 <script>
+    $('#F002-value-input').prop('readonly', true);
     (function () {
         'use strict'
 
