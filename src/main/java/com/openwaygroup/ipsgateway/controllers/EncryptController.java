@@ -1,7 +1,10 @@
 package com.openwaygroup.ipsgateway.controllers;
 
+import com.openwaygroup.ipsgateway.IpsGatewayApplication;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.util.encoders.Hex;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,13 +15,12 @@ import java.security.Security;
 
 @RestController
 public class EncryptController {
+    Logger log = LoggerFactory.getLogger(IpsGatewayApplication.class);
     @PostMapping("/kcv")
     public ResponseEntity<String> getKcv(@RequestBody String key) throws GeneralSecurityException {
-      /*  String key = "BCD66B9B01A1CE8313AE984025204FE9";*/
         byte[] bytes = Hex.decode(key);
-        System.out.println("bytes=" + bytes);
         String kcv = desEncrypt(bytes);
-        System.out.println("key=" + key + ", kcv=" + kcv);
+        log.info("Key=" + key + ", KCV=" + kcv);
         return ResponseEntity.ok(kcv);
     }
     /**

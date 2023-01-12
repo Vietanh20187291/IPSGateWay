@@ -17,4 +17,6 @@ public class Component {
     @Getter
     @Setter
     private String kcv;
+    public Component(){
+    }
 }

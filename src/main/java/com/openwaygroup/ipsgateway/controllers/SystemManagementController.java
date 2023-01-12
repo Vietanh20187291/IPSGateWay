@@ -7,10 +7,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.*;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
 
@@ -30,41 +29,36 @@ public class SystemManagementController {
     public String index(@ModelAttribute("systemInfo") SystemInformation systemInfo, Model model) {
         model.addAttribute("systemInfo", systemInformation);
         model.addAttribute("configuration", configuration);
-        System.out.println(systemInformation.toString());
         return "systemManagement";
     }
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String create(@ModelAttribute("keyManagement") KeyManagement keyManagement, Model model) {
-        model.addAttribute("keyManagement", keyManagement); //Đổ ra view
+        model.addAttribute("keyManagement", keyManagement);
         model.addAttribute("systemInformation", systemInformation);
         model.addAttribute("configuration", configuration);
         return "systemCreate";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String store(@ModelAttribute("keyManagement") KeyManagement keyManagement, Model model) {
-        model.addAttribute("keyManagement", keyManagement); //Đổ ra view
+    public String store(@ModelAttribute("keyManagement") KeyManagement keyManagement, BindingResult bindingResult,Model model) {
+        model.addAttribute("keyManagement", keyManagement);
         model.addAttribute("configuration", configuration);
-        List<KeyManagement> systemInfo = new ArrayList<>();
         boolean isDuplicated = false;
-       /* SystemInformation systemInformationCreate = new SystemInformation();*/
         for (KeyManagement key : systemInformation.getSystemInformation()) {
             if(keyManagement.getId() == key.getId()){
               isDuplicated = true;
-
             }
-            System.out.println(key.toString());
         }
 
         if(!isDuplicated){
-            systemInfo.add(keyManagement);
-            systemInformation.getSystemInformation().addAll(systemInfo);
+            systemInformation.getSystemInformation().add(keyManagement);
             saveParamChanges();
+            return "redirect:/system";
         }else {
-            log.info("Duplicate");
+            log.info("Duplicated Group ID");
+            bindingResult.addError(new ObjectError("duplicated","Duplicated Group ID"));
+            return "systemCreate";
         }
-
-        return "systemCreate";
     }
 
     public void saveParamChanges() {
@@ -78,7 +72,6 @@ public class SystemManagementController {
             Map<String,Object> dataMap = new LinkedHashMap<>();
             List<Map> list = new ArrayList<>();
             //
-
             for(int id =0; id<systemInformation.getSystemInformation().size();id++){
                 Map<String, Object> systemInfo = new LinkedHashMap<>();
                 LinkedHashMap<String, Object> zpk = new LinkedHashMap<>();
@@ -118,18 +111,16 @@ public class SystemManagementController {
                 list.add(systemInfo);
             }
             dataMap.put("systemInformation",list);
-            //
             prefix.put("system-information",dataMap);
-            //
             Writer writer = new FileWriter("src/main/resources/systemInformation.yml");
             yaml.dump(prefix,writer);
-
             writer.close();
             this.log.info("System Information Param Saved To File");
         } catch (Exception e ) {
             e.printStackTrace();
         }
     }
+
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String edit(@PathVariable("id") Integer id, Model model) {
         KeyManagement keyManagement = new KeyManagement();
@@ -138,33 +129,38 @@ public class SystemManagementController {
                 keyManagement = key;
             }
         }
-        model.addAttribute("keyManagement", keyManagement); //Đổ ra view
+        model.addAttribute("keyManagement", keyManagement);
         model.addAttribute("configuration", configuration);
-        model.addAttribute("id",id);
         return "systemEdit";
     }
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
-    public String update(@PathVariable("id") Integer id,@ModelAttribute("keyManagement") KeyManagement keyManagement, Model model) {
-        model.addAttribute("keyManagement", keyManagement); //Đổ ra view
+    public String update(@PathVariable("id") Integer id,@ModelAttribute("keyManagement") KeyManagement keyManagement,BindingResult bindingResult, Model model) {
+        model.addAttribute("keyManagement", keyManagement);
         model.addAttribute("configuration", configuration);
-        model.addAttribute("id",id);
-        List<KeyManagement> systemInfo = new ArrayList<>();
         boolean isDuplicated = false;
+        //Check Duplicate ID Except Editing Key
         for (KeyManagement key : systemInformation.getSystemInformation()) {
-            if(keyManagement.getId() == key.getId()){
+            if(keyManagement.getId() == key.getId() && keyManagement.getId()!=id){
                 isDuplicated = true;
+                break;
             }
         }
-
-        if(isDuplicated){
-            systemInfo.add(keyManagement);
-            systemInformation.getSystemInformation().addAll(systemInfo);
+        if(!isDuplicated){
+            //Remove old key
+            for (KeyManagement key : systemInformation.getSystemInformation()) {  //
+                if(key.getId()==id){
+                    systemInformation.getSystemInformation().remove(key);
+                    break;
+                }
+            }
+            systemInformation.getSystemInformation().add(keyManagement);
             saveParamChanges();
+            return "redirect:/system";
         }else {
-            log.info("Duplicate");
+            log.info("Duplicated Group ID");
+            bindingResult.addError(new ObjectError("duplicated","Duplicated Group ID"));
+            return "systemEdit";
         }
-
-
-        return "systemEdit";
     }
+
 }

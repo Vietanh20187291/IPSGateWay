@@ -8,13 +8,13 @@
     <!-- Bootstrap -->
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
     <!-- IPS Gateway StyleSheet -->
-    <link th:href="@{../css/Style.css}" rel="stylesheet" />
+    <link th:href="@{../css/style.css}" rel="stylesheet" />
 
     <script type="text/javascript" th:src="@{/js/systemCreate.js}"></script>
     <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
     <title>System Configuration Create</title>
 </head>
-<body <!--onload="javascript:roleCheck()"-->>
+<body>
 <!-- Header -->
 <div th:replace="~{fragments/header}">
 
@@ -26,6 +26,9 @@
     <h2>System Information Create</h2>
     <div class="alert alert-info">
     <form class="row" th:action="@{/system/create}" th:object="${keyManagement}" th:method="post">
+        <div class="alert-dismissible" th:if="${#fields.hasAnyErrors()}" role="alert" >
+            <div th:each="err : ${#fields.allErrors()}" th:text="${err}+'!'" class="error"></div>
+        </div>
         <h3 class="h3-system-create">ZPK</h3>
           <div class="col-sm-6 col-md-6 col-lg-6 col-key">
             <div class="form-row" id="keyInput1">
@@ -35,7 +38,7 @@
                 </div>
                 <div class="form-group col-sm-8 col-md-7 col-lg-4 kcv">
                         <label class="kcvLabel" for="inputKcv1">KCV</label>
-                        <input type="text" th:field="*{zpk.component1.kcv}" class="form-control" id="inputZpkKcv1" placeholder="123456" style="display:inline;">
+                        <input type="text" th:field="*{zpk.component1.kcv}" readonly="readonly" class="form-control read-only" id="inputZpkKcv1" placeholder="123456" style="display:inline;">
                 </div>
             </div>
 
@@ -46,7 +49,7 @@
                 </div>
                 <div class="form-group col-sm-8 col-md-7 col-lg-4 kcv">
                     <label class="kcvLabel" for="inputKcv2" >KCV</label>
-                    <input type="text" th:field="*{zpk.component2.kcv}" class="form-control" id="inputZpkKcv2" placeholder="123456">
+                    <input type="text" th:field="*{zpk.component2.kcv}" readonly="readonly" class="form-control read-only" id="inputZpkKcv2" placeholder="123456">
                 </div>
             </div>
 
@@ -57,7 +60,7 @@
                 </div>
                 <div class="form-group col-sm-8 col-md-7 col-lg-4 kcv">
                     <label class="kcvLabel" for="inputKcv3" >KCV</label>
-                    <input type="text" th:field="*{zpk.component3.kcv}" class="form-control" id="inputZpkKcv3" placeholder="123456">
+                    <input type="text" th:field="*{zpk.component3.kcv}" readonly="readonly" class="form-control read-only" id="inputZpkKcv3" placeholder="123456">
                 </div>
             </div>
 
@@ -67,11 +70,11 @@
             <div class="form-row" id="keyInputCombined">
                 <div class="form-group col-sm-11 col-md-11 col-lg-11">
                     <label class="keyLabel" for="inputKeyCombined">Combined Key</label>
-                    <input type="text" th:field="*{zpk.combined}" class="form-control" id="inputZpkCombined" placeholder="123456789ABCDEF" onchange="javascript:generateKcvCombined()">
+                    <input type="text" th:field="*{zpk.combined}" readonly="readonly" class="form-control read-only" id="inputZpkCombined" placeholder="123456789ABCDEF" onchange="javascript:generateKcvCombined()">
                 </div>
                 <div class="form-group col-sm-8 col-md-7 col-lg-4 kcv">
                     <label class="kcvLabel" for="inputKcvCombined" >KCV</label>
-                    <input type="text" th:field="*{zpk.kcv}" class="form-control" id="inputZpkKcvCombined" placeholder="123456">
+                    <input type="text" th:field="*{zpk.kcv}" readonly="readonly" class="form-control read-only" id="inputZpkKcvCombined" placeholder="123456">
                 </div>
 
             </div>
@@ -90,7 +93,7 @@
                 </div>
                 <div class="form-group col-sm-8 col-md-7 col-lg-4 kcv">
                     <label class="kcvLabel" for="inputKcv1">KCV</label>
-                    <input type="text" th:field="*{tcmk.component1.kcv}" class="form-control" id="inputTcmkKcv1" placeholder="123456" style="display:inline;">
+                    <input type="text" th:field="*{tcmk.component1.kcv}" readonly="readonly" class="form-control read-only" id="inputTcmkKcv1" placeholder="123456" style="display:inline;">
                 </div>
             </div>
 
@@ -101,7 +104,7 @@
                 </div>
                 <div class="form-group col-sm-8 col-md-7 col-lg-4 kcv">
                     <label class="kcvLabel" for="inputKcv2" >KCV</label>
-                    <input type="text" th:field="*{tcmk.component2.kcv}" class="form-control" id="inputTcmkKcv2" placeholder="123456">
+                    <input type="text" th:field="*{tcmk.component2.kcv}" readonly="readonly" class="form-control read-only" id="inputTcmkKcv2" placeholder="123456">
                 </div>
             </div>
 
@@ -112,7 +115,7 @@
                 </div>
                 <div class="form-group col-sm-8 col-md-7 col-lg-4 kcv">
                     <label class="kcvLabel" for="inputKcv3" >KCV</label>
-                    <input type="text" th:field="*{tcmk.component3.kcv}" class="form-control" id="inputTcmkKcv3" placeholder="123456">
+                    <input type="text" th:field="*{tcmk.component3.kcv}" readonly="readonly" class="form-control read-only" id="inputTcmkKcv3" placeholder="123456">
                 </div>
             </div>
             <!--End TCMK-->
@@ -131,11 +134,11 @@
         <div class="form-row" id="keyInputCombined">
             <div class="form-group col-sm-11 col-md-11 col-lg-11">
                 <label class="keyLabel" for="inputTcmkCombined">Combined Key</label>
-                <input type="text" th:field="*{tcmk.combined}" class="form-control" id="inputTcmkCombined" placeholder="123456789ABCDEF" onchange="javascript:generateTcmkCombined()">
+                <input type="text" th:field="*{tcmk.combined}" readonly="readonly" class="form-control read-only" id="inputTcmkCombined" placeholder="123456789ABCDEF" onchange="javascript:generateTcmkCombined()">
             </div>
             <div class="form-group col-sm-8 col-md-7 col-lg-4 kcv">
                 <label class="kcvLabel" for="inputTcmkKcvCombined" >KCV</label>
-                <input type="text" th:field="*{tcmk.kcv}" class="form-control" id="inputTcmkKcvCombined" placeholder="123456">
+                <input type="text" th:field="*{tcmk.kcv}" readonly="readonly" class="form-control read-only" id="inputTcmkKcvCombined" placeholder="123456">
             </div>
 
         </div>

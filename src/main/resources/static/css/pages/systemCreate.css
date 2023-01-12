@@ -25,6 +25,23 @@
 .buttonSave{
     display: flex;
 }
+.read-only{
+    background-color: lightgrey;
+}
+.error{
+    border: 1px solid;
+    border-color: #f5c2c7;
+    margin-bottom: 8px;
+    font-size: 17px;
+    font-weight: normal;
+    width: 40%;
+    padding-left: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-color: #f8d7da;
+    border-radius: 0.375rem;
+    color: #842029;
+}
 h2{
 
     color: #273444;

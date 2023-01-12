@@ -21,9 +21,7 @@ public class SystemInformation {
     @Getter
     @Setter
     private List<KeyManagement> systemInformation;
-    @Getter
-    @Setter
-    private KeyManagement keyManagement;
-    public SystemInformation() {
+    public SystemInformation(List<KeyManagement> systemInformation) {
+        this.systemInformation = systemInformation;
     }
 }
