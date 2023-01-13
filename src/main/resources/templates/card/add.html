@@ -58,8 +58,8 @@
                             <!--                            Required Row-->
                             <div th:if="*{not listField[__${itemStat.index}__].optional}">
                                 <td class="col-md-1 text-danger" th:text="${field.fieldId}+'*'"></td>
-                                <td class="col-md-1" th:utext="*{listField[__${itemStat.index}__].name}"></td>
-                                <td class="col-md-2" th:utext="*{listField[__${itemStat.index}__].description}"></td>
+                                <td class="col-md-1" th:text="${field.name}"></td>
+                                <td class="col-md-2" th:text="${field.description}"></td>
                                 <td>
                                     <input class="border-0 form-control" readonly
                                            th:field="*{listField[__${itemStat.index}__].fieldId}"
@@ -67,9 +67,9 @@
                                     <!--                                    This hidden input is to set the fieldId to modelattribute-->
                                     <div>
                                         <input class="form-control border-0 input-value"
-                                               th:id="${field.fieldId}"
                                                required
                                                th:field="*{listField[__${itemStat.index}__].value}"
+                                               th:id="${field.fieldId}"
                                                th:placeholder="'ex: '+*{listField[__${itemStat.index}__].value}"
 
                                                type="text">
@@ -79,10 +79,7 @@
                                     </div>
 
                                 </td>
-                                <td>
-                                    <button class="btn btn-outline-secondary float-right m-1" onclick="handleClick()"
-                                            type="button">SubFields
-                                    </button>
+                                <td th:id="${field.fieldId}+'-subfields'">
                                 </td>
                             </div>
                             <!--                           End Required Row-->
@@ -97,8 +94,8 @@
                                     <!-- This hidden input is to set the fieldId to modelattribute-->
                                     <div>
                                         <input class="form-control border-0 input-value"
-                                               th:id="${field.fieldId}"
                                                th:field="*{listField[__${itemStat.index}__].value}"
+                                               th:id="${field.fieldId}"
                                                th:placeholder="'ex: '+*{listField[__${itemStat.index}__].value}"
                                                type="text">
                                     </div>
@@ -149,41 +146,7 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <div class="modal-body">
-
-                                        <div class="form-group">
-                                            <label for="f45.01">Track 1 Format Code (F45.01):</label>
-                                            <input class="form-control required-field-45" id="f45.01" name="f45.01" type="text" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="f45.02">Primary Account Number (F45.02):</label>
-                                            <input class="form-control required-field-45" id="f45.02" name="f45.02" type="text">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="f45.03">Card Holder Name (F45.03):</label>
-                                            <input class="form-control required-field-45" id="f45.03" name="f45.03" type="text">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="f45.04">Expiration Date (F45.04):</label>
-                                            <input class="form-control required-field-45" id="f45.04" name="f45.04" type="text">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="f45.05">Service Code (F45.05):</label>
-                                            <input class="form-control required-field-45" id="f45.05" name="f45.05" type="text">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="f45.06">PKI Number (F45.06):</label>
-                                            <input class="form-control required-field-45" id="f45.06" name="f45.06" type="text">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="f45.07">Discretionary Data (F45.07):</label>
-                                            <input class="form-control" id="f45.07" name="f45.07" type="text">
-                                        </div>
-                                        <div class="form-group">
-                                            <button id="submit-f45" aria-label="Close" class="btn btn-primary" data-dismiss="modal" type="button">
-                                                Submit
-                                            </button>
-                                        </div>
+                                <div class="modal-body" id="subfields-body">
                                 </div>
                             </div>
                         </div>
@@ -195,7 +158,6 @@
 
         </div>
     </div>
-
 </div>
 <!-- End WP-Content -->
 
@@ -223,43 +185,103 @@
     }
 </style>
 <script>
-    function handleClick() {
+    //Set parameter to subfields body
+    var f45 = [
+        {
+            id: 'F45.01',
+            name: 'Track 1 Format Code (F45.01) '
+        },
+        {
+            id: 'F45.02',
+            name: 'Primary Account Number (F45.02)'
+        },
+        {
+            id: 'F45.03',
+            name: 'Card Holder Name (F45.03)'
+        },
+        {
+            id: 'F45.04',
+            name: 'Expiration Date (F45.04)'
+        }
+        ,
+        {
+            id: 'F45.05',
+            name: 'Service Code (F45.05)'
+        }
+        ,
+        {
+            id: 'F45.06',
+            name: 'PKI Number (F45.06)'
+        }
+        ,
+        {
+            id: 'F45.07',
+            name: 'Discretionary Data (F45.07)'
+        }
+
+
+    ]
+    var box = ''
+    f45.map((subfield_info) => {
+        box = box + `<div className="${subfield_info.id}">
+        <label htmlFor="${subfield_info.id}">${subfield_info.name} :</label>
+        <input class="form-control required-field-45" id="${subfield_info.id}" name="${subfield_info.id}" type="text">
+        </div>`
+    })
+
+    const subfields_body= box + ` <br>
+                                        <div class="form-group">
+                                            <button id="submit-f45" aria-label="Close" class="btn btn-primary" data-dismiss="modal" type="button">
+                                                Submit
+                                            </button>
+                                        </div>`;
+
+    document.getElementById('subfields-body').innerHTML = subfields_body;
+
+    var button_subfields_f45 = `<button class="btn btn-outline-secondary float-right m-1" onclick="openSubFieldsF45()"
+                                          type="button">SubFields
+                                    </button>`
+
+    document.getElementById('F045-subfields').innerHTML = button_subfields_f45;
+    //Set parameter to subfields body
+    function openSubFieldsF45() {
         jQuery.noConflict();
         window.$('#subfieldsId').modal('show');
     }
-    $("#submit-f45").on("click", function(e){
 
+    $("#submit-f45").on("click", function (e) {
+        console.log('submit')
         var forms = document.querySelectorAll(".required-field-45")
+        console.log(forms.length)
         var validForm = 0
         // wait until 5 forms are valid to submit data
-       // Loop over them and prevent submission
+        // Loop over them and prevent submission
         Array.prototype.slice.call(forms)
             .forEach(function (form) {
                 form.classList.remove('border-danger')
-                    if (form.value=='') {
-                        event.preventDefault()
-                        event.stopPropagation()
-                        form.classList.add('border-danger')
-                    }else{
-                        validForm++
-                    }
-                    if(validForm==6) {
-                        var f45_01 = document.getElementById('f45.01').value;
-                        var f45_02 = document.getElementById('f45.02').value;
-                        var f45_03 = document.getElementById('f45.03').value;
-                        var f45_04 = document.getElementById('f45.04').value;
-                        var f45_05 = document.getElementById('f45.05').value;
-                        var f45_06 = document.getElementById('f45.06').value;
-                        var f45_07 = document.getElementById('f45.07').value;
-                        var f45 = f45_01 + f45_02 + '^' + f45_03 + '^' + f45_04 + f45_05 + f45_06 + f45_07;
-                        document.getElementById("F045").value = f45;
-                    }
+                if (form.value == '') {
+                    event.preventDefault()
+                    event.stopPropagation()
+                    form.classList.add('border-danger')
+                } else {
+                    validForm++
+                }
+                if (validForm == 7) {
+                    var f45_01 = document.getElementById('F45.01').value;
+                    var f45_02 = document.getElementById('F45.02').value;
+                    var f45_03 = document.getElementById('F45.03').value;
+                    var f45_04 = document.getElementById('F45.04').value;
+                    var f45_05 = document.getElementById('F45.05').value;
+                    var f45_06 = document.getElementById('F45.06').value;
+                    var f45_07 = document.getElementById('F45.07').value;
+                    var f45 = f45_01 + f45_02 + '^' + f45_03 + '^' + f45_04 + f45_05 + f45_06 + f45_07;
+                    document.getElementById("F045").value = f45;
+                }
 
             })
 
 
-     });
-
+    });
 
     (function () {
         'use strict'
