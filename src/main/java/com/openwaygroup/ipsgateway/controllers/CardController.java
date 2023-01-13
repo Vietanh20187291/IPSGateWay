@@ -133,6 +133,7 @@ public class CardController {
         log.info("add card: "+addCard);
         if(addCard) {
             redirectAttributes.addFlashAttribute("message", " Card Added Successfully!");
+            return "card/add";
         }else{
             redirectAttributes.addFlashAttribute("message", " Failed to add card!");
 
@@ -142,7 +143,6 @@ public class CardController {
 
     @PostMapping("/{id}/delete")
     public String delete(@PathVariable("id") String id, RedirectAttributes redirectAttributes) throws Exception {
-        log.info("here");
         boolean deleteCard = cardService.deleteCard(id);
         log.info("delete card: "+deleteCard);
         if(deleteCard) {
