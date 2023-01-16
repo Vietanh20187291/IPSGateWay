@@ -11,9 +11,9 @@ public interface ICardService {
 
     Card getById(ArrayList<Card> listCard, String id) throws IOException;
 
-    boolean addCard(Card card) throws Exception;
+    String addCard(Card card) throws Exception;
 
-    boolean editCard(Card card) throws Exception;
+    String editCard(Card card) throws Exception;
 
     boolean deleteCard(String id) throws Exception;
 
