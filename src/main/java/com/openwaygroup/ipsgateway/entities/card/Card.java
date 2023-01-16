@@ -34,17 +34,30 @@ public class Card {
         }
         return null;
     }
-
+    public boolean isNull(){
+        List<Field> fields = this.getListField();
+        if(fields == null){
+            return true;
+        }
+        return false;
+    }
     @Override
     public String toString() {
-
+        String value = "";
         List<Field> fields = this.getListField();
-        String value = "Card {";
-        for (Field field : fields) {
-            value += field.toString();
+        if(fields == null){
+            value = "Card {null}";
         }
-        value += "}";
 
+        else {
+
+
+            value = "Card {";
+            for (Field field : fields) {
+                value += field.toString();
+            }
+            value += "}";
+        }
 
         return value;
     }

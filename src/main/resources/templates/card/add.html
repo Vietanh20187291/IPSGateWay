@@ -36,130 +36,190 @@
     <div id="wp-content">
         <div id="list-card-component">
             <h4>Add Card</h4>
-            <form action="#" class="needs-validation"
-                  novalidate
-                  th:action="@{/cards/add}"
-                  th:method="post"
-                  th:object="${card}">
-                <div id="list-card">
-                    <table class="table table-bordered">
-                        <thead class="table-header thead-light">
-                        <tr>
-                            <th class="col-md-1">Field ID</th>
-                            <th class="col-md-1">Name</th>
-                            <th class="col-md-2">Description</th>
-                            <th>Value</th>
-                            <th class="col-md-1"></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr class="table-row">
-                        <tr th:each="field, itemStat : *{listField}">
-                            <!--                            Required Row-->
-                            <div th:if="*{not listField[__${itemStat.index}__].optional}">
-                                <td class="col-md-1 text-danger" th:text="${field.fieldId}+'*'"></td>
-                                <td class="col-md-1" th:text="${field.name}"></td>
-                                <td class="col-md-2" th:text="${field.description}"></td>
-                                <td>
-                                    <input class="border-0 form-control" readonly
-                                           th:field="*{listField[__${itemStat.index}__].fieldId}"
-                                           type="hidden"/>
-                                    <!--                                    This hidden input is to set the fieldId to modelattribute-->
-                                    <div>
-                                        <input class="form-control border-0 input-value"
-                                               required
-                                               th:field="*{listField[__${itemStat.index}__].value}"
-                                               th:id="${field.fieldId}"
-                                               th:placeholder="'ex: '+*{listField[__${itemStat.index}__].value}"
 
-                                               type="text">
-                                        <div class="invalid-feedback">
-                                            This cannot be empty!
-                                        </div>
-                                    </div>
-
-                                </td>
-                                <td th:id="${field.fieldId}+'-subfields'">
-                                </td>
-                            </div>
-                            <!--                           End Required Row-->
-                            <!--                          Optional row-->
-                            <div th:if="*{listField[__${itemStat.index}__].optional}">
-                                <td class="col-md-1" th:text="${field.fieldId}"></td>
-                                <td class="col-md-1" th:utext="*{listField[__${itemStat.index}__].name}"></td>
-                                <td class="col-md-2" th:utext="*{listField[__${itemStat.index}__].description}"></td>
-                                <td>
-                                    <input readonly th:field="*{listField[__${itemStat.index}__].fieldId}"
-                                           type="hidden"/>
-                                    <!-- This hidden input is to set the fieldId to modelattribute-->
-                                    <div>
-                                        <input class="form-control border-0 input-value"
-                                               th:field="*{listField[__${itemStat.index}__].value}"
-                                               th:id="${field.fieldId}"
-                                               th:placeholder="'ex: '+*{listField[__${itemStat.index}__].value}"
-                                               type="text">
-                                    </div>
-                                </td>
-                                <td></td>
-                            </div>
-                        </tr>
-                        <!--                        End Optional Row-->
-                        </tbody>
-                    </table>
-
-                    <div>
-                        <button class="btn btn-outline-secondary float-right m-1">
-                            <a class="text-secondary" th:href="@{/cards}">BACK</a>
-                        </button>
-                    </div>
-                    <div>
-                        <button class="btn btn-outline-secondary float-right m-1">
-                            SAVE
-                        </button>
-                    </div>
-                    <!-- Modal -->
-                    <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="notificationId"
-                         role="dialog" tabindex="-1">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title text-danger" id="exampleModalLabel">Notification</h5>
-                                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    Please Fill All Required Fields
-                                </div>
-                            </div>
+            <div th:if="${message!=null}">
+                <div th:switch="${messageType}">
+                    <div th:case="error">
+                        <div class="alert alert-danger" role="alert">
+                            <span th:text="${message}"></span>
+                            <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
                     </div>
-
-                    <!-- Modal -->
-                    <div aria-hidden="true" aria-labelledby="exampleModalLabel1" class="modal fade" id="subfieldsId"
-                         role="dialog" tabindex="-1">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel1">Subfields</h5>
-                                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body" id="subfields-body">
-                                </div>
-                            </div>
+                    <div th:case="success">
+                        <div class="alert alert-success" role="alert">
+                            <span th:text="${message}"></span>
+                            <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
                     </div>
-
+                        <div th:case="warning">
+                            <div class="alert alert-warning" role="alert">
+                                <span th:text="${message}"></span>
+                                <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </div>
+                    <div th:case="*">
+                        <div class="alert alert-primary" role="alert">
+                            <span th:text="${message}"></span>
+                            <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                    </div>
                 </div>
-            </form>
+
+                <form action="#" class="needs-validation"
+                      novalidate
+                      th:action="@{/cards/add}"
+                      th:method="post"
+                      th:object="${card}">
+                    <div id="list-card">
+                        <table class="table table-bordered">
+                            <thead class="table-header thead-light">
+                            <tr>
+                                <th class="col-md-1">Field ID</th>
+                                <th class="col-md-1">Name</th>
+                                <th class="col-md-2">Description</th>
+                                <th>Value</th>
+                                <th class="col-md-1"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="table-row">
+                            <tr th:each="field, itemStat : *{listField}">
+                                <!--                            Required Row-->
+                                <div th:if="*{not listField[__${itemStat.index}__].optional}">
+                                    <td class="col-md-1 text-danger" th:text="${field.fieldId}+'*'"></td>
+                                    <td class="col-md-1" th:utext="*{listField[__${itemStat.index}__].name}"></td>
+                                    <td class="col-md-2"
+                                        th:utext="*{listField[__${itemStat.index}__].description}"></td>
+                                    <td>
+                                        <input class="border-0 form-control" readonly
+                                               th:field="*{listField[__${itemStat.index}__].fieldId}"
+                                               type="hidden"/>
+                                        <input class="border-0 form-control" readonly
+                                               th:field="*{listField[__${itemStat.index}__].name}"
+                                               type="hidden"/>
+                                        <input class="border-0 form-control" readonly
+                                               th:field="*{listField[__${itemStat.index}__].description}"
+                                               type="hidden"/>
+                                        <input class="border-0 form-control" readonly
+                                               th:field="*{listField[__${itemStat.index}__].optional}"
+                                               type="hidden"/>
+                                        <!--                                    This hidden input is to set the fieldId to modelattribute-->
+                                        <div>
+                                            <input class="form-control border-0 input-value"
+                                                   required
+                                                   th:field="*{listField[__${itemStat.index}__].value}"
+                                                   th:id="${field.fieldId}"
+                                                   th:placeholder="'ex: '+*{listField[__${itemStat.index}__].value}"
+
+                                                   type="text">
+                                            <div class="invalid-feedback">
+                                                This cannot be empty!
+                                            </div>
+                                        </div>
+
+                                    </td>
+                                    <td th:id="${field.fieldId}+'-subfields'">
+                                    </td>
+                                </div>
+                                <!--                           End Required Row-->
+                                <!--                          Optional row-->
+                                <div th:if="*{listField[__${itemStat.index}__].optional}">
+                                    <td class="col-md-1" th:text="${field.fieldId}"></td>
+                                    <td class="col-md-1" th:utext="*{listField[__${itemStat.index}__].name}"></td>
+                                    <td class="col-md-2"
+                                        th:utext="*{listField[__${itemStat.index}__].description}"></td>
+                                    <td>
+                                        <input readonly th:field="*{listField[__${itemStat.index}__].fieldId}"
+                                               type="hidden"/>
+                                        <input class="border-0 form-control" readonly
+                                               th:field="*{listField[__${itemStat.index}__].name}"
+                                               type="hidden"/>
+                                        <input class="border-0 form-control" readonly
+                                               th:field="*{listField[__${itemStat.index}__].description}"
+                                               type="hidden"/>
+                                        <input class="border-0 form-control" readonly
+                                               th:field="*{listField[__${itemStat.index}__].optional}"
+                                               type="hidden"/>
+                                        <!-- This hidden input is to set the fieldId to modelattribute-->
+                                        <input class="form-control border-0 input-value"
+                                               th:field="*{listField[__${itemStat.index}__].value}"
+                                               th:id="${field.fieldId}"
+                                               th:placeholder="'ex: '+*{listField[__${itemStat.index}__].value}"
+                                               type="text">
+
+                                    </td>
+                                    <td th:id="${field.fieldId}+'-subfields'">
+                                    </td>
+
+                                </div>
+                            </tr>
+                            <!--                        End Optional Row-->
+                            </tbody>
+                        </table>
+
+                        <div>
+                            <button class="btn btn-outline-secondary float-right m-1">
+                                <a class="text-secondary" th:href="@{/cards}">BACK</a>
+                            </button>
+                        </div>
+                        <div>
+                            <button class="btn btn-outline-secondary float-right m-1">
+                                SAVE
+                            </button>
+                        </div>
+                        <!-- Modal -->
+                        <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade"
+                             id="notificationId"
+                             role="dialog" tabindex="-1">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title text-danger" id="exampleModalLabel">Notification</h5>
+                                        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Please Fill All Required Fields
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Modal -->
+                        <div aria-hidden="true" aria-labelledby="exampleModalLabel1" class="modal fade" id="subfieldsId"
+                             role="dialog" tabindex="-1">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel1">Subfields</h5>
+                                        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body" id="subfields-body">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
 
 
+            </div>
         </div>
     </div>
-</div>
-<!-- End WP-Content -->
+    <!-- End WP-Content -->
 
 </div>
 <!-- End Body -->
@@ -229,7 +289,7 @@
         </div>`
     })
 
-    const subfields_body= box + ` <br>
+    const subfields_body = box + ` <br>
                                         <div class="form-group">
                                             <button id="submit-f45" aria-label="Close" class="btn btn-primary" data-dismiss="modal" type="button">
                                                 Submit
@@ -243,6 +303,7 @@
                                     </button>`
 
     document.getElementById('F045-subfields').innerHTML = button_subfields_f45;
+
     //Set parameter to subfields body
     function openSubFieldsF45() {
         jQuery.noConflict();
