@@ -14,6 +14,12 @@ public class Component {
     @Getter
     @Setter
     private String data;
+
+    public Component(String data, String kcv) {
+        this.data = data;
+        this.kcv = kcv;
+    }
+
     @Getter
     @Setter
     private String kcv;

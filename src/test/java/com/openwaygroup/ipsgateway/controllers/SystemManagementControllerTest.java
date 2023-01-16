@@ -4,18 +4,29 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.openwaygroup.ipsgateway.entities.*;
 import com.openwaygroup.ipsgateway.services.InetAddressIsReachable;
 import com.openwaygroup.ipsgateway.services.TcpConnectionService;
+import com.openwaygroup.ipsgateway.services.YamlPropertySourceFactory;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+
+import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
-@ContextConfiguration(classes = {SystemManagementController.class,SystemInformation.class, KeyManagement.class, Key.class, Component.class,Configuration.class, Connection.class,Log.class})
 @SpringBootTest
+@RunWith(MockitoJUnitRunner.class)
 class SystemManagementControllerTest {
     @Autowired
     SystemInformation systemInformation;
@@ -27,8 +38,14 @@ class SystemManagementControllerTest {
     Component component1 = new Component();
     Component component2 = new Component();
     Component component3 = new Component();
+    @Mock
+    BindingResult bindingResult;
+    @Mock
+    Model model;
+    @Mock
+    RedirectAttributes redirectAttributes;
     void setGroupKey(){
-        keyManagement.setId(99);
+        keyManagement.setId(9999);
         component1.setData("BCD66B9B01A1CE8313AE984025204FE9");
         component2.setData("BCD66B9B01A1CE8313AE984025204FE9");
         component3.setData("BCD66B9B01A1CE8313AE984025204FE9");
@@ -45,20 +62,17 @@ class SystemManagementControllerTest {
         zpk.setKcv("C8F1D1");
         tcmk.setCombined("BCD66B9B01A1CE8313AE984025204FE9");
         tcmk.setKcv("C8F1D1");
-    }
-    @Test
-    void testImportServerFromInformationFile(){
-        System.out.println(systemInformation.toString());
-        assertNotNull(systemInformation);
+        keyManagement.setZpk(zpk);
+        keyManagement.setTcmk(tcmk);
     }
 
     @Test
     void testCreateKeyGroup(){
         setGroupKey();
-        systemInformation.getSystemInformation().add(keyManagement);
+        systemManagementController.store(keyManagement,redirectAttributes,bindingResult,model);
         boolean actualResult = false;
         for (KeyManagement keyMan : systemInformation.getSystemInformation()) {
-            if(keyManagement.getId() == keyMan.getId()){
+            if(Objects.equals(keyManagement.getId(), keyMan.getId())){
                 actualResult = true;
             }
         }

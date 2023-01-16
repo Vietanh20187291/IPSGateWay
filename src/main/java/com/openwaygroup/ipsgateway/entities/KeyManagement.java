@@ -17,6 +17,13 @@ public class KeyManagement {
     @Getter
     @Setter
     private Integer id;
+
+    public KeyManagement(Integer id, Key zpk, Key tcmk) {
+        this.id = id;
+        this.zpk = zpk;
+        this.tcmk = tcmk;
+    }
+
     @Getter
     @Setter
     private Key zpk;

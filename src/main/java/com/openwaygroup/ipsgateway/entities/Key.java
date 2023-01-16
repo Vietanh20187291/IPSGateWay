@@ -16,6 +16,15 @@ public class Key {
     @Getter
     @Setter
     private Component component1;
+
+    public Key(Component component1, Component component2, Component component3, String combined, String kcv) {
+        this.component1 = component1;
+        this.component2 = component2;
+        this.component3 = component3;
+        this.combined = combined;
+        this.kcv = kcv;
+    }
+
     @Getter
     @Setter
     private Component component2;

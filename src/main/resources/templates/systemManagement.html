@@ -23,6 +23,12 @@
 <!-- Body -->
 <div class="container pt-4">
     <h2>System Information Management</h2>
+    <div th:if="${success}">
+        <div class="alert alert-success alert-box" role="alert">
+            <span th:text="${success}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
     <div class="navigate">
     <a th:href="@{/system/create}"><button class="btn navigateBtn">Create Key Group</button></a>
     </div>
