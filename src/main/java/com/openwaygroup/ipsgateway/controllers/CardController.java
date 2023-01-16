@@ -88,10 +88,10 @@ public class CardController {
 //            card.setId(id);
 //            return "card/getbyid";
 //        }
-        boolean editCard = cardService.editCard(card);
+        String editCard = cardService.editCard(card);
         log.info("edit card: "+editCard);
-        if(!editCard) {
-            model.addAttribute("message"," Card Edited Failed!");
+        if(!editCard.equals("success")) {
+            model.addAttribute("message",editCard);
             model.addAttribute("messageType","error");
             return "card/getbyid";
         }else{
@@ -106,10 +106,10 @@ public class CardController {
                        BindingResult result, Model model, RedirectAttributes redirectAttributes) throws Exception {
 
 
-        boolean addCard = cardService.addCard(card);
+        String addCard = cardService.addCard(card);
         log.info("add card: "+addCard);
-        if(!addCard) {
-            model.addAttribute("message"," Card Added Failed!");
+        if(!addCard.equals("success")) {
+            model.addAttribute("message",addCard);
             model.addAttribute("messageType","error");
            return "card/add";
         }else{
