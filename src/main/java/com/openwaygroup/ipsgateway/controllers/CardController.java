@@ -111,6 +111,7 @@ public class CardController {
         if(!addCard.equals("success")) {
             model.addAttribute("message",addCard);
             model.addAttribute("messageType","error");
+            model.addAttribute("invalidData",true);
            return "card/add";
         }else{
             redirectAttributes.addFlashAttribute("message", " Card Added Successfully!");
