@@ -127,8 +127,10 @@ public class CardController {
         log.info("delete card: "+deleteCard);
         if(deleteCard) {
             redirectAttributes.addFlashAttribute("message", " Card Deleted Successfully!");
+            redirectAttributes.addFlashAttribute("messageType","success");
         }else{
             redirectAttributes.addFlashAttribute("message", " Failed to add card!");
+            redirectAttributes.addFlashAttribute("messageType","error");
 
         }
         return "redirect:/cards";

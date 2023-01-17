@@ -18,40 +18,28 @@ function openSubFieldsF035() {
 var f035 = [
     {
         id: 'F035.01',
-        name: 'Track 1 Format Code (F035.01) ',
+        name: 'Primary Account Number (F035.01)',
         value:''
     },
     {
         id: 'F035.02',
-        name: 'Primary Account Number (F035.02)',
+        name: 'Expiration Date (F035.02)',
         value:''
     },
     {
         id: 'F035.03',
-        name: 'Card Holder Name (F035.03)',
+        name: 'Service Code (F035.03)',
         value:''
     },
     {
         id: 'F035.04',
-        name: 'Expiration Date (F035.04)',
+        name: 'PKI Number (F035.04)',
         value:''
     }
     ,
     {
         id: 'F035.05',
-        name: 'Service Code (F035.05)',
-        value:''
-    }
-    ,
-    {
-        id: 'F035.06',
-        name: 'PKI Number (F035.06)',
-        value:''
-    }
-    ,
-    {
-        id: 'F035.07',
-        name: 'Discretionary Data (F035.07)',
+        name: 'Discretionary Data (F035.05)',
         value:''
     }
 
@@ -101,22 +89,20 @@ function generateSubFieldsModalBody() {
 
 
 function generateSubfields35Value(f035_value){
-    if(f035_value.length>25) {
+    if(f035_value.length>21) {
         let count  = 0
         for(var i = 0; i<f035_value.length;i++){
-            if(f035_value[i] =='^'){
+            if(f035_value[i] =='='){
                 count++
             }
         }
-        if(count == 2) {
+        if(count == 1) {
 
-            f035[0].value = f035_value.substring(0, 1);
-            f035[1].value = f035_value.substring(1, f035_value.indexOf('^'));
-            f035[2].value = f035_value.substring(f035_value.indexOf('^') + 1, f035_value.lastIndexOf('^'));
-            f035[3].value = f035_value.substring(f035_value.lastIndexOf('^') + 1, f035_value.lastIndexOf('^') + 5);
-            f035[4].value = f035_value.substring(f035_value.lastIndexOf('^') + 5, f035_value.lastIndexOf('^') + 8);
-            f035[5].value = f035_value.substring(f035_value.lastIndexOf('^') + 8, f035_value.lastIndexOf('^') + 9);
-            f035[6].value = f035_value.substring(f035_value.lastIndexOf('^') + 9, f035_value.length);
+            f035[0].value = f035_value.substring(0, f035_value.indexOf('='));
+            f035[1].value = f035_value.substring(f035_value.indexOf('=') + 1, f035_value.indexOf('=') + 5);
+            f035[2].value = f035_value.substring(f035_value.indexOf('=') + 5, f035_value.indexOf('=') + 8);
+            f035[3].value = f035_value.substring(f035_value.indexOf('=') + 8, f035_value.indexOf('=') + 9);
+            f035[4].value = f035_value.substring(f035_value.indexOf('=') + 9, f035_value.length);
 
         }
     }
@@ -139,16 +125,15 @@ function setSubmitF035() {
                 } else {
                     validForm++
                 }
-                if (validForm == 7) {
+                if (validForm == 5) {
                     var f035_01 = document.getElementById('F035.01').value;
                     var f035_02 = document.getElementById('F035.02').value;
                     var f035_03 = document.getElementById('F035.03').value;
                     var f035_04 = document.getElementById('F035.04').value;
                     var f035_05 = document.getElementById('F035.05').value;
-                    var f035_06 = document.getElementById('F035.06').value;
-                    var f035_07 = document.getElementById('F035.07').value;
-                    var f035 = f035_01 + f035_02 + '^' + f035_03 + '^' + f035_04 + f035_05 + f035_06 + f035_07;
+                    var f035 = f035_01 + '=' + f035_02 + f035_03 + f035_04 + f035_05;
                     document.getElementById("F035").value = f035;
+                    console.log(f035)
                 }
 
             })
