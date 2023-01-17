@@ -229,9 +229,13 @@ public class CardService implements ICardService {
         EnumSet<FieldsEnum> fieldsEnums = EnumSet.allOf(FieldsEnum.class);
 
         for (FieldsEnum fieldsEnum : fieldsEnums) {
-            if(card.getFieldById(fieldsEnum.getFieldId()).value.length()>fieldsEnum.getMaxLength() || card.getFieldById(fieldsEnum.getFieldId()).value.length() < fieldsEnum.getMinLength() ){
-
-                return "The data for "+fieldsEnum.getFieldId()+" must between "+ fieldsEnum.getMinLength()+" and "+ fieldsEnum.getMaxLength()+" characters";
+            Field field = card.getFieldById(fieldsEnum.getFieldId());
+            if(field.value.length()>fieldsEnum.getMaxLength() || field.value.length() < fieldsEnum.getMinLength() ){
+                boolean isRequiredField = isRequiredField(field);
+                if(field.value.length() == 0 && !isRequiredField){}
+                else {
+                    return "The data for " + fieldsEnum.getFieldId() + " must between " + fieldsEnum.getMinLength() + " and " + fieldsEnum.getMaxLength() + " characters";
+                }
             }
 
         }
@@ -248,6 +252,16 @@ public class CardService implements ICardService {
         }
         return true;
 
+    }
+    public boolean isRequiredField(Field field){
+        EnumSet<RequiredFields> requiredFields = EnumSet.allOf(RequiredFields.class);
+
+        for (RequiredFields requiredField : requiredFields) {
+            if(field.getFieldId().equals(requiredField)){
+                return true;
+            }
+        }
+        return false;
     }
 
 
