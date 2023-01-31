@@ -1,8 +1,8 @@
 connection:
-  hostIp: 192.168.242.1
+  hostIp: 127.0.1.1
   hostPort: 9999
   ipsPort: 7777
   role: false
 log:
   timeout: 4000
-  logLevel: info
+  logLevel: error

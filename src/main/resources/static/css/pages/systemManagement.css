@@ -1,0 +1,100 @@
+h2{
+    color: #273444;
+    padding-bottom: 12px;
+}
+.h3-system-management{
+    font-weight: bold;
+    font-size: 25px;
+    text-align: center;
+}
+.navigate{
+    margin-bottom: 10px;
+}
+.navigateBtn{
+    background-color: #273444;
+    color: white;
+}
+.value{
+    display: inline;
+}
+.valueId{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 12px;
+    height: 230px;
+    border-bottom: 1px solid;
+}
+#valueId{
+    width: 100%;
+    font-size: 22px;
+}
+.col-key{
+    margin-bottom: 16px;
+}
+.keyManagement{
+    height: 230px;
+    margin-top: 12px;
+    border-bottom: 1px solid;
+}
+ .accordion-item .accordion-button{
+    background-color: #273444;
+     color: white;
+     width: 90%;
+}
+.accordion-header{
+    font-weight: bold;
+    padding-bottom: 0;
+    display: flex;
+}
+.accordion-button{
+    height: 50px;
+    font-size: 19px;
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+.accordion-body{
+    font-size: 17px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.keyBody{
+    height: 255px;
+}
+.endBody{
+    padding-bottom: 0;
+}
+.accordion-button::after{
+    margin-top: 12px;
+    background-image: url('../../images/white-arrow-down.png');
+}
+.accordion-button:not(.collapsed)::after{
+    margin-bottom: 12px;
+    background-image: url('../../images/white-arrow-down.png');
+}
+.tableComponentTitle{
+    font-weight: 800;
+    font-size: 20px;
+    display: inline;
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+.editBtn{
+    margin-left: 15px;
+    margin-top: 12px;
+    background-size: contain;
+    height: 27px;
+    width: 27px;
+    background-image: url("../../images/pencil.png");
+    border: 0px;
+}
+.btn-close{
+    position: absolute;
+    right:15px;
+}
+.alert-box{
+    width: 90%;
+}

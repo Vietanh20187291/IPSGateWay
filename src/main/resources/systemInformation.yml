@@ -1,0 +1,302 @@
+system-information:
+  systemInformation:
+  - id: 6
+    zpk:
+      component1:
+        data: "BCD66B9B01A1CE8313AE984025204FE9"
+        kcv: "C8F1D1"
+      component2:
+        data: "4AC77043D0C8C7700EADF4A29D408661"
+        kcv: "027119"
+      component3:
+        data: "5EABF3378ADB3840EFFF40A9DC388D7D"
+        kcv: "E97176"
+      combined: "A8BAE8EF5BB231B3F2FC2C4B645844F5"
+      kcv: "17D023"
+    tcmk:
+      component1:
+        data: "BCD66B9B01A1CE8313AE984025204FE9"
+        kcv: "C8F1D1"
+      component2:
+        data: "4AC77043D0C8C7700EADF4A29D408661"
+        kcv: "027119"
+      component3:
+        data: "69FD42D681FD45878CB237F0A665CCDC"
+        kcv: "18535B"
+      combined: "9FEC590E50944C7491B15B121E050554"
+      kcv: "CD365F"
+  - id: 7
+    zpk:
+      component1:
+        data: "69FD42D681FD45878CB237F0A665CCAC"
+        kcv: "BE4001"
+      component2:
+        data: "ACD66B9B01A1CE8313AE984025204FAC"
+        kcv: "3C6CB9"
+      component3:
+        data: "13B031AEF729BA3DE004408FF8EAD3A4"
+        kcv: "5A7EFC"
+      combined: "D69B18E3777531397F18EF3F7BAF50A4"
+      kcv: "5173B0"
+    tcmk:
+      component1:
+        data: "BCD66B9B01A1CE8313AE984025204FE9"
+        kcv: "C8F1D1"
+      component2:
+        data: "4AC77043D0C8C7700EADF4A29D408661"
+        kcv: "027119"
+      component3:
+        data: "69FD42D681FD45878CB237F0A665CCDC"
+        kcv: "18535B"
+      combined: "9FEC590E50944C7491B15B121E050554"
+      kcv: "CD365F"
+  - id: 0
+    zpk:
+      component1:
+        data: "BCD66B9B01A1CE8313AE984025204FE9"
+        kcv: "C8F1D1"
+      component2:
+        data: "4AC77043D0C8C7700EADF4A29D408661"
+        kcv: "027119"
+      component3:
+        data: "BCD66B9B01A1CE8313AE984025204FE9"
+        kcv: "C8F1D1"
+      combined: "4AC77043D0C8C7700EADF4A29D408661"
+      kcv: "027119"
+    tcmk:
+      component1:
+        data: "BCD66B9B01A1CE8313AE984025204FE9"
+        kcv: "C8F1D1"
+      component2:
+        data: "4AC77043D0C8C7700EADF4A29D408661"
+        kcv: "027119"
+      component3:
+        data: "69FD42D681FD45878CB237F0A665CCDC"
+        kcv: "18535B"
+      combined: "9FEC590E50944C7491B15B121E050554"
+      kcv: "CD365F"
+  - id: 8
+    zpk:
+      component1:
+        data: "BCD66B9B01A1CE8313AE984025204FAC"
+        kcv: "1955DE"
+      component2:
+        data: "BCD66B9B01A1CE8313AE984025204FE9"
+        kcv: "C8F1D1"
+      component3:
+        data: "BCD66B9B01A1CE8313AE984025204FE9"
+        kcv: "C8F1D1"
+      combined: "BCD66B9B01A1CE8313AE984025204FAC"
+      kcv: "1955DE"
+    tcmk:
+      component1:
+        data: "BCD66B9B01A1CE8313AE984025204FE9"
+        kcv: "C8F1D1"
+      component2:
+        data: "BCD66B9B01A1CE8313AE984025204FE9"
+        kcv: "C8F1D1"
+      component3:
+        data: "BCD66B9B01A1CE8313AE984025204FE9"
+        kcv: "C8F1D1"
+      combined: "9FEC590E50944C7491B15B121E050554"
+      kcv: "CD365F"
+  - id: 9
+    zpk:
+      component1:
+        data: "BCD66B9B01A1CE8313AE984025204FDC"
+        kcv: "29D421"
+      component2:
+        data: "ACD66B9B01A1CE8313AE984025204FE9"
+        kcv: "FCA881"
+      component3:
+        data: "5EABF3378ADB3840EFFF40A9DC388D7D"
+        kcv: "E97176"
+      combined: "4EABF3378ADB3840EFFF40A9DC388D48"
+      kcv: "B5E0C0"
+    tcmk:
+      component1:
+        data: "BCD66B9B01A1CE8313AE984025204FE9"
+        kcv: "C8F1D1"
+      component2:
+        data: "4AC77043D0C8C7700EADF4A29D408661"
+        kcv: "027119"
+      component3:
+        data: "69FD42D681FD45878CB237F0A665CCDC"
+        kcv: "18535B"
+      combined: "9FEC590E50944C7491B15B121E050554"
+      kcv: "CD365F"
+  - id: 2
+    zpk:
+      component1:
+        data: "BCD66B9B01A1CE8313AE984025204FAC"
+        kcv: "1955DE"
+      component2:
+        data: "BCD66B9B01A1CE8313AE984025204FE9"
+        kcv: "C8F1D1"
+      component3:
+        data: "BCD66B9B01A1CE8313AE984025204FE9"
+        kcv: "C8F1D1"
+      combined: "BCD66B9B01A1CE8313AE984025204FAC"
+      kcv: "1955DE"
+    tcmk:
+      component1:
+        data: "BCD66B9B01A1CE8313AE984025204FE9"
+        kcv: "C8F1D1"
+      component2:
+        data: "BCD66B9B01A1CE8313AE984025204FE9"
+        kcv: "C8F1D1"
+      component3:
+        data: "BCD66B9B01A1CE8313AE984025204FE9"
+        kcv: "C8F1D1"
+      combined: "9FEC590E50944C7491B15B121E050554"
+      kcv: "CD365F"
+  - id: 3
+    zpk:
+      component1:
+        data: "69FD42D681FD45878CB237F0A665CCAC"
+        kcv: "BE4001"
+      component2:
+        data: "5E04E8C7FCFBB86B33FAE484215B9033"
+        kcv: "BEDA8F"
+      component3:
+        data: "5EABF3378ADB3840EFFF40A9DC388D7D"
+        kcv: "E97176"
+      combined: "69525926F7DDC5AC50B793DD5B06D1E2"
+      kcv: "D70052"
+    tcmk:
+      component1:
+        data: "BCD66B9B01A1CE8313AE984025204FE9"
+        kcv: "C8F1D1"
+      component2:
+        data: "BCD66B9B01A1CE8313AE984025204FE9"
+        kcv: "C8F1D1"
+      component3:
+        data: "BCD66B9B01A1CE8313AE984025204FE9"
+        kcv: "C8F1D1"
+      combined: "9FEC590E50944C7491B15B121E050554"
+      kcv: "CD365F"
+  - id: 4
+    zpk:
+      component1:
+        data: "69FD42D681FD45878CB237F0A665CCAC"
+        kcv: "BE4001"
+      component2:
+        data: "5E04E8C7FCFBB86B33FAE484215B9033"
+        kcv: "BEDA8F"
+      component3:
+        data: "5EABF3378ADB3840EFFF40A9DC388D7D"
+        kcv: "E97176"
+      combined: "69525926F7DDC5AC50B793DD5B06D1E2"
+      kcv: "D70052"
+    tcmk:
+      component1:
+        data: "BCD66B9B01A1CE8313AE984025204FE9"
+        kcv: "C8F1D1"
+      component2:
+        data: "BCD66B9B01A1CE8313AE984025204FE9"
+        kcv: "C8F1D1"
+      component3:
+        data: "BCD66B9B01A1CE8313AE984025204FE9"
+        kcv: "C8F1D1"
+      combined: "9FEC590E50944C7491B15B121E050554"
+      kcv: "CD365F"
+  - id: 5
+    zpk:
+      component1:
+        data: "ACD66B9B01A1CE8313AE984025204FDC"
+        kcv: "3137E0"
+      component2:
+        data: "5E04E8C7FCFBB86B33FAE484215B9033"
+        kcv: "BEDA8F"
+      component3:
+        data: "13B031AEF729BA3DE004408FF8EAD3A4"
+        kcv: "5A7EFC"
+      combined: "E162B2F20A73CCD5C0503C4BFC910C4B"
+      kcv: "C748CF"
+    tcmk:
+      component1:
+        data: "BCD66B9B01A1CE8313AE984025204FE9"
+        kcv: "C8F1D1"
+      component2:
+        data: "4AC77043D0C8C7700EADF4A29D408661"
+        kcv: "027119"
+      component3:
+        data: "69FD42D681FD45878CB237F0A665CCDC"
+        kcv: "18535B"
+      combined: "9FEC590E50944C7491B15B121E050554"
+      kcv: "CD365F"
+  - id: 10
+    zpk:
+      component1:
+        data: "ACD66B9B01A1CE8313AE984025204FE9"
+        kcv: "FCA881"
+      component2:
+        data: "5E04E8C7FCFBB86B33FAE484215B9033"
+        kcv: "BEDA8F"
+      component3:
+        data: "BCD66B9B01A1CE8313AE984025204FE9"
+        kcv: "C8F1D1"
+      combined: "4E04E8C7FCFBB86B33FAE484215B9033"
+      kcv: "72ABF8"
+    tcmk:
+      component1:
+        data: "BCD66B9B01A1CE8313AE984025204FE9"
+        kcv: "C8F1D1"
+      component2:
+        data: "4AC77043D0C8C7700EADF4A29D408661"
+        kcv: "027119"
+      component3:
+        data: "69FD42D681FD45878CB237F0A665CCDC"
+        kcv: "18535B"
+      combined: "9FEC590E50944C7491B15B121E050554"
+      kcv: "CD365F"
+  - id: 1
+    zpk:
+      component1:
+        data: "69FD42D681FD45878CB237F0A665CCBC"
+        kcv: "F26EF6"
+      component2:
+        data: "4AC77043D0C8C7700EADF4A29D408661"
+        kcv: "027119"
+      component3:
+        data: "13B031AEF729BA3DE004408FF8EAD3A4"
+        kcv: "5A7EFC"
+      combined: "308A033BA61C38CA621B83DDC3CF9979"
+      kcv: "2132A8"
+    tcmk:
+      component1:
+        data: "BCD66B9B01A1CE8313AE984025204FE9"
+        kcv: "C8F1D1"
+      component2:
+        data: "4AC77043D0C8C7700EADF4A29D408661"
+        kcv: "027119"
+      component3:
+        data: "69FD42D681FD45878CB237F0A665CCDC"
+        kcv: "18535B"
+      combined: "9FEC590E50944C7491B15B121E050554"
+      kcv: "CD365F"
+  - id: 9999
+    zpk:
+      component1:
+        data: "BCD66B9B01A1CE8313AE984025204FE9"
+        kcv: "C8F1D1"
+      component2:
+        data: "BCD66B9B01A1CE8313AE984025204FE9"
+        kcv: "C8F1D1"
+      component3:
+        data: "BCD66B9B01A1CE8313AE984025204FE9"
+        kcv: "C8F1D1"
+      combined: "BCD66B9B01A1CE8313AE984025204FE9"
+      kcv: "C8F1D1"
+    tcmk:
+      component1:
+        data: "BCD66B9B01A1CE8313AE984025204FE9"
+        kcv: "C8F1D1"
+      component2:
+        data: "BCD66B9B01A1CE8313AE984025204FE9"
+        kcv: "C8F1D1"
+      component3:
+        data: "BCD66B9B01A1CE8313AE984025204FE9"
+        kcv: "C8F1D1"
+      combined: "BCD66B9B01A1CE8313AE984025204FE9"
+      kcv: "C8F1D1"
