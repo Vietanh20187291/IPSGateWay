@@ -11,7 +11,8 @@ function openSubFieldsF045() {
     generateSubFieldsModalF45();
     generateSubFieldsModalBodyF45();
     jQuery.noConflict();
-    window.$('#subfieldsF45').modal('show');
+    var Modal = new bootstrap.Modal(document.getElementById('subfieldsF45'))
+    Modal.show()
 }
 
 var f045 = [
@@ -85,9 +86,9 @@ function generateSubFieldsModalBodyF45() {
 
     const subfields_body = box45 + ` <br>
                                     <div class="form-group">
-                                        <button id="submit-f045" aria-label="Close" class="btn btn-primary" data-dismiss="modal" type="button">
+                                                <button id="submit-f045" class="btn btn-primary" data-dismiss="modal" href="#exampleModalToggle" role="button" type="button" aria-label="Close">
                                             Submit
-                                        </button>
+                                            </button>
                                     </div>`;
     document.getElementById('subfields-body-F045').innerHTML = subfields_body;
     setSubmitF045()
