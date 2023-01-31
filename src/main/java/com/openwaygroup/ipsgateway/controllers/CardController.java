@@ -5,18 +5,13 @@ import com.openwaygroup.ipsgateway.entities.card.Card;
 import com.openwaygroup.ipsgateway.service.ICardService;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
-import java.util.Map;
 
 @Component
 @Controller
@@ -38,6 +33,11 @@ public class CardController {
     @RequestMapping(method = RequestMethod.GET)
     public String index(@ModelAttribute("card") Card card, Model model) throws Exception {
         listCard = cardService.loadCard(path);
+        if(listCard.isEmpty()){
+            model.addAttribute("message","List Card is null");
+            model.addAttribute("messageType","error");
+            return "card/index";
+        }
         log.info("Add card to attribute");
         model.addAttribute("listCard", listCard);
         log.info("Render card/index.html");
@@ -67,13 +67,11 @@ public class CardController {
 
     @GetMapping("/add")
     public String add(Model model) throws Exception {
-
-
             if (listCard == null) {
                 listCard = cardService.loadCard(path);
             }
-            model.addAttribute("card", listCard.get(0));
-
+                Card card = cardService.getSampleCard();
+                model.addAttribute("card", card);
         log.info("-----------------");
         log.info("render card add");
         return "card/add";
@@ -82,12 +80,6 @@ public class CardController {
     @PostMapping("/{id}/edit")
     public String edit(@PathVariable("id") String id, Card card,
                        BindingResult result, Model model, RedirectAttributes redirectAttributes) throws Exception {
-//        log.info(card.getFieldById("F002").getValue());
-//        log.info(card.getFieldById("F014").getValue());
-//        if (result.hasErrors()) {
-//            card.setId(id);
-//            return "card/getbyid";
-//        }
         String editCard = cardService.editCard(card);
         log.info("edit card: "+editCard);
         if(!editCard.equals("success")) {
@@ -95,7 +87,7 @@ public class CardController {
             model.addAttribute("messageType","error");
             return "card/getbyid";
         }else{
-            redirectAttributes.addFlashAttribute("message", " Card Edited Successfully!");
+            redirectAttributes.addFlashAttribute("message", " Card Edited Successfully ("+card.getFieldById("F002").value+")");
             redirectAttributes.addFlashAttribute("messageType","success");
 
         }
@@ -114,7 +106,7 @@ public class CardController {
             model.addAttribute("invalidData",true);
            return "card/add";
         }else{
-            redirectAttributes.addFlashAttribute("message", " Card Added Successfully!");
+            redirectAttributes.addFlashAttribute("message", " Card Added Successfully ("+card.getFieldById("F002").value+")");
             redirectAttributes.addFlashAttribute("messageType","success");
 
         }
@@ -126,7 +118,7 @@ public class CardController {
         boolean deleteCard = cardService.deleteCard(id);
         log.info("delete card: "+deleteCard);
         if(deleteCard) {
-            redirectAttributes.addFlashAttribute("message", " Card Deleted Successfully!");
+            redirectAttributes.addFlashAttribute("message", " Card Deleted Successfully ("+id+")");
             redirectAttributes.addFlashAttribute("messageType","success");
         }else{
             redirectAttributes.addFlashAttribute("message", " Failed to add card!");

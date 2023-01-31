@@ -13,7 +13,8 @@
                     event.preventDefault()
                     event.stopPropagation()
                     jQuery.noConflict();
-                    window.$('#notificationId').modal('show');
+                    var Modal = new bootstrap.Modal(document.getElementById('notificationId'))
+                    Modal.show()
                 }
                 form.classList.add('was-validated')
 

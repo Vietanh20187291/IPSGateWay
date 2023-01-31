@@ -12,7 +12,9 @@ function openSubFieldsF035() {
     generateSubFieldsModalF35()
     generateSubFieldsModalBody()
     jQuery.noConflict()
-    window.$('#subfieldsF35').modal('show');
+    // window.$('#subfieldsF35').modal('show');
+    var Modal = new bootstrap.Modal(document.getElementById('subfieldsF35'))
+    Modal.show()
 }
 
 var f035 = [
@@ -77,9 +79,7 @@ function generateSubFieldsModalBody() {
 
     const subfields_body = box35 + ` <br>
                                     <div class="form-group">
-                                        <button id="submit-f035" aria-label="Close" class="btn btn-primary" data-dismiss="modal" type="button">
-                                            Submit
-                                        </button>
+                                                    <button id="submit-f035" type="button" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
                                     </div>`;
     document.getElementById('subfields-body-F035').innerHTML = subfields_body;
     setSubmitF035()
@@ -133,7 +133,8 @@ function setSubmitF035() {
                     var f035_05 = document.getElementById('F035.05').value;
                     var f035 = f035_01 + '=' + f035_02 + f035_03 + f035_04 + f035_05;
                     document.getElementById("F035").value = f035;
-                    console.log(f035)
+                    var Modal = new bootstrap.Modal(document.getElementById('subfieldsF35'))
+                    Modal.hide()
                 }
 
             })

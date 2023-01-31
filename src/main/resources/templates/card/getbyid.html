@@ -166,9 +166,7 @@
                     </table>
 
                 <div>
-                    <button class="btn btn-outline-secondary float-right m-1" type="button">
-                        <a class="text-secondary" th:href="@{/cards}">BACK</a>
-                    </button>
+                        <a class="btn btn-outline-secondary float-right m-1 text-secondary" th:href="@{/cards}">BACK</a>
                 </div>
                 <div>
                     <button class="btn btn-outline-secondary float-right m-1">
@@ -182,9 +180,6 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title text-danger" id="exampleModalLabel">Notification</h5>
-                                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
                                 </div>
                                 <div class="modal-body">
                                     Please Fill All Required Fields
@@ -273,7 +268,8 @@
                         event.preventDefault()
                         event.stopPropagation()
                         jQuery.noConflict();
-                        window.$('#notificationId').modal('show');
+                        var Modal = new bootstrap.Modal(document.getElementById('notificationId'))
+                        Modal.show()
                     }
                     form.classList.add('was-validated')
 
