@@ -227,11 +227,7 @@
 </body>
 <script th:src="@{/js/card/subfields/F035.js}" type="text/javascript"></script>
 <script th:src="@{/js/card/subfields/F045.js}" type="text/javascript"></script>
-<script>
-    $(".input").click(function () {
-        $(".input").toggleClass('border-0')
-    });
-</script>
+<script th:src="@{/js/card/getbyid.js}" type="text/javascript"></script>
 <style>
     .form-control:focus {
         box-shadow: none;
@@ -241,30 +237,4 @@
         background-color: white !important;
     }
 </style>
-<script>
-    $('#F002').prop('readonly', true);
-    (function () {
-        'use strict'
-
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        var forms = document.querySelectorAll('.needs-validation')
-
-        // Loop over them and prevent submission
-        Array.prototype.slice.call(forms)
-            .forEach(function (form) {
-                form.addEventListener('submit', function (event) {
-                    if (!form.checkValidity()) {
-                        event.preventDefault()
-                        event.stopPropagation()
-                        jQuery.noConflict();
-                        var Modal = new bootstrap.Modal(document.getElementById('notificationId'))
-                        Modal.show()
-                    }
-                    form.classList.add('was-validated')
-
-                }, false)
-            })
-    })()
-</script>
-<link rel="stylesheet" th:href="@{/css/card.css}"/>
 </html>
