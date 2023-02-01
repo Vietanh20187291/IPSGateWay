@@ -63,9 +63,7 @@ function generateSubFieldsModalF45(){
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel1">Subfields</h5>
-                                        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
+                                        <button type="button" class="btn-close border-0" data-bs-dismiss="modal" aria-label="Close">x</button>
                                     </div>
                                     <div class="modal-body" id="subfields-body-F045">
                                     </div>
@@ -86,9 +84,7 @@ function generateSubFieldsModalBodyF45() {
 
     const subfields_body = box45 + ` <br>
                                     <div class="form-group">
-                                                <button id="submit-f045" class="btn btn-primary" data-dismiss="modal" href="#exampleModalToggle" role="button" type="button" aria-label="Close">
-                                            Submit
-                                            </button>
+                                                    <button id="submit-f045" type="button" class="btn btn-primary">Submit</button>
                                     </div>`;
     document.getElementById('subfields-body-F045').innerHTML = subfields_body;
     setSubmitF045()
@@ -146,6 +142,9 @@ function setSubmitF045() {
                     var f045_07 = document.getElementById('F045.07').value;
                     var f045 = f045_01 + f045_02 + '^' + f045_03 + '^' + f045_04 + f045_05 + f045_06 + f045_07;
                     document.getElementById("F045").value = f045;
+                    var Modal = document.getElementById('subfieldsF45');
+                    var modal = bootstrap.Modal.getInstance(Modal)
+                    modal.hide();
                 }
 
             })
