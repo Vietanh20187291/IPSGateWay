@@ -1,4 +1,4 @@
-package com.openwaygroup.ipsgateway.service.impl;
+package com.openwaygroup.ipsgateway.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
@@ -7,11 +7,9 @@ import com.openwaygroup.ipsgateway.entities.card.Card;
 import com.openwaygroup.ipsgateway.entities.card.Field;
 import com.openwaygroup.ipsgateway.enumurate.cardEnums.FieldsEnum;
 import com.openwaygroup.ipsgateway.enumurate.cardEnums.RequiredFields;
-import com.openwaygroup.ipsgateway.service.ICardService;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.yaml.snakeyaml.Yaml;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -20,11 +18,11 @@ import java.util.*;
 
 
 @Service
-public class CardService implements ICardService {
+public class CardService {
     private static final String path = "src/main/resources/inputCards";
     org.slf4j.Logger log = LoggerFactory.getLogger(IpsGatewayApplication.class);
 
-    @Override
+
     public ArrayList<Card> loadCard(String path) throws IOException, NullPointerException {
         ArrayList<Card> listCard = new ArrayList<Card>();
         File file = null;
@@ -83,7 +81,6 @@ public class CardService implements ICardService {
 
     }
 
-    @Override
     public Card getSampleCard() {
 
         EnumSet<FieldsEnum> fieldsEnums = EnumSet.allOf(FieldsEnum.class);
@@ -112,7 +109,6 @@ public class CardService implements ICardService {
     }
 
 
-    @Override
     public Card getById(ArrayList<Card> listCard, String cardId) throws IOException {
         for (Card card : listCard) {
             if (card.getFieldById("F002").getValue().equals(cardId)) {

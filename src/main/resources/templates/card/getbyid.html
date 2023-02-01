@@ -5,6 +5,7 @@
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
     <script th:src="@{/js/ajax.jquery.js}" type="text/javascript"></script>
     <script th:src="@{/js/action.js}" type="text/javascript"></script>
     <script th:src="@{/js/bootstrap.min.js}" type="text/javascript"></script>
@@ -13,51 +14,46 @@
             integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
             th:src="@{/js/popper.min.js}"></script>
     <title>Card</title>
+
 </head>
 
 <body>
 <!-- Header -->
-<!-- End Header -->
+<div th:replace="~{fragments/header}">
 
+</div>
+<!-- End Header -->
 <!-- Body -->
 
 <div class="container pt-1">
     <div id="wp-content">
         <div id="list-card-component">
-            <h4>Card Detail</h4>
+            <h4 class="text-danger">Card Detail</h4>
 
             <div th:if="${message!=null}">
                 <div th:switch="${messageType}">
                     <div th:case="error">
                         <div class="alert alert-danger" role="alert">
                             <span th:text="${message}"></span>
-                            <button aria-label="Close" class="close" data-dismiss="alert" type="button">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+                            <button type="button" class="btn-close border-0" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     </div>
                     <div th:case="success">
                         <div class="alert alert-success" role="alert">
                             <span th:text="${message}"></span>
-                            <button aria-label="Close" class="close" data-dismiss="alert" type="button">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+                            <button type="button" class="btn-close border-0" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     </div>
                     <div th:case="warning">
                         <div class="alert alert-warning" role="alert">
                             <span th:text="${message}"></span>
-                            <button aria-label="Close" class="close" data-dismiss="alert" type="button">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+                            <button type="button" class="btn-close border-0" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     </div>
                     <div th:case="*">
                         <div class="alert alert-primary" role="alert">
                             <span th:text="${message}"></span>
-                            <button aria-label="Close" class="close" data-dismiss="alert" type="button">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+                            <button type="button" class="btn-close border-0" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     </div>
                 </div>
@@ -156,10 +152,10 @@
                     </table>
 
                 <div>
-                        <a class="btn btn-outline-secondary float-right m-1 text-secondary" th:href="@{/cards}">BACK</a>
+                        <a class="btn btn-outline-secondary float-end m-1 text-secondary" th:href="@{/cards}">BACK</a>
                 </div>
                 <div>
-                    <button class="btn btn-outline-secondary float-right m-1">
+                    <button class="btn btn-outline-secondary float-end m-1">
                         SAVE
                     </button>
                 </div>

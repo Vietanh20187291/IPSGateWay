@@ -1,8 +1,10 @@
 package com.openwaygroup.ipsgateway.controllers;
 
 import com.openwaygroup.ipsgateway.IpsGatewayApplication;
+import com.openwaygroup.ipsgateway.entities.Configuration;
 import com.openwaygroup.ipsgateway.entities.card.Card;
-import com.openwaygroup.ipsgateway.service.ICardService;
+//import com.openwaygroup.ipsgateway.service.ICardService;
+import com.openwaygroup.ipsgateway.services.CardService;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,22 +18,22 @@ import java.util.ArrayList;
 @Component
 @Controller
 @RequestMapping("/cards")
-//@RestController(value = "/")
 
 public class CardController {
     org.slf4j.Logger log = LoggerFactory.getLogger(IpsGatewayApplication.class);
     @Autowired
-
+    public Configuration configuration;
     private static String path = "src/main/resources/inputCards";
     private static ArrayList<Card> listCard;
-    private final ICardService cardService;
+    private final CardService cardService;
 
-    public CardController(ICardService cardService) {
+    public CardController(CardService cardService) {
         this.cardService = cardService;
     }
 
     @RequestMapping(method = RequestMethod.GET)
     public String index(@ModelAttribute("card") Card card, Model model) throws Exception {
+        model.addAttribute("configuration", configuration);
         listCard = cardService.loadCard(path);
         if(listCard.isEmpty()){
             model.addAttribute("message","List Card is null");
@@ -48,6 +50,7 @@ public class CardController {
 
     @GetMapping("/{id}")
     public String edit(@PathVariable String id, Model model) throws Exception {
+        model.addAttribute("configuration", configuration);
         if (listCard == null) {
             listCard = cardService.loadCard(path);
         }
@@ -67,6 +70,7 @@ public class CardController {
 
     @GetMapping("/add")
     public String add(Model model) throws Exception {
+        model.addAttribute("configuration", configuration);
             if (listCard == null) {
                 listCard = cardService.loadCard(path);
             }
@@ -80,6 +84,7 @@ public class CardController {
     @PostMapping("/{id}/edit")
     public String edit(@PathVariable("id") String id, Card card,
                        BindingResult result, Model model, RedirectAttributes redirectAttributes) throws Exception {
+        model.addAttribute("configuration", configuration);
         String editCard = cardService.editCard(card);
         log.info("edit card: "+editCard);
         if(!editCard.equals("success")) {
@@ -97,7 +102,7 @@ public class CardController {
     public String add(Card card,
                        BindingResult result, Model model, RedirectAttributes redirectAttributes) throws Exception {
 
-
+        model.addAttribute("configuration", configuration);
         String addCard = cardService.addCard(card);
         log.info("add card: "+addCard);
         if(!addCard.equals("success")) {

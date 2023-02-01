@@ -1,7 +1,7 @@
 package com.openwaygroup.ipsgateway;
 
 import com.openwaygroup.ipsgateway.entities.card.Card;
-import com.openwaygroup.ipsgateway.service.impl.CardService;
+import com.openwaygroup.ipsgateway.services.CardService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
