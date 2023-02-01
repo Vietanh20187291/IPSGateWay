@@ -94,7 +94,6 @@
                     </th:block>
                     </tbody>
                 </table>
-                <script></script>
 
                 <!-- Modal Delete Confirmation -->
                 <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="confirmationId"
@@ -131,21 +130,8 @@
 
 </div>
 <!-- End Body -->
-<script>
-    function showConfirmModalDialog(cardId) {
-        window.$('#cardId').text(cardId)
-        window.$('#form-delete').attr('action', '/cards/'+cardId+'/delete')
-        window.$('#form-delete').attr('method', 'post')
-        // th:action="@{/cards/{id}/delete(id=${card.getFieldById('F002').getValue()})}"
-        // th:method="post">
-        jQuery.noConflict();
-        // window.$('#confirmationId').modal('show');
-        var myModal = new bootstrap.Modal(document.getElementById('confirmationId'))
-        myModal.show()
-
-    }
-</script>
 </body>
+<script th:src="@{/js/card/index.js}" type="text/javascript"></script>
 
 
 </html>
