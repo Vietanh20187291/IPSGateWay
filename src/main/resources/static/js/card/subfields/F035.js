@@ -12,7 +12,6 @@ function openSubFieldsF035() {
     generateSubFieldsModalF35()
     generateSubFieldsModalBody()
     jQuery.noConflict()
-    // window.$('#subfieldsF35').modal('show');
     var Modal = new bootstrap.Modal(document.getElementById('subfieldsF35'))
     Modal.show()
 }
@@ -54,9 +53,7 @@ function generateSubFieldsModalF35(){
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel2">Subfields</h5>
-                                        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
+                                        <button type="button" class="btn-close border-0" data-bs-dismiss="modal" aria-label="Close">x</button>
                                     </div>
                                     <div class="modal-body" id="subfields-body-F035">
                                     </div>
@@ -79,8 +76,9 @@ function generateSubFieldsModalBody() {
 
     const subfields_body = box35 + ` <br>
                                     <div class="form-group">
-                                                    <button id="submit-f035" type="button" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
+                                                    <button id="submit-f035" type="button" class="btn btn-primary">Submit</button>
                                     </div>`;
+
     document.getElementById('subfields-body-F035').innerHTML = subfields_body;
     setSubmitF035()
 }
@@ -133,8 +131,9 @@ function setSubmitF035() {
                     var f035_05 = document.getElementById('F035.05').value;
                     var f035 = f035_01 + '=' + f035_02 + f035_03 + f035_04 + f035_05;
                     document.getElementById("F035").value = f035;
-                    var Modal = new bootstrap.Modal(document.getElementById('subfieldsF35'))
-                    Modal.hide()
+                    var Modal = document.getElementById('subfieldsF35');
+                    var modal = bootstrap.Modal.getInstance(Modal)
+                    modal.hide();
                 }
 
             })
