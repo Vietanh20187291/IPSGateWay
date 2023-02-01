@@ -65,7 +65,7 @@ public class ConfigurationController {
         return "redirect:/configuration";
     }
     public void setLogLevel(String loggerLevel) {
-        ch.qos.logback.classic.Logger root = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(org.slf4j.Logger.ROOT_LOGGER_NAME);
+        ch.qos.logback.classic.Logger root = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
         if ("info".equalsIgnoreCase(loggerLevel)) {
             root.setLevel(ch.qos.logback.classic.Level.INFO);
         } else if ("debug".equalsIgnoreCase(loggerLevel)) {
