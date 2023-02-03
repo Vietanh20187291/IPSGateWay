@@ -1,5 +1,5 @@
 connection:
-  hostIp: 10.145.48.96
+  hostIp: null
   hostPort: 7777
   ipsPort: 9999
   role: true

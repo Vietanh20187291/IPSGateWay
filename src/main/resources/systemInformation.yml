@@ -1,4 +1,5 @@
-system-information:
+
+ system-information:
   systemInformation:
   - id: 6
     zpk:
